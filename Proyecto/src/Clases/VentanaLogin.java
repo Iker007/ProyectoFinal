@@ -1,6 +1,8 @@
 package Clases;
 
-public class VentanaLog {
+public class VentanaLogin {
+	
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
