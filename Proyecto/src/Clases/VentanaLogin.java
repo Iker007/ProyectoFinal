@@ -128,7 +128,7 @@ public class VentanaLogin extends JFrame{
 		background.setMinimumSize(new Dimension(200, 200));
 		this.add(pContent,BorderLayout.SOUTH);
 		pBotones.setBounds(100, 100, 1000, 100);
-		//this.add(pBotones,BorderLayout.SOUTH);
+		///this.add(pBotones,BorderLayout.SOUTH);
 		this.setMinimumSize(new Dimension(825, 670));
 		
 		
