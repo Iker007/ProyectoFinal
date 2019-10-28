@@ -1,5 +1,6 @@
 package Clases;
 
+<<<<<<< HEAD
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -137,6 +138,6 @@ public class VentanaLogin extends JFrame{
 		// TODO Auto-generated method stub
 		VentanaLogin v = new VentanaLogin();
 		v.setVisible(true);
-	}
 
+	}
 }
