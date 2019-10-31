@@ -68,6 +68,7 @@ public class Pokemon {
 	public Tipo[] getTipo() {
 		return tipo;
 	}
+	
 
 
 
