@@ -137,7 +137,7 @@ public class Pokemon {
 
 
 	public static void main(String[] arg0) {
-		ArrayList<Pokemon> a = new ArrayList<Pokemon>();
+		List<Pokemon> a = new ArrayList<Pokemon>();
 		Pokemon p1 = new Pokemon();
 		Pokemon p2 = new Pokemon();
 		Pokemon p3 = new Pokemon();
