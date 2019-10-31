@@ -2,8 +2,7 @@ package Class;
 
 public class Tipo {
 	private String nombre;
-	private static int UNIQUE_ID = 0;
-	private int uid = ++UNIQUE_ID;
+	
 	
 	
 	public Tipo() {
@@ -11,10 +10,9 @@ public class Tipo {
 	}
 
 
-	public Tipo(String nombre, int uid) {
+	public Tipo(String nombre) {
 		super();
 		this.nombre = nombre;
-		this.uid = uid;
 	}
 
 
@@ -26,17 +24,5 @@ public class Tipo {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-
-	public int getUid() {
-		return uid;
-	}
-
-
-	public void setUid(int uid) {
-		this.uid = uid;
-	}
 	
-	
-
 }
