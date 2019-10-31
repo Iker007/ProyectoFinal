@@ -7,6 +7,8 @@ public class Entrenador {
 	private String name;
 	private ArrayList<Pokemon> team;
 	private int score;
+	private String usuario;
+	private String contraseña;
 
 	public Entrenador() {
 		super();
