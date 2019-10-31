@@ -1,4 +1,4 @@
-package Clases;
+package Class;
 
 public class Pokemon {
 	private String nombre;

@@ -1,4 +1,4 @@
-package Clases;
+package Interfaz;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -12,11 +12,11 @@ public class VentanaInicio extends JFrame implements ActionListener {
 	private JPanel hueco2;
 	private JPanel hueco3;
 	private JPanel hueco4;
-	private JPanel hueco5;
+	//private JPanel hueco5;
 	private JPanel hueco6;
 	private JPanel hueco7;
 	private JPanel hueco8;
-	private JPanel hueco9;
+	//private JPanel hueco9;
 	private JPanel PanelEntrenador1;
 	private JPanel PanelEntrenador2;
 	private JPanel Equipo1;
@@ -41,6 +41,9 @@ public class VentanaInicio extends JFrame implements ActionListener {
 	private Image NewImagePOK2;
 	private Image ImagePOK2;
 	private JLabel Pokemon1;
+	private ImageIcon ImagenPOK1;
+	private Image NewImagePOK1;
+	private Image ImagePOK1B;
 	private JLabel Pokemon2;
 	private JLabel Pokemon3;
 	private JLabel Pokemon4;
@@ -59,26 +62,28 @@ public class VentanaInicio extends JFrame implements ActionListener {
 
 		nombre1 = new JLabel();
 		nombre1.setText("TRAINER1");
-		nombre1.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		PanelEntrenador1 = new JPanel();
-		PanelEntrenador1.setLayout(new GridLayout(1, 3));
-		hueco5 = new JPanel();
-		PanelEntrenador1.add(hueco5);
-		hueco5.setVisible(false);
+		nombre1.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+		PanelEntrenador1 = new JPanel(new FlowLayout(FlowLayout.CENTER,20,85) );
+		
+		//PanelEntrenador1.setLayout(new GridLayout(1, 3));
+		//hueco5 = new JPanel();
+		//PanelEntrenador1.add(hueco5);
+		//hueco5.setVisible(false);
 		PanelEntrenador1.add(nombre1);
 		PanelEntrenador1.setBackground(new Color(0, 0, 0, 0));
-		hueco9 = new JPanel();
-		PanelEntrenador1.add(hueco9);
-		hueco9.setVisible(false);
+		
+		//hueco9 = new JPanel();
+		//PanelEntrenador1.add(hueco9);
+		//hueco9.setVisible(false);
 		fondo.add(PanelEntrenador1);
-
+		
 		hueco1 = new JPanel();
 		hueco1.setOpaque(false);
 		fondo.add(hueco1);
 
 		nombre2 = new JLabel();
 		nombre2.setText("RED");
-		nombre2.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		nombre2.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
 		PanelEntrenador2 = new JPanel();
 		PanelEntrenador2.setLayout(new GridLayout(1, 3));
 		hueco6 = new JPanel();
@@ -118,10 +123,8 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		ImageENT2B = ImagenENT2.getImage();
 		NewImageENT2 = ImageENT2B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH); 
 		ImagenENT2 = new ImageIcon(NewImageENT2); 
-		
 		entrenador2 = new JLabel((ImagenENT2));
 		entrenador2.setBackground(new Color(0, 0, 0, 0));
-		entrenador2.setLayout(new FlowLayout());
 		fondo.add(entrenador2);
 		
 		//entrenador2 = new JLabel(new ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\Red.png"));
@@ -129,23 +132,22 @@ public class VentanaInicio extends JFrame implements ActionListener {
 
 		Equipo1 = new JPanel();
 		Equipo1.setLayout(new GridLayout(2,3));
-		Pokemon1 = new JLabel();
-		Pokemon1.setBackground(Color.red);
+		Equipo1.setBackground(new Color(0, 0, 0, 0));
+		ImagenPOK1 = new ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\ArceusSprite.png");
+		ImagePOK1B = ImagenPOK1.getImage();
+		NewImagePOK1 = ImagePOK1B.getScaledInstance(80, 80, java.awt.Image.SCALE_SMOOTH); 
+		ImagenPOK1 = new ImageIcon(NewImagePOK1);
+		Pokemon1 = new JLabel(ImagenPOK1);
 		Equipo1.add(Pokemon1);
 		Pokemon2 = new JLabel();
-		Pokemon2.setBackground(Color.yellow);
 		Equipo1.add(Pokemon2);
 		Pokemon3 = new JLabel();
-		Pokemon3.setBackground(Color.green);
 		Equipo1.add(Pokemon3);
 		Pokemon4 = new JLabel();
-		Pokemon4.setBackground(Color.blue);
 		Equipo1.add(Pokemon4);
 		Pokemon5 = new JLabel();
-		Pokemon5.setBackground(Color.orange);
 		Equipo1.add(Pokemon5);
 		Pokemon6 = new JLabel();
-		Pokemon6.setBackground(Color.black);
 		Equipo1.add(Pokemon6);
 		fondo.add(Equipo1);
 
@@ -175,7 +177,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		hueco7 = new JPanel();
 		hueco7.setVisible(false);
 		continuar = new JLabel("TOCA PARA CONTINUAR");
-		continuar.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+		continuar.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
 		PanelContinuar.add(hueco7);
 		PanelContinuar.add(continuar);
 		PanelContinuar.setBackground(new Color(0, 0, 0, 0));

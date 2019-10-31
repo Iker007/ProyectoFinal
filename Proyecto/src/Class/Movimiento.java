@@ -1,4 +1,4 @@
-package Clases;
+package Class;
 
 public class Movimiento {
 	private String nombre;
