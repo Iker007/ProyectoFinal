@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import Class.Entrenador;
 import Class.Movimiento;
 import Class.Pokemon;
 import Class.Tipo;
@@ -86,31 +87,31 @@ public class GestorBD {
 			}
 			return pokemons;
 		}catch(SQLException e) {
-			throw new BDException("No se pudo obtener el usuario", e);
+			throw new BDException("No se pudo obtener el pokemons", e);
 		}
 	}
-	public void crearTableUsuario() throws BDException{
+	public void crearTableEntrenador() throws BDException{
 		
 		try(Statement stmt = connection.createStatement()){
-			String sql = "CREATE TABLE usuario (usuario VARCHAR, contrasena VARCHAR)";
+			String sql = "CREATE TABLE entrenador (usuario VARCHAR, contrasena VARCHAR)";
 			stmt.executeUpdate(sql);
 		}catch (SQLException e) {
 			// TODO: handle exception
-			throw new BDException("No se pudo crear la tabla 'usuario'", e);
+			throw new BDException("No se pudo crear la tabla 'entrenador'", e);
 		}
 		
 	}
-	public List<Usuario> obtenerTodosUsuario() throws BDException{
-		List<Usuario> usuarios = new ArrayList<Usuario>();
-		try(Statement stmt = conn.createStatement()){
+	public List<Entrenador> obtenerTodosUsuario() throws BDException{
+		List<Entrenador> usuarios = new ArrayList<Entrenador>();
+		try(Statement stmt = connection.createStatement()){
 			ResultSet rs = stmt.executeQuery("SELECT id, nombre, apellido FROM usuario");
 			while(rs.next()) {
-				Usuario u = new Usuario();
-				u.setId(rs.getInt("id"));
-				u.setNombre(rs.getString("nombre"));
-				u.setApellido(rs.getString("apeliido"));
+				Entrenador e = new Entrenador();
+				//e.setTeam(rs.get("id"));
+				e.setName(rs.getString("name"));
+				e.setUsuario(rs.getString("usuario"));
 				
-				usuarios.add(u);
+				usuarios.add(e);
 			}
 			
 		}catch (SQLException e) {
