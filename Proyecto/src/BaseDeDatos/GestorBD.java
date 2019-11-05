@@ -82,9 +82,41 @@ public class GestorBD {
 				p.setAtak(result.getInt("attack"));
 				p.setDefense(result.getInt("defense"));
 				p.setMovimientos(movimientos);
+				pokemons.add(p);
 			}
+			return pokemons;
 		}catch(SQLException e) {
 			throw new BDException("No se pudo obtener el usuario", e);
 		}
+	}
+	public void crearTableUsuario() throws BDException{
+		
+		try(Statement stmt = connection.createStatement()){
+			String sql = "CREATE TABLE usuario (usuario VARCHAR, contrasena VARCHAR)";
+			stmt.executeUpdate(sql);
+		}catch (SQLException e) {
+			// TODO: handle exception
+			throw new BDException("No se pudo crear la tabla 'usuario'", e);
+		}
+		
+	}
+	public List<Usuario> obtenerTodosUsuario() throws BDException{
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		try(Statement stmt = conn.createStatement()){
+			ResultSet rs = stmt.executeQuery("SELECT id, nombre, apellido FROM usuario");
+			while(rs.next()) {
+				Usuario u = new Usuario();
+				u.setId(rs.getInt("id"));
+				u.setNombre(rs.getString("nombre"));
+				u.setApellido(rs.getString("apeliido"));
+				
+				usuarios.add(u);
+			}
+			
+		}catch (SQLException e) {
+			throw new BDException("No se pudo obtener la lista de la tabla 'usuario'", e);
+			
+		}
+		return usuarios;
 	}
 }
