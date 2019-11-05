@@ -12,6 +12,7 @@ public class Pokemon {
 	private int atak;
 	private int defense;
 	private int hp;
+	private int speed;
 	
 	
 	
@@ -31,6 +32,7 @@ public class Pokemon {
 		this.atak = atak;
 		this.defense = defense;
 		this.hp = hp;
+		this.speed = speed;
 	}
 
 
@@ -131,6 +133,17 @@ public class Pokemon {
 
 	public void setHp(int hp) {
 		this.hp = hp;
+	}
+	
+	public int getSpped() {
+		return speed;
+	}
+
+
+
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
 	}
 
 
