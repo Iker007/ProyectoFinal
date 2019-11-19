@@ -14,7 +14,7 @@ import clases.Pokemon;
 import clases.Tipo;
 
 public class GestorBD {
-
+	public List<Entrenador> usuarios;
 	private Connection connection = null;
 
 	public GestorBD() {
@@ -104,20 +104,28 @@ public class GestorBD {
 	public List<Entrenador> obtenerTodosUsuario() throws BDException{
 		List<Entrenador> usuarios = new ArrayList<Entrenador>();
 		try(Statement stmt = connection.createStatement()){
-			ResultSet rs = stmt.executeQuery("SELECT id, nombre, apellido FROM usuario");
+			ResultSet rs = stmt.executeQuery("SELECT USUARIO, CONTRASEÑA, SCORE, POKEMON1, POKEMON2, POKEMON3, POKEMON4, POKEMON5, POKEMON6 FROM ENTRENADOR");
 			while(rs.next()) {
 				Entrenador e = new Entrenador();
-				//e.setTeam(rs.get("id"));
-				e.setName(rs.getString("name"));
-				e.setUsuario(rs.getString("usuario"));
+				
+				e.setName(rs.getString("NAME"));
+				e.setUsuario(rs.getString("USUARIO"));
+				e.setContraseña(rs.getString("CONTRASENA"));
 				
 				usuarios.add(e);
 			}
 			
 		}catch (SQLException e) {
-			throw new BDException("No se pudo obtener la lista de la tabla 'usuario'", e);
-			
+			throw new BDException("No se pudo obtener la lista de la tabla 'usuario'", e);	
 		}
+		this.usuarios = usuarios;
 		return usuarios;
 	}
+	public boolean comprobarEntrenadorExiste(Entrenador e){
+		for(Entrenador e : usuarios) {
+			
+		}
+		return true;
+	}
+	
 }

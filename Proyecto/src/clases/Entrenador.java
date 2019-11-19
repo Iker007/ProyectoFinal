@@ -63,6 +63,10 @@ public class Entrenador {
 			//equipo.add(Pokemon.getUid());
 		}		
 		return equipo;
+	} 
+	
+	public void comprobarParaIniciarSesion() {
+		
 	}
 	
 	

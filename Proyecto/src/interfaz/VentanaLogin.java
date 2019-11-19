@@ -8,6 +8,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.event.WindowStateListener;
@@ -18,12 +20,13 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-public class VentanaLogin extends JFrame{
+public class VentanaLogin extends JFrame implements ActionListener{
 	private JPanel pContent;
 	private JPanel pTitulo;
 	private JPanel pBottom;
@@ -33,10 +36,11 @@ public class VentanaLogin extends JFrame{
 	private JTextField username;
 	private JLabel usernameLabel;
 	private JLabel passwordLabel;
-	private JPasswordField password;
+	private JTextField password;
 	private JPanel pBotones;
 	private JButton signUpButton;
 	private JButton signInButton;
+	private JButton salir;
 	private ImageIcon imageIconTitle;
 	private JLabel avatar;
 	private JComboBox<String> avatarComboBox;
@@ -50,6 +54,7 @@ public class VentanaLogin extends JFrame{
 	private Color southPanel;
 	private Dimension tamanyoBotones;
 	
+	
 	public VentanaLogin() {
 		this.setSize(800, 600);
 		this.setLayout(new BorderLayout());
@@ -60,7 +65,7 @@ public class VentanaLogin extends JFrame{
 		username.setPreferredSize(new Dimension(250, 45));
 		username.setFont(new Font("Comic Sainz MS", Font.BOLD, 20));
 		passwordLabel = new JLabel("Password:");
-		password = new JPasswordField();
+		password = new JTextField();
 		password.setEditable(true);
 		password.setPreferredSize(new Dimension(250,45));
 		password.setFont(new Font("",Font.BOLD,20));
@@ -94,6 +99,7 @@ public class VentanaLogin extends JFrame{
 		this.add(background,BorderLayout.CENTER);
 		background.setLayout(new FlowLayout());
 		pContent.add(pBotones);
+		salir = new JButton("Salir del juego");
 		avatarNames = new String[]{"Chico","Chica","Otros"};
 		avatar = new JLabel("Avatar:");
 		avatar.setForeground(Color.WHITE);
@@ -102,9 +108,10 @@ public class VentanaLogin extends JFrame{
 		//.addItem(avatarNames[0]);
 		//avatarComboBox.addItem(avatarNames[1]);
 		//avatarComboBox.addItem(avatarNames[2]);
-		pComboBox = new JPanel(new FlowLayout(FlowLayout.CENTER,10,60));
+		pComboBox = new JPanel(new FlowLayout(FlowLayout.CENTER,30,40));
 		pComboBox.add(avatar);
 		pComboBox.add(avatarComboBox);
+		pComboBox.add(salir);
 		//pComboBox.setAlignmentX(CENTER_ALIGNMENT);
 		//pComboBox.setAlignmentY(CENTER_ALIGNMENT);
 		
@@ -130,12 +137,40 @@ public class VentanaLogin extends JFrame{
 		pBotones.setBounds(100, 100, 1000, 100);
 		////this.add(pBotones,BorderLayout.SOUTH);
 		this.setMinimumSize(new Dimension(825, 670));
+		signInButton.addActionListener(this);
+		salir.addActionListener(this);
+	}
+	
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			String s = username.getText();
+			String p = password.getText();
+			try {
+			if(e.getSource() == signInButton) {
+				
+				if(!s.isEmpty() && !p.isEmpty()) {
+					for(Entrenador e : )
+					JOptionPane.showMessageDialog(this, "Se ha realizado con exito");
+					}
+				else {
+					JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			}catch(NumberFormatException E) {
+				JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error", JOptionPane.ERROR_MESSAGE);
+				
+			}
+			if(e.getSource() == salir) {
+				System.exit(0);
+			}
 		
 		
+
 	}
 	public boolean compararUsuario() {
-		
+		return true;
 	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		VentanaLogin v = new VentanaLogin();
