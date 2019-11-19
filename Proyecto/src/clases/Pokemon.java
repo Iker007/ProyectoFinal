@@ -1,4 +1,4 @@
-package Class;
+package clases;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class Pokemon {
 	
 
 	
-	public Pokemon(String nombre, int uid, Tipo[] tipo, List<Movimiento> movimientos, int atak, int defense, int hp) {
+	public Pokemon(String nombre, int uid, Tipo[] tipo, List<Movimiento> movimientos, int atak, int defense, int hp, int speed) {
 		super();
 		this.nombre = nombre;
 		this.uid = uid;

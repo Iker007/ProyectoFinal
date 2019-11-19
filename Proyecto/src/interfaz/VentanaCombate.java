@@ -1,4 +1,4 @@
-package Interfaz;
+package interfaz;
 
 public class VentanaCombate {
 

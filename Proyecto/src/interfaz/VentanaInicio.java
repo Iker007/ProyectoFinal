@@ -1,8 +1,10 @@
-package Interfaz;
+package interfaz;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+
 
 public class VentanaInicio extends JFrame implements ActionListener {
 
@@ -49,11 +51,15 @@ public class VentanaInicio extends JFrame implements ActionListener {
 	private JLabel Pokemon4;
 	private JLabel Pokemon5;
 	private JLabel Pokemon6;
+	private ImageIcon img1;
+	private Image img2;
+	private Image img3;
+	private ImageIcon a;
 
 	public VentanaInicio() {
 
 		this.setLayout(new FlowLayout());
-		fondo2 = new JLabel(new ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\InicioCombate.png"));
+		fondo2 = new JLabel(new ImageIcon(getClass().getResource("/resources/InicioCombate.png")));
 		fondo = new JPanel();
 		fondo.setBackground(new Color(0, 0, 0, 0));
 		fondo2.setLayout(new FlowLayout());
@@ -96,7 +102,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		PanelEntrenador2.setBackground(new Color(0, 0, 0, 0));
 		fondo.add(PanelEntrenador2);
 		
-		ImagenENT1 = new ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\ApacheKawaii.png");
+		ImagenENT1 = new ImageIcon(getClass().getResource("/resources/ApacheKawaii.png"));
 		ImageENT1B = ImagenENT1.getImage();
 		NewImageENT1 = ImageENT1B.getScaledInstance(300, 180, java.awt.Image.SCALE_SMOOTH); 
 		ImagenENT1 = new ImageIcon(NewImageENT1); 
@@ -109,7 +115,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		//entrenador1 = new JLabel(new ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\ApacheKawaii.png"));
 		//fondo.add(entrenador1);
 
-		ImagenVS = new ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\VS.png");
+		ImagenVS = new ImageIcon(getClass().getResource("/resources/Vs.png"));
 		ImageVS2 = ImagenVS.getImage();
 		NewImageVS = ImageVS2.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH); 
 		ImagenVS = new ImageIcon(NewImageVS); 
@@ -118,8 +124,10 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		versus.setBackground(new Color(0, 0, 0, 0));
 		versus.setLayout(new FlowLayout());
 		fondo.add(versus);
-
-		ImagenENT2 = new ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\Red.png");
+		
+		ImagenENT2 = new ImageIcon(getClass().getResource("/resources/Red.png"));
+		//ImagenENT2 = new ImageIcon(VentanaInicio.class.getResource("img/Red.png"));
+		//ImagenENT2 = new ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\Red.png");
 		ImageENT2B = ImagenENT2.getImage();
 		NewImageENT2 = ImageENT2B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH); 
 		ImagenENT2 = new ImageIcon(NewImageENT2); 
@@ -130,14 +138,16 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		//entrenador2 = new JLabel(new ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\Red.png"));
 		//fondo.add(entrenador2);
 
+		
 		Equipo1 = new JPanel();
 		Equipo1.setLayout(new GridLayout(2,3));
-		Equipo1.setBackground(new Color(0, 0, 0, 0));
-		ImagenPOK1 = new ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\ArceusSprite.png");
-		ImagePOK1B = ImagenPOK1.getImage();
-		NewImagePOK1 = ImagePOK1B.getScaledInstance(80, 80, java.awt.Image.SCALE_SMOOTH); 
-		ImagenPOK1 = new ImageIcon(NewImagePOK1);
-		Pokemon1 = new JLabel(ImagenPOK1);
+		//Equipo1.setBackground(new Color(0, 0, 0, 0));
+		//ImagenPOK1 = new ImageIcon(getClass().getResource("/resources/ArceusSprite.png"));
+		//ImagePOK1B = ImagenPOK1.getImage();
+		//NewImagePOK1 = ImagePOK1B.getScaledInstance(80, 80, java.awt.Image.SCALE_SMOOTH); 
+		//ImagenPOK1 = new ImageIcon(NewImagePOK1);
+		a = ajustarSprite("ArceusSprite");
+		Pokemon1 = new JLabel(a);
 		Equipo1.add(Pokemon1);
 		Pokemon2 = new JLabel();
 		Equipo1.add(Pokemon2);
@@ -155,7 +165,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		fondo.add(hueco2);
 		hueco2.setVisible(false);
 		
-		ImagenPOK2 = new ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\EnemyTeam.png");
+		ImagenPOK2 = new ImageIcon(getClass().getResource("/resources/EnemyTeam.png"));
 		ImagePOK2 = ImagenPOK2.getImage();
 		NewImagePOK2 = ImagePOK2.getScaledInstance(300, 175, java.awt.Image.SCALE_SMOOTH); 
 		ImagenPOK2 = new ImageIcon(NewImagePOK2); 
@@ -207,6 +217,15 @@ public class VentanaInicio extends JFrame implements ActionListener {
 			}
 		});
 	}
+	
+	public  ImageIcon ajustarSprite(String img) {
+
+		ImageIcon imageIcon = new ImageIcon(getClass().getResource("/resources/"+img+".png")); // load the image to a imageIcon
+		Image image = imageIcon.getImage(); // transform it 
+		Image newimg = image.getScaledInstance(80, 80,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		imageIcon = new ImageIcon(newimg);  // transform it back
+		return imageIcon;
+}
 
 	public static void main(String[] args) {
 		VentanaInicio a = new VentanaInicio();

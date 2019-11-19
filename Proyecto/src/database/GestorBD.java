@@ -1,4 +1,4 @@
-package BaseDeDatos;
+package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,10 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Class.Entrenador;
-import Class.Movimiento;
-import Class.Pokemon;
-import Class.Tipo;
+import clases.Entrenador;
+import clases.Movimiento;
+import clases.Pokemon;
+import clases.Tipo;
 
 public class GestorBD {
 

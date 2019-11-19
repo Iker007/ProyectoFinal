@@ -1,4 +1,4 @@
-package BaseDeDatos;
+package database;
 public class BDException extends Exception{
 
 	/**

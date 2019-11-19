@@ -1,8 +1,8 @@
-package Class;
+package clases;
 
 import java.util.ArrayList;
 
-import Interfaz.VentanaFinCombate;
+import interfaz.VentanaFinCombate;
 
 public class Ranking {
 	
