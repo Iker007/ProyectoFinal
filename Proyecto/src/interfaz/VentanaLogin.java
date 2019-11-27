@@ -26,6 +26,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+import clases.Entrenador;
+import database.GestorBD;
+
 public class VentanaLogin extends JFrame implements ActionListener{
 	private JPanel pContent;
 	private JPanel pTitulo;
@@ -53,7 +56,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
 	private JMenuBar menuBar;
 	private Color southPanel;
 	private Dimension tamanyoBotones;
-	
+	private GestorBD baseDeDatos = new GestorBD();
 	
 	public VentanaLogin() {
 		this.setSize(800, 600);
@@ -149,8 +152,14 @@ public class VentanaLogin extends JFrame implements ActionListener{
 			if(e.getSource() == signInButton) {
 				
 				if(!s.isEmpty() && !p.isEmpty()) {
-					for(Entrenador e : )
-					JOptionPane.showMessageDialog(this, "Se ha realizado con exito");
+					for(Entrenador entrenador : baseDeDatos.usuarios) {
+					if(entrenador.getUsuario().equals(s) && entrenador.getContraseña().equals(p)) {
+						JOptionPane.showMessageDialog(this, "Se ha realizado con exito");
+						VentanaInicio v = new VentanaInicio();
+						System.exit(0);
+					}
+					}
+					
 					}
 				else {
 					JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error", JOptionPane.ERROR_MESSAGE);
@@ -164,7 +173,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
 				System.exit(0);
 			}
 		
-		
+			
 
 	}
 	public boolean compararUsuario() {
