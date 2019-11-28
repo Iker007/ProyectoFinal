@@ -144,12 +144,12 @@ public class VentanaLogin extends JFrame implements ActionListener{
 		salir.addActionListener(this);
 	}
 	
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent event) {
 			// TODO Auto-generated method stub
 			String s = username.getText();
 			String p = password.getText();
 			try {
-			if(e.getSource() == signInButton) {
+			if(event.getSource() == signInButton) {
 				
 				if(!s.isEmpty() && !p.isEmpty()) {
 					for(Entrenador entrenador : baseDeDatos.usuarios) {
@@ -165,11 +165,38 @@ public class VentanaLogin extends JFrame implements ActionListener{
 					JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
+			
 			}catch(NumberFormatException E) {
 				JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error", JOptionPane.ERROR_MESSAGE);
 				
 			}
-			if(e.getSource() == salir) {
+			if(event.getSource() == signUpButton) {
+				
+				if(!s.isEmpty() && !p.isEmpty()) {
+					for(Entrenador entrenador : baseDeDatos.usuarios) {
+					if(entrenador.getUsuario().equals(s)) {
+						JOptionPane.showMessageDialog(this, "El usuario ya existe");
+						
+					}
+					else {
+						Entrenador e = new Entrenador();
+						e.setName(s);
+						e.setContraseña(p);
+						VentanaInicio v = new VentanaInicio();
+						baseDeDatos.usuarios.add(e);
+						
+						JOptionPane.showMessageDialog(this, "El usuario ya existe");
+					}
+					}
+					
+					}
+				else {
+					JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			
+			
+			if(event.getSource() == salir) {
 				System.exit(0);
 			}
 		

@@ -127,5 +127,18 @@ public class GestorBD {
 		}
 		return true;
 	}
+	public void insertarEntrenador(Entrenador e) {
+		try(Statement stmt = connection.createStatement()){
+			int res = stmt.executeUpdate("INSERT INTO ENTRENADOR VALUES("+ e.getName() + "," + e.getContraseña() + ")" );
+		
+				
+	
+			}
+			
+		}catch (SQLException e) {
+			throw new BDException("No se pudo obtener la lista de la tabla 'usuario'", e);	
+		}
+		
+	
 	
 }

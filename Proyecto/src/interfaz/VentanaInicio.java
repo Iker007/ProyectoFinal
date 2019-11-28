@@ -226,10 +226,10 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		imageIcon = new ImageIcon(newimg);  // transform it back
 		return imageIcon;
 }
-
+	
 	public static void main(String[] args) {
 		VentanaInicio a = new VentanaInicio();
-
+		
 	}
 
 	@Override
