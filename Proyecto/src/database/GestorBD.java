@@ -138,7 +138,50 @@ public class GestorBD {
 		}catch (SQLException e) {
 			throw new BDException("No se pudo obtener la lista de la tabla 'usuario'", e);	
 		}
-		
+		public List<Pokemon> obtenerTodosPokemon() throws BDException{
+		    List<Pokemon> pokemon = new ArrayList<Pokemon>();
+		    try(Statement stmt = connection.createStatement()){
+		        ResultSet rs = stmt.executeQuery("SELECT ID_P, NOMBRE_P, SCORE, TIPO1, TIPO2, ATAQUE, DEFENSA, HP, VELOCIDAD, MOVIMIENTO1, MOVIMIENTO2 FROM POKEMON");
+		        while(rs.next()) {
+		            Pokemon p = new Pokemon();
+
+		            p.setUid(rs.getInt("ID_P"));
+		            p.setNombre(rs.getString("NOMBRE_P"));
+		            p.setTipo1(rs.getString("TIPO1"));
+		            p.setTipo2(rs.getString("TIPO2"));
+		            p.setAtak(rs.getInt("ATAQUE"));
+		            p.setDefense(rs.getInt("DEFENSA"));
+		            p.setHp(rs.getInt("HP"));
+		            p.setSpeed(rs.getInt("VELOCIDAD"));
+		            p.setMovimiento1(rs.getString("MOVIMIENTO1"));
+		            p.setMovimiento2(rs.getString("MOVIMIENTO2"));
+		            pokemon.add(p);
+		        }
+		public List<Entrenador> obtenerTodosUsuario() throws BDException{
+		        List<Entrenador> usuarios = new ArrayList<Entrenador>();
+		        try(Statement stmt = connection.createStatement()){
+		            ResultSet rs = stmt.executeQuery("SELECT USUARIO, CONTRASEÑA, SCORE, POKEMON1, POKEMON2, POKEMON3, POKEMON4, POKEMON5, POKEMON6 FROM ENTRENADOR");
+		            while(rs.next()) {
+		                Entrenador e = new Entrenador();
+
+		                e.setName(rs.getString("NAME"));
+		                e.setUsuario(rs.getString("USUARIO"));
+		                e.setContraseña(rs.getString("CONTRASENA"));
+		                e.setPokemon1(rs.getInt("POKEMON1"));
+		                e.setPokemon2(rs.getInt("POKEMON2"));
+		                e.setPokemon3(rs.getInt("POKEMON3"));
+		                e.setPokemon4(rs.getInt("POKEMON4"));
+		                e.setPokemon5(rs.getInt("POKEMON5"));
+		                e.setPokemon6(rs.getInt("POKEMON6"));
+		                usuarios.add(e);
+		            }
+
+		        }catch (SQLException e) {
+		            throw new BDException("No se pudo obtener la lista de la tabla 'usuario'", e);
+		        }
+		        this.usuarios = usuarios;
+		        return usuarios;
+		    }	
 	
 	
 }
