@@ -5,17 +5,18 @@ import java.util.ArrayList;
 import interfaz.VentanaFinCombate;
 
 public class Ranking {
-	
+
 	private int score1;
 	private int score2;
 	private String primero;
 	private String segundo;
 	private String tercero;
 	private int debilitados;
+
 	public Ranking() {
 		super();
 	}
-	
+
 	public int getScore1() {
 		return score1;
 	}
@@ -68,16 +69,21 @@ public class Ranking {
 		debilitados = 0;
 		score1 = e1.getScore();
 		score2 = e2.getScore();
-		ArrayList<Pokemon> pokemons = e1.getTeam();
-		for(Pokemon p: pokemons) {
-			if(p.equals(null)) {
+		ArrayList<Pokemon> pokemons = new ArrayList<Pokemon>();
+		pokemons.add(e1.getPokemon1());
+		pokemons.add(e1.getPokemon2());
+		pokemons.add(e1.getPokemon3());
+		pokemons.add(e1.getPokemon4());
+		pokemons.add(e1.getPokemon5());
+		pokemons.add(e1.getPokemon6());
+		for (Pokemon p : pokemons) {
+			if (p.equals(null)) {
 				debilitados++;
 			}
-			if(debilitados == 6) {
+			if (debilitados == 6) {
 				score2++;
 				VentanaFinCombate v = new VentanaFinCombate();
-			}
-			else {
+			} else {
 				score1++;
 				VentanaFinCombate v = new VentanaFinCombate();
 			}
@@ -85,5 +91,5 @@ public class Ranking {
 		e1.setScore(score1);
 		e2.setScore(score2);
 	}
-	
+
 }

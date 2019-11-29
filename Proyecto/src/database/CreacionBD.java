@@ -146,17 +146,17 @@ public class CreacionBD {
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(13, 'REGIGIGAS', 'NORMAL', NULL, 100, 200, 800, 20, 'SWORDS DANCE', 'RETURN');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(14, 'PIKACHU', 'ELECTRIC', NULL, 160, 75, 400, 300, 'SWORDS DANCE', 'RETURN');");
+					"INSERT INTO POKEMON VALUES(14, 'PIKACHU', 'ELECTRIC', NULL, 160, 75, 400, 300, 'THUNDERBOLT', 'IRON TAIL');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(15, 'VENUSAUR', 'GRASS', 'POISON', 80, 200, 700, 40, 'SWORDS DANCE', 'RETURN');");
+					"INSERT INTO POKEMON VALUES(15, 'VENUSAUR', 'GRASS', 'POISON', 80, 200, 700, 40, 'GIGA DRAIN', 'SLUDGE BOMB');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(16, 'CHARIZARD', 'FIRE', 'FLYING', 130, 80, 500, 90, 'SWORDS DANCE', 'RETURN');");
+					"INSERT INTO POKEMON VALUES(16, 'CHARIZARD', 'FIRE', 'FLYING', 130, 80, 500, 90, 'FIRE BLAST', 'SLASH');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(17, 'BLASTOISE', 'WATER', NULL, 70, 250, 750, 10, 'SWORDS DANCE', 'RETURN');");
+					"INSERT INTO POKEMON VALUES(17, 'BLASTOISE', 'WATER', NULL, 70, 250, 750, 10, 'HYDRO PUMP', 'PROTECT');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(18, 'SNORLAX', 'NORMAL', NULL, 100, 150, 1000, 30, 'SWORDS DANCE', 'RETURN');");
+					"INSERT INTO POKEMON VALUES(18, 'SNORLAX', 'NORMAL', NULL, 100, 150, 1000, 30, 'BODY SLAM', 'RECOVER');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(19, 'LAPRAS', 'WATER', 'ICE', 100, 150, 800, 120, 'SWORDS DANCE', 'RETURN');");
+					"INSERT INTO POKEMON VALUES(19, 'LAPRAS', 'WATER', 'ICE', 100, 150, 800, 120, 'ICE BEAM', 'HYDRO PUMP');");
 			rs = statement.executeQuery("select * from pokemon");
 			while (rs.next()) {
 				// Leer el resultset
@@ -168,7 +168,7 @@ public class CreacionBD {
 				System.out.println("def = " + rs.getString("defensa"));
 				System.out.println("hp = " + rs.getString("hp"));
 				System.out.println("vel = " + rs.getString("velocidad"));
-				System.out.println("at1 = " + rs.getString("movimienwto1"));
+				System.out.println("at1 = " + rs.getString("movimiento1"));
 				System.out.println("at2 = " + rs.getString("movimiento2"));
 				System.out.println();
 			}
