@@ -57,6 +57,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
 	private Color southPanel;
 	private Dimension tamanyoBotones;
 	private GestorBD baseDeDatos = new GestorBD();
+	private Entrenador entrenadorActual;
 	
 	public VentanaLogin() {
 		this.setSize(800, 600);
@@ -182,6 +183,8 @@ public class VentanaLogin extends JFrame implements ActionListener{
 						Entrenador e = new Entrenador();
 						e.setName(s);
 						e.setContraseña(p);
+						System.out.println(e.getName());
+						entrenadorActual = e;
 						VentanaInicio v = new VentanaInicio();
 						baseDeDatos.usuarios.add(e);
 						

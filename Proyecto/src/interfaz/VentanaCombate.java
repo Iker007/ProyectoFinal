@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 
+import clases.Entrenador;
 import clases.Pokemon;
 
 public class VentanaCombate extends JFrame{
@@ -41,8 +42,15 @@ public class VentanaCombate extends JFrame{
 	private int loggerHeigth;
 	private Dimension loggerDimension;
 	private Dimension movimientosDimension;
-	
+	private Entrenador entrenador;
+	private Entrenador rojo;
+	private Pokemon pokemonActualAliado;
+	private Pokemon pokemonRojo;
+
+
+
 	public VentanaCombate() {
+
 		ventanaWidth = 1200;
 		ventanaHeigth = 800;
 		ventanaDimension = new Dimension(ventanaWidth, ventanaHeigth);
@@ -68,11 +76,44 @@ public class VentanaCombate extends JFrame{
 		pContent = new JPanel(new BorderLayout());
 		pContent.add(pMovimientos,BorderLayout.SOUTH);
 		this.add(pContent,BorderLayout.CENTER);
-		
+
 		this.setVisible(true);
 	}
 	public static void main(String[] args) {
 		VentanaCombate v = new VentanaCombate();
+		System.out.println((int) (Math.random() * 2 + 1));
 	}
+	public int quienAtacaPrimero(int velocidad1, int velocidad2) {
+		if(velocidad1 > velocidad2) {
+			return 1;
+		}if(velocidad2 < velocidad1) {
+			return 2;
+		}
+		else {
+			return (int) (Math.random() * 2 + 1);
+		}
 
+	}
+	@SuppressWarnings("static-access")
+	public void Combate() throws InterruptedException {
+		while(entrenador.getPokemons()!=null || rojo.getPokemons() != null) {
+			if(quienAtacaPrimero(pokemonActualAliado.getSpeed(), pokemonRojo.getSpeed())==1){
+				Thread turnoEntrenador = new Thread();
+				Thread rojo = new Thread();
+				turnoEntrenador.start();
+				while(turnoEntrenador.isAlive()) {
+					rojo.sleep(1000);
+
+				}
+
+			}
+		}
+	}
+	public boolean pokemonEsDerrotado(Pokemon pokemon) {
+		if(pokemon.getHp()<=0) {
+			return true;
+			
+		}
+		return false;
+	}
 }

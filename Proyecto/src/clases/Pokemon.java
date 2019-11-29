@@ -144,5 +144,8 @@ public class Pokemon {
 		}
 
 	}
+	public int atacar() {
+		return this.getAtak();
+	}
 
 }
