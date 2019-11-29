@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.event.WindowStateListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,6 +29,10 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import clases.Entrenador;
+import clases.Movimiento;
+import clases.Pokemon;
+import clases.Tipo;
+import database.BDException;
 import database.GestorBD;
 
 public class VentanaLogin extends JFrame implements ActionListener{
@@ -58,11 +64,22 @@ public class VentanaLogin extends JFrame implements ActionListener{
 	private Dimension tamanyoBotones;
 	private GestorBD baseDeDatos = new GestorBD();
 	private Entrenador entrenadorActual;
+	public List<Entrenador> usuarios = new ArrayList<Entrenador>();
+	public List<Pokemon> pokemons = new ArrayList<Pokemon>();
+	public List<Tipo> tipos = new ArrayList<Tipo>();
+	public List<Movimiento> movimientos = new ArrayList<Movimiento>();
 	
-	public VentanaLogin() {
+	public VentanaLogin() throws BDException {
 		this.setSize(800, 600);
 		this.setLayout(new BorderLayout());
 		this.setTitle("Pokemon Showdown");
+		baseDeDatos.conectar();
+		tipos = baseDeDatos.obtenerTodosTipos();
+		movimientos = baseDeDatos.obtenerTodosMovimientos();
+		pokemons = baseDeDatos.obtenerTodosPokemon(movimientos);
+		
+		usuarios = baseDeDatos.obtenerTodosUsuario2(pokemons);
+		System.out.println(usuarios.get(0).getName());
 		usernameLabel = new JLabel("Username:");
 		username = new JTextField();
 		username.setEditable(true);
@@ -143,6 +160,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
 		this.setMinimumSize(new Dimension(825, 670));
 		signInButton.addActionListener(this);
 		salir.addActionListener(this);
+		signUpButton.addActionListener(this);
 	}
 	
 		public void actionPerformed(ActionEvent event) {
@@ -153,7 +171,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
 			if(event.getSource() == signInButton) {
 				
 				if(!s.isEmpty() && !p.isEmpty()) {
-					for(Entrenador entrenador : baseDeDatos.usuarios) {
+					for(Entrenador entrenador : usuarios) {
 					if(entrenador.getUsuario().equals(s) && entrenador.getContraseña().equals(p)) {
 						JOptionPane.showMessageDialog(this, "Se ha realizado con exito");
 						VentanaInicio v = new VentanaInicio();
@@ -174,7 +192,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
 			if(event.getSource() == signUpButton) {
 				
 				if(!s.isEmpty() && !p.isEmpty()) {
-					for(Entrenador entrenador : baseDeDatos.usuarios) {
+					for(Entrenador entrenador : usuarios) {
 					if(entrenador.getUsuario().equals(s)) {
 						JOptionPane.showMessageDialog(this, "El usuario ya existe");
 						
@@ -186,9 +204,15 @@ public class VentanaLogin extends JFrame implements ActionListener{
 						System.out.println(e.getName());
 						entrenadorActual = e;
 						VentanaInicio v = new VentanaInicio();
-						baseDeDatos.usuarios.add(e);
-						
-						JOptionPane.showMessageDialog(this, "El usuario ya existe");
+						usuarios.add(e);
+						try {
+							baseDeDatos.insertarEntrenador(e);
+						} catch (BDException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						System.out.println(e);
+						//JOptionPane.showMessageDialog(this, "El usuario ya existe");
 					}
 					}
 					
@@ -210,7 +234,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
 		return true;
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws BDException {
 		// TODO Auto-generated method stub
 		VentanaLogin v = new VentanaLogin();
 		v.setVisible(true);

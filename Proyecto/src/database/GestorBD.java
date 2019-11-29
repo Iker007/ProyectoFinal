@@ -14,17 +14,18 @@ import clases.Pokemon;
 import clases.Tipo;
 
 public class GestorBD {
-	public List<Entrenador> usuarios;
+	
 	private Connection connection = null;
-
-	public GestorBD() {
-
-	}
+	
+	public GestorBD() throws BDException {
+		
+		
+			}
 
 	public void conectar() throws BDException {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			connection = DriverManager.getConnection("jdbc:sqlite:datos/pokemon.bd");
+			connection = DriverManager.getConnection("jdbc:sqlite:showdown");
 		} catch (ClassNotFoundException e) {
 			throw new BDException("No se pudo cargar el driver", e);
 		} catch (SQLException e) {
@@ -125,7 +126,7 @@ public class GestorBD {
 	public void insertarEntrenador(Entrenador e) throws BDException {
 		try (Statement stmt = connection.createStatement()) {
 			int res = stmt
-					.executeUpdate("INSERT INTO ENTRENADOR VALUES(" + e.getName() + "," + e.getContraseña() + ")");
+					.executeUpdate("INSERT INTO ENTRENADOR VALUES('+ e.getName() +', '+ e.getContraseña() +')");
 		}
 
 		catch (SQLException e1) {
@@ -173,7 +174,7 @@ public class GestorBD {
 		List<Pokemon> pokemon = new ArrayList<Pokemon>();
 		try (Statement stmt = connection.createStatement()) {
 			ResultSet rs = stmt.executeQuery(
-					"SELECT ID_P, NOMBRE_P, SCORE, TIPO1, TIPO2, ATAQUE, DEFENSA, HP, VELOCIDAD, MOVIMIENTO1, MOVIMIENTO2 FROM POKEMON");
+					"SELECT ID_P, NOMBRE_P, TIPO1, TIPO2, ATAQUE, DEFENSA, HP, VELOCIDAD, MOVIMIENTO1, MOVIMIENTO2 FROM POKEMON");
 			while (rs.next()) {
 				Pokemon p = new Pokemon();
 
@@ -223,9 +224,9 @@ public class GestorBD {
 			while (rs.next()) {
 				Entrenador e = new Entrenador();
 
-				e.setName(rs.getString("NAME"));
 				e.setUsuario(rs.getString("USUARIO"));
-				e.setContraseña(rs.getString("CONTRASENA"));
+				e.setContraseña(rs.getString("CONTRASEÑA"));
+				e.setScore(rs.getInt("SCORE"));
 				List<Pokemon> equipo = new ArrayList<Pokemon>();
 				Pokemon pokemon1 = new Pokemon();
 				for(Pokemon p : pokemon) {
@@ -337,7 +338,7 @@ public class GestorBD {
 		} catch (SQLException e) {
 			throw new BDException("No se pudo obtener la lista de la tabla 'Entrenador'", e);
 		}
-		this.usuarios = usuarios;
+		
 		return usuarios;
 	}
 

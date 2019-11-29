@@ -172,12 +172,15 @@ public class CreacionBD {
 				System.out.println("at2 = " + rs.getString("movimiento2"));
 				System.out.println();
 			}
+			res = statement.executeUpdate(
+                    "INSERT INTO ENTRENADOR VALUES('RED', 'C', 0, 14, 15, 16, 17, 18, 19);");
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		} finally {
 			try {
 				if (connection != null)
 					connection.close();
+				
 			} catch (SQLException e) {
 				// Cierre de conexión fallido
 				System.err.println(e);
