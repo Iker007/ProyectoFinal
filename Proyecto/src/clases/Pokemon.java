@@ -5,8 +5,7 @@ import java.util.List;
 
 public class Pokemon {
 	private String nombre;
-	private static int UNIQUE_ID = 0;
-	private int uid = ++UNIQUE_ID;
+	private int id;
 	private Tipo tipo1;
 	private Tipo tipo2;	
 	private Movimiento movimiento1;
@@ -24,7 +23,7 @@ public class Pokemon {
 			int atak, int defense, int hp, int speed) {
 		super();
 		this.nombre = nombre;
-		this.uid = uid;
+		this.id = id;
 		this.tipo1 = tipo1;
 		this.tipo2 = tipo2;
 		this.movimiento1 = movimiento1;
@@ -43,20 +42,12 @@ public class Pokemon {
 		this.nombre = nombre;
 	}
 
-	public static int getUNIQUE_ID() {
-		return UNIQUE_ID;
+	public int getId() {
+		return id;
 	}
 
-	public static void setUNIQUE_ID(int uNIQUE_ID) {
-		UNIQUE_ID = uNIQUE_ID;
-	}
-
-	public int getUid() {
-		return uid;
-	}
-
-	public void setUid(int uid) {
-		this.uid = uid;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Tipo getTipo1() {
@@ -140,7 +131,7 @@ public class Pokemon {
 		a.add(p6);
 
 		for (int i = 0; i <= 5; i++) {
-			System.out.println(a.get(i).getUid());
+			System.out.println(a.get(i).getId());
 		}
 
 	}

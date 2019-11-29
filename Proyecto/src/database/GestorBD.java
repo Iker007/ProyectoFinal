@@ -177,7 +177,7 @@ public class GestorBD {
 			while (rs.next()) {
 				Pokemon p = new Pokemon();
 
-				p.setUid(rs.getInt("ID_P"));
+				p.setId(rs.getInt("ID_P"));
 				p.setNombre(rs.getString("NOMBRE_P"));
 				Tipo tipo1 = new Tipo(rs.getString("TIPO1"));
 				p.setTipo1(tipo1);
@@ -226,22 +226,111 @@ public class GestorBD {
 				e.setName(rs.getString("NAME"));
 				e.setUsuario(rs.getString("USUARIO"));
 				e.setContraseña(rs.getString("CONTRASENA"));
+				List<Pokemon> equipo = new ArrayList<Pokemon>();
 				Pokemon pokemon1 = new Pokemon();
 				for(Pokemon p : pokemon) {
-					if(p.getNombre().equals(rs.getString("MOVIMIENTO2"))){
+					if(p.getId() == (rs.getInt("POKEMON1"))){
+						pokemon1.setId(p.getId());
 						pokemon1.setNombre(p.getNombre());
-						pokemon1.setDaño(m.getDaño());
-						pokemon1.setEfecto(m.getEfecto());
-						pokemon1.setTipo(m.getTipo());
+						pokemon1.setTipo1(p.getTipo1());
+						pokemon1.setTipo2(p.getTipo2());
+						pokemon1.setAtak(p.getAtak());
+						pokemon1.setDefense(p.getDefense());
+						pokemon1.setHp(p.getHp());
+						pokemon1.setSpeed(p.getSpeed());
+						pokemon1.setMovimiento1(p.getMovimiento1());
+						pokemon1.setMovimiento2(p.getMovimiento2());
+						
 					}
-					p.setMovimiento1(movimiento2);
+					equipo.add(pokemon1);
 				}
-				e.setPokemon1(rs.getString("POKEMON1"));
-				e.setPokemon2(rs.getString("POKEMON2"));
-				e.setPokemon3(rs.getString("POKEMON3"));
-				e.setPokemon4(rs.getString("POKEMON4"));
-				e.setPokemon5(rs.getString("POKEMON5"));
-				e.setPokemon6(rs.getString("POKEMON6"));
+				Pokemon pokemon2 = new Pokemon();
+				for(Pokemon p : pokemon) {
+					if(p.getId() == (rs.getInt("POKEMON2"))){
+						pokemon2.setId(p.getId());
+						pokemon2.setNombre(p.getNombre());
+						pokemon2.setTipo1(p.getTipo1());
+						pokemon2.setTipo2(p.getTipo2());
+						pokemon2.setAtak(p.getAtak());
+						pokemon2.setDefense(p.getDefense());
+						pokemon2.setHp(p.getHp());
+						pokemon2.setSpeed(p.getSpeed());
+						pokemon2.setMovimiento1(p.getMovimiento1());
+						pokemon2.setMovimiento2(p.getMovimiento2());
+						
+					}
+					equipo.add(pokemon2);
+				}
+				Pokemon pokemon3 = new Pokemon();
+				for(Pokemon p : pokemon) {
+					if(p.getId() == (rs.getInt("POKEMON3"))){
+						pokemon3.setId(p.getId());
+						pokemon3.setNombre(p.getNombre());
+						pokemon3.setTipo1(p.getTipo1());
+						pokemon3.setTipo2(p.getTipo2());
+						pokemon3.setAtak(p.getAtak());
+						pokemon3.setDefense(p.getDefense());
+						pokemon3.setHp(p.getHp());
+						pokemon3.setSpeed(p.getSpeed());
+						pokemon3.setMovimiento1(p.getMovimiento1());
+						pokemon3.setMovimiento2(p.getMovimiento2());
+						
+					}
+					equipo.add(pokemon3);
+				}
+				Pokemon pokemon4 = new Pokemon();
+				for(Pokemon p : pokemon) {
+					if(p.getId() == (rs.getInt("POKEMON4"))){
+						pokemon4.setId(p.getId());
+						pokemon4.setNombre(p.getNombre());
+						pokemon4.setTipo1(p.getTipo1());
+						pokemon4.setTipo2(p.getTipo2());
+						pokemon4.setAtak(p.getAtak());
+						pokemon4.setDefense(p.getDefense());
+						pokemon4.setHp(p.getHp());
+						pokemon4.setSpeed(p.getSpeed());
+						pokemon4.setMovimiento1(p.getMovimiento1());
+						pokemon4.setMovimiento2(p.getMovimiento2());
+						
+					}
+					equipo.add(pokemon4);
+				}
+				Pokemon pokemon5 = new Pokemon();
+				for(Pokemon p : pokemon) {
+					if(p.getId() == (rs.getInt("POKEMON5"))){
+						pokemon5.setId(p.getId());
+						pokemon5.setNombre(p.getNombre());
+						pokemon5.setTipo1(p.getTipo1());
+						pokemon5.setTipo2(p.getTipo2());
+						pokemon5.setAtak(p.getAtak());
+						pokemon5.setDefense(p.getDefense());
+						pokemon5.setHp(p.getHp());
+						pokemon5.setSpeed(p.getSpeed());
+						pokemon5.setMovimiento1(p.getMovimiento1());
+						pokemon5.setMovimiento2(p.getMovimiento2());
+						
+					}
+					equipo.add(pokemon5);
+				}
+				Pokemon pokemon6 = new Pokemon();
+				for(Pokemon p : pokemon) {
+					if(p.getId() == (rs.getInt("POKEMON6"))){
+						pokemon6.setId(p.getId());
+						pokemon6.setNombre(p.getNombre());
+						pokemon6.setTipo1(p.getTipo1());
+						pokemon6.setTipo2(p.getTipo2());
+						pokemon6.setAtak(p.getAtak());
+						pokemon6.setDefense(p.getDefense());
+						pokemon6.setHp(p.getHp());
+						pokemon6.setSpeed(p.getSpeed());
+						pokemon6.setMovimiento1(p.getMovimiento1());
+						pokemon6.setMovimiento2(p.getMovimiento2());
+						
+					}
+					equipo.add(pokemon6);
+				}
+				e.setPokemons(equipo);
+				
 				usuarios.add(e);
 			}
 
