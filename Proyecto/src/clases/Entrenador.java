@@ -12,12 +12,6 @@ public class Entrenador {
 	private Pokemon pokemon4;
 	private Pokemon pokemon5;
 	private Pokemon pokemon6;
-	private String pokemon1String;
-	private String pokemon2String;
-	private String pokemon3String;
-	private String pokemon4String;
-	private String pokemon5String;
-	private String pokemon6String;
 
 	public Entrenador() {}
 
@@ -89,54 +83,6 @@ public class Entrenador {
 
 	public void setPokemon6(Pokemon pokemon6) {
 		this.pokemon6 = pokemon6;
-	}
-
-	public String getPokemon1String() {
-		return pokemon1String;
-	}
-
-	public void setPokemon1String(String pokemon1String) {
-		this.pokemon1String = pokemon1String;
-	}
-
-	public String getPokemon2String() {
-		return pokemon2String;
-	}
-
-	public void setPokemon2String(String pokemon2String) {
-		this.pokemon2String = pokemon2String;
-	}
-
-	public String getPokemon3String() {
-		return pokemon3String;
-	}
-
-	public void setPokemon3String(String pokemon3String) {
-		this.pokemon3String = pokemon3String;
-	}
-
-	public String getPokemon4String() {
-		return pokemon4String;
-	}
-
-	public void setPokemon4String(String pokemon4String) {
-		this.pokemon4String = pokemon4String;
-	}
-
-	public String getPokemon5String() {
-		return pokemon5String;
-	}
-
-	public void setPokemon5String(String pokemon5String) {
-		this.pokemon5String = pokemon5String;
-	}
-
-	public String getPokemon6String() {
-		return pokemon6String;
-	}
-
-	public void setPokemon6String(String pokemon6String) {
-		this.pokemon6String = pokemon6String;
 	}
 
 	public int getScore() {

@@ -157,7 +157,8 @@ public class GestorBD {
 				Movimiento m = new Movimiento();
 
 				m.setNombre(rs.getString("NOMBRE_M"));
-				m.setTipoString(rs.getString("TIPO"));
+				Tipo tipo = new Tipo(rs.getString("TIPO"));
+				m.setTipo(tipo);
 				m.setDaño(rs.getInt("DAMAGE"));
 				m.setEfecto(rs.getString("EFECTO"));
 				movimientos.add(m);
@@ -168,7 +169,7 @@ public class GestorBD {
 		}
 	}
 
-	public List<Pokemon> obtenerTodosPokemon() throws BDException {
+	public List<Pokemon> obtenerTodosPokemon(List<Movimiento> movimientos) throws BDException {
 		List<Pokemon> pokemon = new ArrayList<Pokemon>();
 		try (Statement stmt = connection.createStatement()) {
 			ResultSet rs = stmt.executeQuery(
@@ -178,14 +179,34 @@ public class GestorBD {
 
 				p.setUid(rs.getInt("ID_P"));
 				p.setNombre(rs.getString("NOMBRE_P"));
-				p.setTipo1String(rs.getString("TIPO1"));
-				p.setTipo2String(rs.getString("TIPO2"));
+				Tipo tipo1 = new Tipo(rs.getString("TIPO1"));
+				p.setTipo1(tipo1);
+				Tipo tipo2 = new Tipo(rs.getString("TIPO2"));
+				p.setTipo2(tipo2);
 				p.setAtak(rs.getInt("ATAQUE"));
 				p.setDefense(rs.getInt("DEFENSA"));
 				p.setHp(rs.getInt("HP"));
 				p.setSpeed(rs.getInt("VELOCIDAD"));
-				p.setMovimiento1String(rs.getString("MOVIMIENTO1"));
-				p.setMovimiento2String(rs.getString("MOVIMIENTO2"));
+				Movimiento movimiento1 = new Movimiento();
+				for(Movimiento m : movimientos) {
+					if(m.getNombre().equals(rs.getString("MOVIMIENTO1"))){
+						movimiento1.setNombre(m.getNombre());
+						movimiento1.setDaño(m.getDaño());
+						movimiento1.setEfecto(m.getEfecto());
+						movimiento1.setTipo(m.getTipo());
+					}
+					p.setMovimiento1(movimiento1);
+				}
+				Movimiento movimiento2 = new Movimiento();
+				for(Movimiento m : movimientos) {
+					if(m.getNombre().equals(rs.getString("MOVIMIENTO2"))){
+						movimiento2.setNombre(m.getNombre());
+						movimiento2.setDaño(m.getDaño());
+						movimiento2.setEfecto(m.getEfecto());
+						movimiento2.setTipo(m.getTipo());
+					}
+					p.setMovimiento1(movimiento2);
+				}
 				pokemon.add(p);
 			}
 			return pokemon;
@@ -194,7 +215,7 @@ public class GestorBD {
 		}
 	}
 
-	public List<Entrenador> obtenerTodosUsuario2() throws BDException {
+	public List<Entrenador> obtenerTodosUsuario2(List<Pokemon> pokemon) throws BDException {
 		List<Entrenador> usuarios = new ArrayList<Entrenador>();
 		try (Statement stmt = connection.createStatement()) {
 			ResultSet rs = stmt.executeQuery(
@@ -205,12 +226,22 @@ public class GestorBD {
 				e.setName(rs.getString("NAME"));
 				e.setUsuario(rs.getString("USUARIO"));
 				e.setContraseña(rs.getString("CONTRASENA"));
-				e.setPokemon1String(rs.getString("POKEMON1"));
-				e.setPokemon2String(rs.getString("POKEMON2"));
-				e.setPokemon3String(rs.getString("POKEMON3"));
-				e.setPokemon4String(rs.getString("POKEMON4"));
-				e.setPokemon5String(rs.getString("POKEMON5"));
-				e.setPokemon6String(rs.getString("POKEMON6"));
+				Pokemon pokemon1 = new Pokemon();
+				for(Pokemon p : pokemon) {
+					if(p.getNombre().equals(rs.getString("MOVIMIENTO2"))){
+						pokemon1.setNombre(p.getNombre());
+						pokemon1.setDaño(m.getDaño());
+						pokemon1.setEfecto(m.getEfecto());
+						pokemon1.setTipo(m.getTipo());
+					}
+					p.setMovimiento1(movimiento2);
+				}
+				e.setPokemon1(rs.getString("POKEMON1"));
+				e.setPokemon2(rs.getString("POKEMON2"));
+				e.setPokemon3(rs.getString("POKEMON3"));
+				e.setPokemon4(rs.getString("POKEMON4"));
+				e.setPokemon5(rs.getString("POKEMON5"));
+				e.setPokemon6(rs.getString("POKEMON6"));
 				usuarios.add(e);
 			}
 

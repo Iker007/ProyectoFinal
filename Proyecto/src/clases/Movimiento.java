@@ -3,7 +3,6 @@ package clases;
 public class Movimiento {
 	private String nombre;
 	private Tipo tipo;
-	private String tipoString;
 	private int daño;
 	private String efecto;
 
@@ -33,14 +32,6 @@ public class Movimiento {
 
 	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
-	}
-
-	public String getTipoString() {
-		return tipoString;
-	}
-
-	public void setTipoString(String tipoString) {
-		this.tipoString = tipoString;
 	}
 
 	public int getDaño() {

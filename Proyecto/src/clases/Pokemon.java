@@ -8,13 +8,9 @@ public class Pokemon {
 	private static int UNIQUE_ID = 0;
 	private int uid = ++UNIQUE_ID;
 	private Tipo tipo1;
-	private Tipo tipo2;
-	private String tipo1String;
-	private String tipo2String;
+	private Tipo tipo2;	
 	private Movimiento movimiento1;
 	private Movimiento movimiento2;
-	private String movimiento1String;
-	private String movimiento2String;
 	private int atak;
 	private int defense;
 	private int hp;
@@ -71,13 +67,6 @@ public class Pokemon {
 		this.tipo1 = tipo1;
 	}
 
-	public String getTipo1String() {
-		return tipo1String;
-	}
-
-	public void setTipo1String(String tipo1String) {
-		this.tipo1String = tipo1String;
-	}
 
 	public Tipo getTipo2() {
 		return tipo2;
@@ -85,14 +74,6 @@ public class Pokemon {
 
 	public void setTipo2(Tipo tipo2) {
 		this.tipo2 = tipo2;
-	}
-
-	public String getTipo2String() {
-		return tipo2String;
-	}
-
-	public void setTipo2String(String tipo2String) {
-		this.tipo2String = tipo2String;
 	}
 
 	public Movimiento getMovimiento1() {
@@ -103,28 +84,12 @@ public class Pokemon {
 		this.movimiento1 = movimiento1;
 	}
 
-	public String getMovimiento1String() {
-		return movimiento1String;
-	}
-
-	public void setMovimiento1String(String movimiento1String) {
-		this.movimiento1String = movimiento1String;
-	}
-
 	public Movimiento getMovimiento2() {
 		return movimiento2;
 	}
 
 	public void setMovimiento2(Movimiento movimiento2) {
 		this.movimiento2 = movimiento2;
-	}
-
-	public String getMovimiento2String() {
-		return movimiento2String;
-	}
-
-	public void setMovimiento2String(String movimiento2String) {
-		this.movimiento2String = movimiento2String;
 	}
 
 	public int getAtak() {
