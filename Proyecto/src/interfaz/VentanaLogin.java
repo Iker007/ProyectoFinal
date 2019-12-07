@@ -76,11 +76,18 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		tipos = baseDeDatos.obtenerTodosTipos();
 		movimientos = baseDeDatos.obtenerTodosMovimientos();
 		pokemons = baseDeDatos.obtenerTodosPokemon(movimientos);
+		usuarios = baseDeDatos.obtenerTodosUsuarios(pokemons);
+		
+		System.out.println(usuarios.get(0).getUsuario());
+		System.out.println(usuarios.get(1).getUsuario());
+		//System.out.println(usuarios.get(2).getUsuario());
 
-		usuarios = baseDeDatos.obtenerTodosUsuario2(pokemons);
-		System.out.println(usuarios.get(0).getName());
-		for(int i = 0; i < 6; i++) {
-		System.out.println(usuarios.get(0).getPokemons().get(i).getNombre());
+		
+		for (int i = 0; i < 6; i++) {
+			System.out.println(usuarios.get(0).getPokemons().get(i).getNombre());
+			System.out.println(usuarios.get(0).getPokemons().get(i).getMovimiento1().getNombre());
+			System.out.println(usuarios.get(0).getPokemons().get(i).getTipo1().getNombre());
+			System.out.println();
 		}
 		usernameLabel = new JLabel("Username:");
 		username = new JTextField();
@@ -187,7 +194,9 @@ public class VentanaLogin extends JFrame implements ActionListener {
 							JOptionPane.showMessageDialog(this, "Se ha realizado con exito");
 							VentanaInicio v = new VentanaInicio();
 							System.exit(0);
-						}
+						} else
+							JOptionPane.showMessageDialog(this, "El entrenador no existe");
+
 					}
 
 				} else {
@@ -207,8 +216,8 @@ public class VentanaLogin extends JFrame implements ActionListener {
 				for (Entrenador entrenador : usuarios) {
 					if (entrenador.getUsuario().equals(s)) {
 						JOptionPane.showMessageDialog(this, "El usuario ya existe");
-
-					} else {
+					}
+					} 
 						Entrenador e = new Entrenador();
 						List<Integer> equipo = new ArrayList<Integer>();
 						List<Pokemon> TodosPokemons = new ArrayList<Pokemon>();
@@ -233,10 +242,11 @@ public class VentanaLogin extends JFrame implements ActionListener {
 							pokemons.add(TodosPokemons.get(equipo.get(i)));
 						}
 
-						e.setName(s);
+						e.setUsuario(s);
 						e.setContraseña(p);
+						e.setScore(0);
 						e.setPokemons(pokemons);
-						System.out.println(e.getName());
+						System.out.println(e.getUsuario());
 						entrenadorActual = e;
 						usuarios.add(e);
 						try {
@@ -245,17 +255,16 @@ public class VentanaLogin extends JFrame implements ActionListener {
 							e1.printStackTrace();
 						}
 						System.out.println(e);
-						JOptionPane.showMessageDialog(this, "El usuario ya existe");
 					}
 				}
 
-			} else {
+			 else {
 				JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
 
-	}
+	
 
 	public boolean compararUsuario() {
 		return true;

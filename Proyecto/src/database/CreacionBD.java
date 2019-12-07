@@ -173,18 +173,22 @@ public class CreacionBD {
 				System.out.println();
 			}
 			res = statement.executeUpdate(
-                    "INSERT INTO ENTRENADOR VALUES('RED', 'C', 0, 14, 15, 16, 17, 18, 19);");
+                    "INSERT INTO ENTRENADOR VALUES('RED', 'C', 999, 14, 15, 16, 17, 18, 19);");
+			res = statement.executeUpdate(
+                    "INSERT INTO ENTRENADOR VALUES('BLUE', 'C', 0, 10, 7, 16, 12, 18, 19);");
 			rs = statement.executeQuery("select * from entrenador");
-			System.out.println("usuario = " + rs.getInt("usuario"));
-			System.out.println("name = " + rs.getString("contraseña"));
-			System.out.println("tipo1 = " + rs.getString("score"));
-			System.out.println("tipo2 = " + rs.getString("pokemon1"));
-			System.out.println("at  = " + rs.getString("pokemon2"));
-			System.out.println("def = " + rs.getString("pokemon3"));
-			System.out.println("hp = " + rs.getString("pokemon4"));
-			System.out.println("vel = " + rs.getString("pokemon5"));
-			System.out.println("at1 = " + rs.getString("pokemon6"));
+			while(rs.next()) {
+			System.out.println("usuario = " + rs.getString("usuario"));
+			System.out.println("cont = " + rs.getString("contraseña"));
+			System.out.println("score = " + rs.getInt("score"));
+			System.out.println("pok1 = " + rs.getInt("pokemon1"));
+			System.out.println("pok2 = " + rs.getInt("pokemon2"));
+			System.out.println("pok3 = " + rs.getInt("pokemon3"));
+			System.out.println("pok4 = " + rs.getInt("pokemon4"));
+			System.out.println("pok5 = " + rs.getInt("pokemon5"));
+			System.out.println("pok6 = " + rs.getInt("pokemon6"));
 			System.out.println();
+			}
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		} finally {

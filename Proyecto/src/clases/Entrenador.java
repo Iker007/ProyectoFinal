@@ -4,38 +4,21 @@ import java.util.List;
 
 public class Entrenador {
 
-	private String name;
-	private int score;
 	private String usuario;
+	private int score;
 	private String contraseña;
 	private List<Pokemon> pokemons;
 
 	public Entrenador() {
 		
 	}
-	public Entrenador(String name, int score, String usuario, String contraseña, List<Pokemon> pokemons) {
+	public Entrenador(String usuario, int score, String contraseña, List<Pokemon> pokemons) {
 		super();
-		this.name = name;
 		this.score = score;
 		this.usuario = usuario;
 		this.contraseña = contraseña;
 		this.pokemons = pokemons;
 	}
-	public String getName() {
-		return name;
-	}
-
-
-
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-
-
 
 	public int getScore() {
 		return score;

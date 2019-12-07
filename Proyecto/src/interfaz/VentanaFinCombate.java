@@ -90,7 +90,7 @@ public class VentanaFinCombate extends JFrame {
             pw = new PrintWriter(fichero);
 
             	for(Entrenador e : lista) {
-                pw.println(e.getName() + ":" + e.getScore());
+                pw.println(e.getUsuario() + ":" + e.getScore());
             	}
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,7 +113,7 @@ public class VentanaFinCombate extends JFrame {
 		return entrenador;
 	}
 	public void setEntrenador(Entrenador entrenador) {
-		this.entrenador.setText(entrenador.getName());
+		this.entrenador.setText(entrenador.getUsuario());
 	}
 	
 

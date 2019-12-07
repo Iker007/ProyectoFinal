@@ -14,13 +14,12 @@ import clases.Pokemon;
 import clases.Tipo;
 
 public class GestorBD {
-	
+
 	private static Connection connection = null;
-	
+
 	public GestorBD() throws BDException {
-		
-		
-			}
+
+	}
 
 	public void conectar() throws BDException {
 		try {
@@ -82,40 +81,7 @@ public class GestorBD {
 		}
 	}
 
-	public void crearTableEntrenador() throws BDException {
-
-		try (Statement stmt = connection.createStatement()) {
-			String sql = "CREATE TABLE entrenador (usuario VARCHAR, contrasena VARCHAR)";
-			stmt.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO: handle exception
-			throw new BDException("No se pudo crear la tabla 'entrenador'", e);
-		}
-
-	}
-
-	public List<Entrenador> obtenerTodosUsuario() throws BDException {
-		List<Entrenador> usuarios = new ArrayList<Entrenador>();
-		try (Statement stmt = connection.createStatement()) {
-			ResultSet rs = stmt.executeQuery(
-					"SELECT USUARIO, CONTRASEÑA, SCORE, POKEMON1, POKEMON2, POKEMON3, POKEMON4, POKEMON5, POKEMON6 FROM ENTRENADOR");
-			while (rs.next()) {
-				Entrenador e = new Entrenador();
-
-				e.setName(rs.getString("NAME"));
-				e.setUsuario(rs.getString("USUARIO"));
-				e.setContraseña(rs.getString("CONTRASENA"));
-
-				usuarios.add(e);
-			}
-
-		} catch (SQLException e) {
-			throw new BDException("No se pudo obtener la lista de la tabla 'usuario'", e);
-		}
-		return usuarios;
-	}
-
-	public boolean comprobarEntrenadorExiste(Entrenador e) {
+	public boolean comprobarEntrenadorExiste(Entrenador e, List<Entrenador> usuarios) {
 		for (Entrenador e2 : usuarios) {
 
 		}
@@ -123,16 +89,13 @@ public class GestorBD {
 	}
 
 	public void insertarEntrenador(Entrenador e) throws BDException, ClassNotFoundException {
-		
+
 		try (Statement stmt = connection.createStatement()) {
-			int res = stmt
-					.executeUpdate("INSERT INTO ENTRENADOR VALUES('"+ e.getName() +"'," + "'"+ e.getContraseña() +"'," 
-			+e.getPokemons().get(0).getId()+"'," 
-					+e.getPokemons().get(1).getId()+"'," 
-							+e.getPokemons().get(1).getId()+"'," 
-									+e.getPokemons().get(1).getId()+"'," 
-											+e.getPokemons().get(1).getId()+"'," 
-													+e.getPokemons().get(1).getId()+");");
+			int res = stmt.executeUpdate("INSERT INTO ENTRENADOR VALUES('" + e.getUsuario() + "', " + "'"
+					+ e.getContraseña() + "', " + e.getScore() + "', " + e.getPokemons().get(0).getId() + "',"
+					+ e.getPokemons().get(1).getId() + "'," + e.getPokemons().get(1).getId() + "',"
+					+ e.getPokemons().get(1).getId() + "'," + e.getPokemons().get(1).getId() + "',"
+					+ e.getPokemons().get(1).getId() + ");");
 		}
 
 		catch (SQLException e1) {
@@ -195,8 +158,8 @@ public class GestorBD {
 				p.setHp(rs.getInt("HP"));
 				p.setSpeed(rs.getInt("VELOCIDAD"));
 				Movimiento movimiento1 = new Movimiento();
-				for(Movimiento m : movimientos) {
-					if(m.getNombre().equals(rs.getString("MOVIMIENTO1"))){
+				for (Movimiento m : movimientos) {
+					if (m.getNombre().equals(rs.getString("MOVIMIENTO1"))) {
 						movimiento1.setNombre(m.getNombre());
 						movimiento1.setDaño(m.getDaño());
 						movimiento1.setEfecto(m.getEfecto());
@@ -205,8 +168,8 @@ public class GestorBD {
 					p.setMovimiento1(movimiento1);
 				}
 				Movimiento movimiento2 = new Movimiento();
-				for(Movimiento m : movimientos) {
-					if(m.getNombre().equals(rs.getString("MOVIMIENTO2"))){
+				for (Movimiento m : movimientos) {
+					if (m.getNombre().equals(rs.getString("MOVIMIENTO2"))) {
 						movimiento2.setNombre(m.getNombre());
 						movimiento2.setDaño(m.getDaño());
 						movimiento2.setEfecto(m.getEfecto());
@@ -222,11 +185,12 @@ public class GestorBD {
 		}
 	}
 
-	public List<Entrenador> obtenerTodosUsuario2(List<Pokemon> pokemon) throws BDException {
+	public List<Entrenador> obtenerTodosUsuarios(List<Pokemon> pokemon) throws BDException {
 		List<Entrenador> usuarios = new ArrayList<Entrenador>();
 		try (Statement stmt = connection.createStatement()) {
 			ResultSet rs = stmt.executeQuery(
 					"SELECT USUARIO, CONTRASEÑA, SCORE, POKEMON1, POKEMON2, POKEMON3, POKEMON4, POKEMON5, POKEMON6 FROM ENTRENADOR");
+
 			while (rs.next()) {
 				Entrenador e = new Entrenador();
 
@@ -235,8 +199,8 @@ public class GestorBD {
 				e.setScore(rs.getInt("SCORE"));
 				List<Pokemon> equipo = new ArrayList<Pokemon>();
 				Pokemon pokemon1 = new Pokemon();
-				for(Pokemon p : pokemon) {
-					if(p.getId() == (rs.getInt("POKEMON1"))){
+				for (Pokemon p : pokemon) {
+					if (p.getId() == (rs.getInt("POKEMON1"))) {
 						pokemon1.setId(p.getId());
 						pokemon1.setNombre(p.getNombre());
 						pokemon1.setTipo1(p.getTipo1());
@@ -247,13 +211,13 @@ public class GestorBD {
 						pokemon1.setSpeed(p.getSpeed());
 						pokemon1.setMovimiento1(p.getMovimiento1());
 						pokemon1.setMovimiento2(p.getMovimiento2());
-						
+						equipo.add(pokemon1);
 					}
-					equipo.add(pokemon1);
+
 				}
 				Pokemon pokemon2 = new Pokemon();
-				for(Pokemon p : pokemon) {
-					if(p.getId() == (rs.getInt("POKEMON2"))){
+				for (Pokemon p : pokemon) {
+					if (p.getId() == (rs.getInt("POKEMON2"))) {
 						pokemon2.setId(p.getId());
 						pokemon2.setNombre(p.getNombre());
 						pokemon2.setTipo1(p.getTipo1());
@@ -264,13 +228,13 @@ public class GestorBD {
 						pokemon2.setSpeed(p.getSpeed());
 						pokemon2.setMovimiento1(p.getMovimiento1());
 						pokemon2.setMovimiento2(p.getMovimiento2());
-						
+						equipo.add(pokemon2);
+
 					}
-					equipo.add(pokemon2);
 				}
 				Pokemon pokemon3 = new Pokemon();
-				for(Pokemon p : pokemon) {
-					if(p.getId() == (rs.getInt("POKEMON3"))){
+				for (Pokemon p : pokemon) {
+					if (p.getId() == (rs.getInt("POKEMON3"))) {
 						pokemon3.setId(p.getId());
 						pokemon3.setNombre(p.getNombre());
 						pokemon3.setTipo1(p.getTipo1());
@@ -281,13 +245,13 @@ public class GestorBD {
 						pokemon3.setSpeed(p.getSpeed());
 						pokemon3.setMovimiento1(p.getMovimiento1());
 						pokemon3.setMovimiento2(p.getMovimiento2());
-						
+						equipo.add(pokemon3);
+
 					}
-					equipo.add(pokemon3);
 				}
 				Pokemon pokemon4 = new Pokemon();
-				for(Pokemon p : pokemon) {
-					if(p.getId() == (rs.getInt("POKEMON4"))){
+				for (Pokemon p : pokemon) {
+					if (p.getId() == (rs.getInt("POKEMON4"))) {
 						pokemon4.setId(p.getId());
 						pokemon4.setNombre(p.getNombre());
 						pokemon4.setTipo1(p.getTipo1());
@@ -298,13 +262,13 @@ public class GestorBD {
 						pokemon4.setSpeed(p.getSpeed());
 						pokemon4.setMovimiento1(p.getMovimiento1());
 						pokemon4.setMovimiento2(p.getMovimiento2());
-						
+						equipo.add(pokemon4);
+
 					}
-					equipo.add(pokemon4);
 				}
 				Pokemon pokemon5 = new Pokemon();
-				for(Pokemon p : pokemon) {
-					if(p.getId() == (rs.getInt("POKEMON5"))){
+				for (Pokemon p : pokemon) {
+					if (p.getId() == (rs.getInt("POKEMON5"))) {
 						pokemon5.setId(p.getId());
 						pokemon5.setNombre(p.getNombre());
 						pokemon5.setTipo1(p.getTipo1());
@@ -315,13 +279,13 @@ public class GestorBD {
 						pokemon5.setSpeed(p.getSpeed());
 						pokemon5.setMovimiento1(p.getMovimiento1());
 						pokemon5.setMovimiento2(p.getMovimiento2());
-						
+						equipo.add(pokemon5);
+
 					}
-					equipo.add(pokemon5);
 				}
 				Pokemon pokemon6 = new Pokemon();
-				for(Pokemon p : pokemon) {
-					if(p.getId() == (rs.getInt("POKEMON6"))){
+				for (Pokemon p : pokemon) {
+					if (p.getId() == (rs.getInt("POKEMON6"))) {
 						pokemon6.setId(p.getId());
 						pokemon6.setNombre(p.getNombre());
 						pokemon6.setTipo1(p.getTipo1());
@@ -332,19 +296,19 @@ public class GestorBD {
 						pokemon6.setSpeed(p.getSpeed());
 						pokemon6.setMovimiento1(p.getMovimiento1());
 						pokemon6.setMovimiento2(p.getMovimiento2());
-						
+						equipo.add(pokemon6);
+
 					}
-					equipo.add(pokemon6);
 				}
 				e.setPokemons(equipo);
-				
+
 				usuarios.add(e);
 			}
 
 		} catch (SQLException e) {
 			throw new BDException("No se pudo obtener la lista de la tabla 'Entrenador'", e);
 		}
-		
+
 		return usuarios;
 	}
 
