@@ -15,7 +15,7 @@ import clases.Tipo;
 
 public class GestorBD {
 	
-	private Connection connection = null;
+	private static Connection connection = null;
 	
 	public GestorBD() throws BDException {
 		
@@ -112,7 +112,6 @@ public class GestorBD {
 		} catch (SQLException e) {
 			throw new BDException("No se pudo obtener la lista de la tabla 'usuario'", e);
 		}
-		this.usuarios = usuarios;
 		return usuarios;
 	}
 
@@ -123,10 +122,17 @@ public class GestorBD {
 		return true;
 	}
 
-	public void insertarEntrenador(Entrenador e) throws BDException {
+	public void insertarEntrenador(Entrenador e) throws BDException, ClassNotFoundException {
+		
 		try (Statement stmt = connection.createStatement()) {
 			int res = stmt
-					.executeUpdate("INSERT INTO ENTRENADOR VALUES('+ e.getName() +', '+ e.getContraseña() +')");
+					.executeUpdate("INSERT INTO ENTRENADOR VALUES('"+ e.getName() +"'," + "'"+ e.getContraseña() +"'," 
+			+e.getPokemons().get(0).getId()+"'," 
+					+e.getPokemons().get(1).getId()+"'," 
+							+e.getPokemons().get(1).getId()+"'," 
+									+e.getPokemons().get(1).getId()+"'," 
+											+e.getPokemons().get(1).getId()+"'," 
+													+e.getPokemons().get(1).getId()+");");
 		}
 
 		catch (SQLException e1) {
@@ -150,7 +156,7 @@ public class GestorBD {
 		}
 	}
 
-	public List<Movimiento> obtenerTodosMovimientos() throws BDException {
+	public static List<Movimiento> obtenerTodosMovimientos() throws BDException {
 		List<Movimiento> movimientos = new ArrayList<Movimiento>();
 		try (Statement stmt = connection.createStatement()) {
 			ResultSet rs = stmt.executeQuery("SELECT NOMBRE_M, TIPO, DAMAGE, EFECTO FROM MOVIMIENTOS");
@@ -170,7 +176,7 @@ public class GestorBD {
 		}
 	}
 
-	public List<Pokemon> obtenerTodosPokemon(List<Movimiento> movimientos) throws BDException {
+	public static List<Pokemon> obtenerTodosPokemon(List<Movimiento> movimientos) throws BDException {
 		List<Pokemon> pokemon = new ArrayList<Pokemon>();
 		try (Statement stmt = connection.createStatement()) {
 			ResultSet rs = stmt.executeQuery(

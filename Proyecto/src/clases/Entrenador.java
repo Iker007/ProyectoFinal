@@ -103,7 +103,6 @@ public class Entrenador {
 
 	public int pokemonAleatorio() {
 		return (int) Math.floor(Math.random() * 14 + 1);
-		// equipo.add(Pokemon.getUid());
 	}
 
 	public void comprobarParaIniciarSesion() {

@@ -70,12 +70,12 @@ public class Ranking {
 		score1 = e1.getScore();
 		score2 = e2.getScore();
 		ArrayList<Pokemon> pokemons = new ArrayList<Pokemon>();
-		pokemons.add(e1.getPokemon1());
-		pokemons.add(e1.getPokemon2());
-		pokemons.add(e1.getPokemon3());
-		pokemons.add(e1.getPokemon4());
-		pokemons.add(e1.getPokemon5());
-		pokemons.add(e1.getPokemon6());
+		pokemons.add(e1.getPokemons().get(0));
+		pokemons.add(e1.getPokemons().get(1));
+		pokemons.add(e1.getPokemons().get(2));
+		pokemons.add(e1.getPokemons().get(3));
+		pokemons.add(e1.getPokemons().get(4));
+		pokemons.add(e1.getPokemons().get(5));
 		for (Pokemon p : pokemons) {
 			if (p.equals(null)) {
 				debilitados++;

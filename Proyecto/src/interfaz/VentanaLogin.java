@@ -1,6 +1,5 @@
 package interfaz;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -35,7 +34,7 @@ import clases.Tipo;
 import database.BDException;
 import database.GestorBD;
 
-public class VentanaLogin extends JFrame implements ActionListener{
+public class VentanaLogin extends JFrame implements ActionListener {
 	private JPanel pContent;
 	private JPanel pTitulo;
 	private JPanel pBottom;
@@ -68,7 +67,7 @@ public class VentanaLogin extends JFrame implements ActionListener{
 	public List<Pokemon> pokemons = new ArrayList<Pokemon>();
 	public List<Tipo> tipos = new ArrayList<Tipo>();
 	public List<Movimiento> movimientos = new ArrayList<Movimiento>();
-	
+
 	public VentanaLogin() throws BDException {
 		this.setSize(800, 600);
 		this.setLayout(new BorderLayout());
@@ -77,9 +76,12 @@ public class VentanaLogin extends JFrame implements ActionListener{
 		tipos = baseDeDatos.obtenerTodosTipos();
 		movimientos = baseDeDatos.obtenerTodosMovimientos();
 		pokemons = baseDeDatos.obtenerTodosPokemon(movimientos);
-		
+
 		usuarios = baseDeDatos.obtenerTodosUsuario2(pokemons);
 		System.out.println(usuarios.get(0).getName());
+		for(int i = 0; i < 6; i++) {
+		System.out.println(usuarios.get(0).getPokemons().get(i).getNombre());
+		}
 		usernameLabel = new JLabel("Username:");
 		username = new JTextField();
 		username.setEditable(true);
@@ -88,18 +90,18 @@ public class VentanaLogin extends JFrame implements ActionListener{
 		passwordLabel = new JLabel("Password:");
 		password = new JTextField();
 		password.setEditable(true);
-		password.setPreferredSize(new Dimension(250,45));
-		password.setFont(new Font("",Font.BOLD,20));
-		pContent = new JPanel(new GridLayout(1,3));
-		pDatos = new JPanel(new GridLayout(2,1));
+		password.setPreferredSize(new Dimension(250, 45));
+		password.setFont(new Font("", Font.BOLD, 20));
+		pContent = new JPanel(new GridLayout(1, 3));
+		pDatos = new JPanel(new GridLayout(2, 1));
 		pUsername = new JPanel(new FlowLayout());
 		pUsername.add(usernameLabel);
 		pUsername.add(username);
 		pPassword = new JPanel(new FlowLayout());
 		pPassword.add(passwordLabel);
 		pPassword.add(password);
-		
-		pBotones = new JPanel(new FlowLayout(FlowLayout.CENTER,0,60));
+
+		pBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 60));
 		pDatos.add(pUsername);
 		pDatos.add(pPassword);
 		tamanyoBotones = new Dimension(100, 50);
@@ -109,131 +111,156 @@ public class VentanaLogin extends JFrame implements ActionListener{
 		signUpButton.setPreferredSize(tamanyoBotones);
 		pBotones.add(signInButton);
 		pBotones.add(signUpButton);
-		
+
 		blanco = new JPanel(new FlowLayout());
 		blanco.setBackground(Color.black);
 		blanco1 = new JPanel(new FlowLayout());
-		pContent.add(pDatos,BorderLayout.SOUTH);
+		pContent.add(pDatos, BorderLayout.SOUTH);
 		blanco.setPreferredSize(new Dimension(300, 300));
 		background = new JLabel(new ImageIcon("C:\\ProyectoProgIII\\PokemonShowdownTitle.jpg"));
-		//background = new JLabel(new ImageIcon("C:\\\\Users\\\\oscar\\\\Downloads\\\\A.gif"));
-		this.add(background,BorderLayout.CENTER);
+		// background = new JLabel(new
+		// ImageIcon("C:\\\\Users\\\\oscar\\\\Downloads\\\\A.gif"));
+		this.add(background, BorderLayout.CENTER);
 		background.setLayout(new FlowLayout());
 		pContent.add(pBotones);
 		salir = new JButton("Salir del juego");
-		avatarNames = new String[]{"Chico","Chica","Otros"};
+		avatarNames = new String[] { "Chico", "Chica", "Otros" };
 		avatar = new JLabel("Avatar:");
 		avatar.setForeground(Color.WHITE);
 		avatarComboBox = new JComboBox<>(avatarNames);
 		avatarComboBox.setPreferredSize(new Dimension(100, 50));
-		//.addItem(avatarNames[0]);
-		//avatarComboBox.addItem(avatarNames[1]);
-		//avatarComboBox.addItem(avatarNames[2]);
-		pComboBox = new JPanel(new FlowLayout(FlowLayout.CENTER,30,40));
+		// .addItem(avatarNames[0]);
+		// avatarComboBox.addItem(avatarNames[1]);
+		// avatarComboBox.addItem(avatarNames[2]);
+		pComboBox = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 40));
 		pComboBox.add(avatar);
 		pComboBox.add(avatarComboBox);
 		pComboBox.add(salir);
-		//pComboBox.setAlignmentX(CENTER_ALIGNMENT);
-		//pComboBox.setAlignmentY(CENTER_ALIGNMENT);
-		
+		// pComboBox.setAlignmentX(CENTER_ALIGNMENT);
+		// pComboBox.setAlignmentY(CENTER_ALIGNMENT);
+
 		pContent.add(pComboBox);
-		//this.setContentPane(new JLabel(new ImageIcon("C:\\ProyectoProgIII\\PokemonShowdownTitle.jpg") ));
-		//this.setLayout(new FlowLayout());
-		//background.add(blanco,BorderLayout.WEST);
-		//background.add(pContent,FlowLayout.CENTER);
-		//background.add(pBotones,FlowLayout.TRAILING);
-		//this.add(pContent, BorderLayout.CENTER);
-		//imageIconTitle = new ImageIcon("C:\\\\Users\\\\oscar\\\\Downloads\\\\Imagenes\\\\X.png");
-		//image = imageIconTitle.getImage(); 
-		//imagenTitulo = new ImageIcon(image);
-		//pContent.add(imagenTitulo);
-		//this.add(pContent,BorderLayout.CENTER);
-		//this.add(imagenTitulo);
-		
+		// this.setContentPane(new JLabel(new
+		// ImageIcon("C:\\ProyectoProgIII\\PokemonShowdownTitle.jpg") ));
+		// this.setLayout(new FlowLayout());
+		// background.add(blanco,BorderLayout.WEST);
+		// background.add(pContent,FlowLayout.CENTER);
+		// background.add(pBotones,FlowLayout.TRAILING);
+		// this.add(pContent, BorderLayout.CENTER);
+		// imageIconTitle = new
+		// ImageIcon("C:\\\\Users\\\\oscar\\\\Downloads\\\\Imagenes\\\\X.png");
+		// image = imageIconTitle.getImage();
+		// imagenTitulo = new ImageIcon(image);
+		// pContent.add(imagenTitulo);
+		// this.add(pContent,BorderLayout.CENTER);
+		// this.add(imagenTitulo);
+
 		pBotones.setBackground(Color.DARK_GRAY);
 		pComboBox.setBackground(Color.DARK_GRAY);
 		pContent.setBackground(Color.DARK_GRAY);
 		background.setMinimumSize(new Dimension(200, 200));
-		this.add(pContent,BorderLayout.SOUTH);
+		this.add(pContent, BorderLayout.SOUTH);
 		pBotones.setBounds(100, 100, 1000, 100);
-		////this.add(pBotones,BorderLayout.SOUTH);
+		//// this.add(pBotones,BorderLayout.SOUTH);
 		this.setMinimumSize(new Dimension(825, 670));
 		signInButton.addActionListener(this);
-		salir.addActionListener(this);
+		salir.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		signUpButton.addActionListener(this);
 	}
-	
-		public void actionPerformed(ActionEvent event) {
-			// TODO Auto-generated method stub
-			String s = username.getText();
-			String p = password.getText();
-			try {
-			if(event.getSource() == signInButton) {
-				
-				if(!s.isEmpty() && !p.isEmpty()) {
-					for(Entrenador entrenador : usuarios) {
-					if(entrenador.getUsuario().equals(s) && entrenador.getContraseña().equals(p)) {
-						JOptionPane.showMessageDialog(this, "Se ha realizado con exito");
-						VentanaInicio v = new VentanaInicio();
-						System.exit(0);
+
+	public void actionPerformed(ActionEvent event) {
+		// TODO Auto-generated method stub
+		String s = username.getText();
+		String p = password.getText();
+		try {
+			if (event.getSource() == signInButton) {
+
+				if (!s.isEmpty() && !p.isEmpty()) {
+					for (Entrenador entrenador : usuarios) {
+						if (entrenador.getUsuario().equals(s) && entrenador.getContraseña().equals(p)) {
+							JOptionPane.showMessageDialog(this, "Se ha realizado con exito");
+							VentanaInicio v = new VentanaInicio();
+							System.exit(0);
+						}
 					}
-					}
-					
-					}
-				else {
-					JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error", JOptionPane.ERROR_MESSAGE);
+
+				} else {
+					JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
-			
-			}catch(NumberFormatException E) {
-				JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error", JOptionPane.ERROR_MESSAGE);
-				
-			}
-			if(event.getSource() == signUpButton) {
-				
-				if(!s.isEmpty() && !p.isEmpty()) {
-					for(Entrenador entrenador : usuarios) {
-					if(entrenador.getUsuario().equals(s)) {
+
+		} catch (NumberFormatException E) {
+			JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error",
+					JOptionPane.ERROR_MESSAGE);
+
+		}
+		if (event.getSource() == signUpButton) {
+
+			if (!s.isEmpty() && !p.isEmpty()) {
+				for (Entrenador entrenador : usuarios) {
+					if (entrenador.getUsuario().equals(s)) {
 						JOptionPane.showMessageDialog(this, "El usuario ya existe");
-						
-					}
-					else {
+
+					} else {
 						Entrenador e = new Entrenador();
+						List<Integer> equipo = new ArrayList<Integer>();
+						List<Pokemon> TodosPokemons = new ArrayList<Pokemon>();
+						List<Movimiento> movimientos = new ArrayList<Movimiento>();
+						List<Pokemon> pokemons = new ArrayList<Pokemon>();
+
+						try {
+							movimientos.addAll(GestorBD.obtenerTodosMovimientos());
+						} catch (BDException e2) {
+							e2.printStackTrace();
+						}
+						for (int i = 0; i < 6; i++) {
+							equipo.add(e.pokemonAleatorio());
+						}
+						try {
+							TodosPokemons.addAll(GestorBD.obtenerTodosPokemon(movimientos));
+
+						} catch (BDException e1) {
+							e1.printStackTrace();
+						}
+						for (int i = 0; i < 6; i++) {
+							pokemons.add(TodosPokemons.get(equipo.get(i)));
+						}
+
 						e.setName(s);
 						e.setContraseña(p);
+						e.setPokemons(pokemons);
 						System.out.println(e.getName());
 						entrenadorActual = e;
-						VentanaInicio v = new VentanaInicio();
 						usuarios.add(e);
 						try {
 							baseDeDatos.insertarEntrenador(e);
-						} catch (BDException e1) {
-							// TODO Auto-generated catch block
+						} catch (BDException | ClassNotFoundException e1) {
 							e1.printStackTrace();
 						}
 						System.out.println(e);
-						//JOptionPane.showMessageDialog(this, "El usuario ya existe");
+						JOptionPane.showMessageDialog(this, "El usuario ya existe");
 					}
-					}
-					
-					}
-				else {
-					JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error", JOptionPane.ERROR_MESSAGE);
 				}
+
+			} else {
+				JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error",
+						JOptionPane.ERROR_MESSAGE);
 			}
-			
-			
-			if(event.getSource() == salir) {
-				System.exit(0);
-			}
-		
-			
+		}
 
 	}
+
 	public boolean compararUsuario() {
 		return true;
 	}
-	
+
 	public static void main(String[] args) throws BDException {
 		// TODO Auto-generated method stub
 		VentanaLogin v = new VentanaLogin();

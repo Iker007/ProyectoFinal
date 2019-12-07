@@ -174,6 +174,17 @@ public class CreacionBD {
 			}
 			res = statement.executeUpdate(
                     "INSERT INTO ENTRENADOR VALUES('RED', 'C', 0, 14, 15, 16, 17, 18, 19);");
+			rs = statement.executeQuery("select * from entrenador");
+			System.out.println("usuario = " + rs.getInt("usuario"));
+			System.out.println("name = " + rs.getString("contraseña"));
+			System.out.println("tipo1 = " + rs.getString("score"));
+			System.out.println("tipo2 = " + rs.getString("pokemon1"));
+			System.out.println("at  = " + rs.getString("pokemon2"));
+			System.out.println("def = " + rs.getString("pokemon3"));
+			System.out.println("hp = " + rs.getString("pokemon4"));
+			System.out.println("vel = " + rs.getString("pokemon5"));
+			System.out.println("at1 = " + rs.getString("pokemon6"));
+			System.out.println();
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		} finally {
