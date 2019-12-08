@@ -59,7 +59,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	private Dimension tamanyoBotones;
 	private String eleccionAvatar;
 	private GestorBD baseDeDatos = new GestorBD();
-	private static Entrenador entrenadorActual;
+	static Entrenador entrenadorActual;
 	public List<Entrenador> usuarios = new ArrayList<Entrenador>();
 	public List<Pokemon> pokemons = new ArrayList<Pokemon>();
 	public List<Tipo> tipos = new ArrayList<Tipo>();
