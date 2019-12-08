@@ -56,12 +56,21 @@ public class VentanaInicio extends JFrame implements ActionListener {
 	private ImageIcon img1;
 	private Image img2;
 	private Image img3;
-	private ImageIcon a;
+	private ImageIcon pok1;
+	private ImageIcon pok2;
+	private ImageIcon pok3;
+	private ImageIcon pok4;
+	private ImageIcon pok5;
+	private ImageIcon pok6;
 	private Entrenador entrenadorActual;
+	private String avatar;
+	private String eleccionAvatar;
 
-	public VentanaInicio(Entrenador entrenadorActual) {
+	public VentanaInicio(Entrenador entrenadorActual, String eleccionAvatar) {
 
 		this.setLayout(new FlowLayout());
+		this.entrenadorActual = entrenadorActual;
+		this.eleccionAvatar = eleccionAvatar;
 		
 		fondo2 = new JLabel(new ImageIcon(getClass().getResource("/resources/InicioCombate.png")));
 		fondo = new JPanel();
@@ -106,9 +115,18 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		PanelEntrenador2.setBackground(new Color(0, 0, 0, 0));
 		fondo.add(PanelEntrenador2);
 		
-		ImagenENT1 = new ImageIcon(getClass().getResource("/resources/ApacheKawaii.png"));
+		if(eleccionAvatar.equals("Chico")) {
+			avatar = "Chico";
+		}
+		else if(eleccionAvatar.equals("Chica")) {
+			avatar = "Chica";
+		}
+		else if(eleccionAvatar.equals("Otros")) {
+			avatar = "ApacheKawaii";
+		}
+		ImagenENT1 = new ImageIcon(getClass().getResource("/resources/"+avatar+".png"));
 		ImageENT1B = ImagenENT1.getImage();
-		NewImageENT1 = ImageENT1B.getScaledInstance(300, 180, java.awt.Image.SCALE_SMOOTH); 
+		NewImageENT1 = ImageENT1B.getScaledInstance(150, 180, java.awt.Image.SCALE_SMOOTH); 
 		ImagenENT1 = new ImageIcon(NewImageENT1); 
 		//Pillar imagen H v M v O
 		entrenador1 = new JLabel((ImagenENT1));
@@ -130,8 +148,6 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		fondo.add(versus);
 		
 		ImagenENT2 = new ImageIcon(getClass().getResource("/resources/Red.png"));
-		//ImagenENT2 = new ImageIcon(VentanaInicio.class.getResource("img/Red.png"));
-		//ImagenENT2 = new ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\Red.png");
 		ImageENT2B = ImagenENT2.getImage();
 		NewImageENT2 = ImageENT2B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH); 
 		ImagenENT2 = new ImageIcon(NewImageENT2); 
@@ -150,18 +166,23 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		//ImagePOK1B = ImagenPOK1.getImage();
 		//NewImagePOK1 = ImagePOK1B.getScaledInstance(80, 80, java.awt.Image.SCALE_SMOOTH); 
 		//ImagenPOK1 = new ImageIcon(NewImagePOK1);
-		a = ajustarSprite("Arceus");
-		Pokemon1 = new JLabel(a);
+		pok1 = ajustarSprite(entrenadorActual.getPokemons().get(0).getNombre().toLowerCase());
+		Pokemon1 = new JLabel(pok1);
 		Equipo1.add(Pokemon1);
-		Pokemon2 = new JLabel();
+		pok2 = ajustarSprite(entrenadorActual.getPokemons().get(1).getNombre().toLowerCase());
+		Pokemon2 = new JLabel(pok2);
 		Equipo1.add(Pokemon2);
-		Pokemon3 = new JLabel();
+		pok3 = ajustarSprite(entrenadorActual.getPokemons().get(2).getNombre().toLowerCase());
+		Pokemon3 = new JLabel(pok3);
 		Equipo1.add(Pokemon3);
-		Pokemon4 = new JLabel();
+		pok4 = ajustarSprite(entrenadorActual.getPokemons().get(3).getNombre().toLowerCase());
+		Pokemon4 = new JLabel(pok4);
 		Equipo1.add(Pokemon4);
-		Pokemon5 = new JLabel();
+		pok5 = ajustarSprite(entrenadorActual.getPokemons().get(4).getNombre().toLowerCase());
+		Pokemon5 = new JLabel(pok5);
 		Equipo1.add(Pokemon5);
-		Pokemon6 = new JLabel();
+		pok6 = ajustarSprite(entrenadorActual.getPokemons().get(5).getNombre().toLowerCase());
+		Pokemon6 = new JLabel(pok6);
 		Equipo1.add(Pokemon6);
 		fondo.add(Equipo1);
 
@@ -232,7 +253,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 }
 	
 	public static void main(String[] args) {
-		VentanaInicio a = new VentanaInicio(entrenadorActual);
+		//VentanaInicio a = new VentanaInicio(entrenadorActual);
 		
 	}
 

@@ -9,9 +9,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.awt.event.WindowStateListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -24,9 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 
 import clases.Entrenador;
 import clases.Movimiento;
@@ -62,6 +57,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	private JMenuBar menuBar;
 	private Color southPanel;
 	private Dimension tamanyoBotones;
+	private String eleccionAvatar;
 	private GestorBD baseDeDatos = new GestorBD();
 	private static Entrenador entrenadorActual;
 	public List<Entrenador> usuarios = new ArrayList<Entrenador>();
@@ -132,24 +128,8 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		pComboBox.add(avatar);
 		pComboBox.add(avatarComboBox);
 		pComboBox.add(salir);
-		// pComboBox.setAlignmentX(CENTER_ALIGNMENT);
-		// pComboBox.setAlignmentY(CENTER_ALIGNMENT);
 
 		pContent.add(pComboBox);
-		// this.setContentPane(new JLabel(new
-		// ImageIcon("C:\\ProyectoProgIII\\PokemonShowdownTitle.jpg") ));
-		// this.setLayout(new FlowLayout());
-		// background.add(blanco,BorderLayout.WEST);
-		// background.add(pContent,FlowLayout.CENTER);
-		// background.add(pBotones,FlowLayout.TRAILING);
-		// this.add(pContent, BorderLayout.CENTER);
-		// imageIconTitle = new
-		// ImageIcon("C:\\\\Users\\\\oscar\\\\Downloads\\\\Imagenes\\\\X.png");
-		// image = imageIconTitle.getImage();
-		// imagenTitulo = new ImageIcon(image);
-		// pContent.add(imagenTitulo);
-		// this.add(pContent,BorderLayout.CENTER);
-		// this.add(imagenTitulo);
 
 		pBotones.setBackground(Color.DARK_GRAY);
 		pComboBox.setBackground(Color.DARK_GRAY);
@@ -185,18 +165,23 @@ public class VentanaLogin extends JFrame implements ActionListener {
 			}
 
 			if (!s.isEmpty() && !p.isEmpty()) {
+				int existe = 1;
 				for (Entrenador entrenador : usuarios) {
 					if (entrenador.getUsuario().equals(s) && entrenador.getContraseña().equals(p)) {
 						JOptionPane.showMessageDialog(this, "Se ha realizado con exito");
+						existe++;
 						entrenadorActual = entrenador;
 						this.setVisible(false);
-						VentanaInicio v = new VentanaInicio(entrenadorActual);
+						eleccionAvatar = (String) avatarComboBox.getSelectedItem();
+						VentanaInicio v = new VentanaInicio(entrenadorActual, eleccionAvatar);
 						v.setVisible(true);
 
 					}
 
 				}
-				JOptionPane.showMessageDialog(this, "El entrenador no existe");
+				if (existe == 1) {
+					JOptionPane.showMessageDialog(this, "El entrenador no existe");
+				}
 
 			} else {
 				JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error",
@@ -235,10 +220,8 @@ public class VentanaLogin extends JFrame implements ActionListener {
 					}
 
 					for (int i = 0; i < 6; i++) {
-						// equipo.add(e.pokemonAleatorio());
 						Random rnd = new Random();
 						equipo.add((int) (rnd.nextDouble() * 14));
-						System.out.println(rnd);
 					}
 					try {
 						TodosPokemons.addAll(GestorBD.obtenerTodosPokemon(movimientos));

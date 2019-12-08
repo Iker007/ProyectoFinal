@@ -83,9 +83,9 @@ public class GestorBD {
 		try (Statement stmt = connection.createStatement()) {
 			stmt.executeUpdate("INSERT INTO ENTRENADOR VALUES('" + e.getUsuario() + "', " + "'"
 					+ e.getContraseña() + "', " + e.getScore() + ", " + e.getPokemons().get(0).getId() + ","
-					+ e.getPokemons().get(1).getId() + "," + e.getPokemons().get(1).getId() + ","
-					+ e.getPokemons().get(1).getId() + "," + e.getPokemons().get(1).getId() + ","
-					+ e.getPokemons().get(1).getId() + ");");
+					+ e.getPokemons().get(1).getId() + "," + e.getPokemons().get(2).getId() + ","
+					+ e.getPokemons().get(3).getId() + "," + e.getPokemons().get(4).getId() + ","
+					+ e.getPokemons().get(5).getId() + ");");
 		}
 
 		catch (SQLException e1) {
