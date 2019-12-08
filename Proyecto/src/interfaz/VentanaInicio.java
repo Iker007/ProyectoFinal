@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import clases.Entrenador;
+
 
 
 public class VentanaInicio extends JFrame implements ActionListener {
@@ -55,10 +57,12 @@ public class VentanaInicio extends JFrame implements ActionListener {
 	private Image img2;
 	private Image img3;
 	private ImageIcon a;
+	private Entrenador entrenadorActual;
 
-	public VentanaInicio() {
+	public VentanaInicio(Entrenador entrenadorActual) {
 
 		this.setLayout(new FlowLayout());
+		
 		fondo2 = new JLabel(new ImageIcon(getClass().getResource("/resources/InicioCombate.png")));
 		fondo = new JPanel();
 		fondo.setBackground(new Color(0, 0, 0, 0));
@@ -228,7 +232,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 }
 	
 	public static void main(String[] args) {
-		VentanaInicio a = new VentanaInicio();
+		VentanaInicio a = new VentanaInicio(entrenadorActual);
 		
 	}
 

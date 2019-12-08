@@ -63,7 +63,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	private Color southPanel;
 	private Dimension tamanyoBotones;
 	private GestorBD baseDeDatos = new GestorBD();
-	private Entrenador entrenadorActual;
+	private static Entrenador entrenadorActual;
 	public List<Entrenador> usuarios = new ArrayList<Entrenador>();
 	public List<Pokemon> pokemons = new ArrayList<Pokemon>();
 	public List<Tipo> tipos = new ArrayList<Tipo>();
@@ -78,21 +78,6 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		movimientos = baseDeDatos.obtenerTodosMovimientos();
 		pokemons = baseDeDatos.obtenerTodosPokemon(movimientos);
 		usuarios = baseDeDatos.obtenerTodosUsuarios(pokemons);
-		
-		System.out.println(usuarios.get(0).getUsuario());
-		System.out.println(usuarios.get(1).getUsuario());
-		System.out.println(usuarios.get(4).getUsuario());
-		
-			System.out.println(usuarios.get(4).getPokemons().get(0).getNombre());
-			System.out.println(usuarios.get(4).getPokemons().get(0).getMovimiento1().getNombre());
-			System.out.println(usuarios.get(4).getPokemons().get(1).getNombre());
-			System.out.println(usuarios.get(4).getPokemons().get(1).getMovimiento1().getNombre());
-			System.out.println(usuarios.get(4).getPokemons().get(2).getNombre());
-			System.out.println(usuarios.get(4).getPokemons().get(2).getMovimiento1().getNombre());
-			System.out.println(usuarios.get(4).getPokemons().get(3).getNombre());
-			System.out.println(usuarios.get(4).getPokemons().get(4).getMovimiento1().getNombre());
-		
-
 		usernameLabel = new JLabel("Username:");
 		username = new JTextField();
 		username.setEditable(true);
@@ -186,94 +171,108 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent event) {
-		// TODO Auto-generated method stub
 		String s = username.getText();
 		String p = password.getText();
-		
-			if (event.getSource() == signInButton) {
 
-				if (!s.isEmpty() && !p.isEmpty()) {
-					for (Entrenador entrenador : usuarios) {
-						if (entrenador.getUsuario().equals(s) && entrenador.getContraseña().equals(p)) {
-							JOptionPane.showMessageDialog(this, "Se ha realizado con exito");
-							VentanaInicio v = new VentanaInicio();
-							System.exit(0);
-						} else
-							JOptionPane.showMessageDialog(this, "El entrenador no existe");
-						break;
+		if (event.getSource() == signInButton) {
+
+			s = username.getText();
+			p = password.getText();
+			try {
+				usuarios = baseDeDatos.obtenerTodosUsuarios(pokemons);
+			} catch (BDException e) {
+				e.printStackTrace();
+			}
+
+			if (!s.isEmpty() && !p.isEmpty()) {
+				for (Entrenador entrenador : usuarios) {
+					if (entrenador.getUsuario().equals(s) && entrenador.getContraseña().equals(p)) {
+						JOptionPane.showMessageDialog(this, "Se ha realizado con exito");
+						entrenadorActual = entrenador;
+						this.setVisible(false);
+						VentanaInicio v = new VentanaInicio(entrenadorActual);
+						v.setVisible(true);
 
 					}
 
-				} else {
-					JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error",
-							JOptionPane.ERROR_MESSAGE);
 				}
-			}
+				JOptionPane.showMessageDialog(this, "El entrenador no existe");
 
-		
+			} else {
+				JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			}
+		}
+
 		if (event.getSource() == signUpButton) {
 			int existe = 1;
+			s = username.getText();
+			p = password.getText();
 
 			if (!s.isEmpty() && !p.isEmpty()) {
+				try {
+					usuarios = baseDeDatos.obtenerTodosUsuarios(pokemons);
+				} catch (BDException e3) {
+					e3.printStackTrace();
+				}
 				for (Entrenador entrenador : usuarios) {
 					if (entrenador.getUsuario().equals(s)) {
 						JOptionPane.showMessageDialog(this, "El usuario ya existe");
 						existe++;
 					}
-					}
-						if(existe == 1) {
-						Entrenador e = new Entrenador();
-						List<Integer> equipo = new ArrayList<Integer>();
-						List<Pokemon> TodosPokemons = new ArrayList<Pokemon>();
-						List<Movimiento> movimientos = new ArrayList<Movimiento>();
-						List<Pokemon> pokemons = new ArrayList<Pokemon>();
+				}
+				if (existe == 1) {
+					Entrenador e = new Entrenador();
+					List<Integer> equipo = new ArrayList<Integer>();
+					List<Pokemon> TodosPokemons = new ArrayList<Pokemon>();
+					List<Movimiento> movimientos = new ArrayList<Movimiento>();
+					List<Pokemon> pokemons = new ArrayList<Pokemon>();
 
-						try {
-							movimientos.addAll(GestorBD.obtenerTodosMovimientos());
-						} catch (BDException e2) {
-							e2.printStackTrace();
-						}
+					try {
+						movimientos.addAll(GestorBD.obtenerTodosMovimientos());
+					} catch (BDException e2) {
+						e2.printStackTrace();
+					}
+
+					for (int i = 0; i < 6; i++) {
+						// equipo.add(e.pokemonAleatorio());
 						Random rnd = new Random();
-						for (int i = 0; i < 6; i++) {
-							//equipo.add(e.pokemonAleatorio());
-							equipo.add((int) (rnd.nextDouble() * 14));
-						}
-						try {
-							TodosPokemons.addAll(GestorBD.obtenerTodosPokemon(movimientos));
-
-						} catch (BDException e1) {
-							e1.printStackTrace();
-						}
-						for (int i = 0; i < 6; i++) {
-							pokemons.add(TodosPokemons.get(equipo.get(i)));
-						}
-
-						e.setUsuario(s);
-						e.setContraseña(p);
-						e.setScore(0);
-						e.setPokemons(pokemons);
-						System.out.println(e.getUsuario());
-						entrenadorActual = e;
-						try {
-							baseDeDatos.insertarEntrenador(e);
-							JOptionPane.showMessageDialog(this, "Usuario creado con éxito. Prueba a iniciar sesión");
-						} catch (BDException | ClassNotFoundException e1) {
-							e1.printStackTrace();
-							System.out.println("No se pudo insertar el entrenador en la BD");
-						}
-						System.out.println(e.getUsuario());
+						equipo.add((int) (rnd.nextDouble() * 14));
+						System.out.println(rnd);
 					}
-			}
-			 else {
-					JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error",
-							JOptionPane.ERROR_MESSAGE);
-				}
-				}
+					try {
+						TodosPokemons.addAll(GestorBD.obtenerTodosPokemon(movimientos));
 
-			
+					} catch (BDException e1) {
+						e1.printStackTrace();
+					}
+					for (int j = 0; j < 6; j++) {
+						pokemons.add(TodosPokemons.get(equipo.get(j)));
+					}
+
+					e.setUsuario(s);
+					e.setContraseña(p);
+					e.setScore(0);
+					e.setPokemons(pokemons);
+					System.out.println(e.getUsuario());
+					entrenadorActual = e;
+					try {
+						baseDeDatos.insertarEntrenador(e);
+						usuarios = baseDeDatos.obtenerTodosUsuarios(pokemons);
+						JOptionPane.showMessageDialog(this, "Usuario creado con éxito. Prueba a iniciar sesión");
+
+					} catch (BDException | ClassNotFoundException e1) {
+						e1.printStackTrace();
+						System.out.println("No se pudo insertar el entrenador en la BD");
+					}
+				}
+			} else {
+				JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			}
 		}
 
-	
+	}
 
 	public boolean compararUsuario() {
 		return true;
