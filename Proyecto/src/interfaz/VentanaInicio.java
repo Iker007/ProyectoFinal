@@ -220,7 +220,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 	
 	public  ImageIcon ajustarSprite(String img) {
 
-		ImageIcon imageIcon = new ImageIcon(getClass().getResource("/resources/"+img+"Sprite.png")); // load the image to a imageIcon
+		ImageIcon imageIcon = new ImageIcon(getClass().getResource("/resources/"+img.toLowerCase()+"Sprite.png")); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(80, 80,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		imageIcon = new ImageIcon(newimg);  // transform it back

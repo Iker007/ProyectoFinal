@@ -14,6 +14,7 @@ import java.awt.event.WindowListener;
 import java.awt.event.WindowStateListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -80,15 +81,18 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		
 		System.out.println(usuarios.get(0).getUsuario());
 		System.out.println(usuarios.get(1).getUsuario());
-		//System.out.println(usuarios.get(2).getUsuario());
-
+		System.out.println(usuarios.get(4).getUsuario());
 		
-		for (int i = 0; i < 6; i++) {
-			System.out.println(usuarios.get(0).getPokemons().get(i).getNombre());
-			System.out.println(usuarios.get(0).getPokemons().get(i).getMovimiento1().getNombre());
-			System.out.println(usuarios.get(0).getPokemons().get(i).getTipo1().getNombre());
-			System.out.println();
-		}
+			System.out.println(usuarios.get(4).getPokemons().get(0).getNombre());
+			System.out.println(usuarios.get(4).getPokemons().get(0).getMovimiento1().getNombre());
+			System.out.println(usuarios.get(4).getPokemons().get(1).getNombre());
+			System.out.println(usuarios.get(4).getPokemons().get(1).getMovimiento1().getNombre());
+			System.out.println(usuarios.get(4).getPokemons().get(2).getNombre());
+			System.out.println(usuarios.get(4).getPokemons().get(2).getMovimiento1().getNombre());
+			System.out.println(usuarios.get(4).getPokemons().get(3).getNombre());
+			System.out.println(usuarios.get(4).getPokemons().get(4).getMovimiento1().getNombre());
+		
+
 		usernameLabel = new JLabel("Username:");
 		username = new JTextField();
 		username.setEditable(true);
@@ -185,7 +189,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		String s = username.getText();
 		String p = password.getText();
-		try {
+		
 			if (event.getSource() == signInButton) {
 
 				if (!s.isEmpty() && !p.isEmpty()) {
@@ -196,6 +200,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 							System.exit(0);
 						} else
 							JOptionPane.showMessageDialog(this, "El entrenador no existe");
+						break;
 
 					}
 
@@ -205,19 +210,18 @@ public class VentanaLogin extends JFrame implements ActionListener {
 				}
 			}
 
-		} catch (NumberFormatException E) {
-			JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error",
-					JOptionPane.ERROR_MESSAGE);
-
-		}
+		
 		if (event.getSource() == signUpButton) {
+			int existe = 1;
 
 			if (!s.isEmpty() && !p.isEmpty()) {
 				for (Entrenador entrenador : usuarios) {
 					if (entrenador.getUsuario().equals(s)) {
 						JOptionPane.showMessageDialog(this, "El usuario ya existe");
+						existe++;
 					}
-					} 
+					}
+						if(existe == 1) {
 						Entrenador e = new Entrenador();
 						List<Integer> equipo = new ArrayList<Integer>();
 						List<Pokemon> TodosPokemons = new ArrayList<Pokemon>();
@@ -229,8 +233,10 @@ public class VentanaLogin extends JFrame implements ActionListener {
 						} catch (BDException e2) {
 							e2.printStackTrace();
 						}
+						Random rnd = new Random();
 						for (int i = 0; i < 6; i++) {
-							equipo.add(e.pokemonAleatorio());
+							//equipo.add(e.pokemonAleatorio());
+							equipo.add((int) (rnd.nextDouble() * 14));
 						}
 						try {
 							TodosPokemons.addAll(GestorBD.obtenerTodosPokemon(movimientos));
@@ -248,20 +254,23 @@ public class VentanaLogin extends JFrame implements ActionListener {
 						e.setPokemons(pokemons);
 						System.out.println(e.getUsuario());
 						entrenadorActual = e;
-						usuarios.add(e);
 						try {
 							baseDeDatos.insertarEntrenador(e);
+							JOptionPane.showMessageDialog(this, "Usuario creado con éxito. Prueba a iniciar sesión");
 						} catch (BDException | ClassNotFoundException e1) {
 							e1.printStackTrace();
+							System.out.println("No se pudo insertar el entrenador en la BD");
 						}
-						System.out.println(e);
+						System.out.println(e.getUsuario());
 					}
+			}
+			 else {
+					JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
 				}
 
-			 else {
-				JOptionPane.showMessageDialog(this, "Error rellene todos los campos para proceder", "Error",
-						JOptionPane.ERROR_MESSAGE);
-			}
+			
 		}
 
 	

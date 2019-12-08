@@ -44,16 +44,6 @@ public class GestorBD {
 
 	}
 
-	public void crearTablePokemon() throws BDException {
-		try (Statement stmt = connection.createStatement();) {
-			String sql = "CREATE TABLE pokemon (id INTERGER PRIMARY KEY, " + "nombre VARCHAR, " + "tipo1 VARCHAR, "
-					+ "tipo2 VARCHAR, " + "hp INTEGER, " + "attack INTEGER, " + "defense INTEGER, "
-					+ "movimiento1 VARCHAR, " + "movimiento2 VARCHAR )";
-		} catch (SQLException e) {
-			throw new BDException("No se pudo crear la tabla 'pokemon'", e);
-		}
-	}
-
 	public List<Pokemon> obtenerTodosPokemon2() throws BDException {
 		List<Pokemon> pokemons = new ArrayList<Pokemon>();
 		try (Statement stmt = connection.createStatement();) {
@@ -89,12 +79,12 @@ public class GestorBD {
 	}
 
 	public void insertarEntrenador(Entrenador e) throws BDException, ClassNotFoundException {
-
+		
 		try (Statement stmt = connection.createStatement()) {
-			int res = stmt.executeUpdate("INSERT INTO ENTRENADOR VALUES('" + e.getUsuario() + "', " + "'"
-					+ e.getContraseña() + "', " + e.getScore() + "', " + e.getPokemons().get(0).getId() + "',"
-					+ e.getPokemons().get(1).getId() + "'," + e.getPokemons().get(1).getId() + "',"
-					+ e.getPokemons().get(1).getId() + "'," + e.getPokemons().get(1).getId() + "',"
+			stmt.executeUpdate("INSERT INTO ENTRENADOR VALUES('" + e.getUsuario() + "', " + "'"
+					+ e.getContraseña() + "', " + e.getScore() + ", " + e.getPokemons().get(0).getId() + ","
+					+ e.getPokemons().get(1).getId() + "," + e.getPokemons().get(1).getId() + ","
+					+ e.getPokemons().get(1).getId() + "," + e.getPokemons().get(1).getId() + ","
 					+ e.getPokemons().get(1).getId() + ");");
 		}
 
