@@ -1,7 +1,12 @@
 package interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -15,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import clases.Entrenador;
@@ -28,24 +34,84 @@ public class VentanaFinCombate extends JFrame {
 	private JLabel ganadas;
 	private JMenuBar menuBar;
 	private JMenu exportar;
-	private Entrenador entrenadorActual;
-
-	public VentanaFinCombate(){
+	private static Entrenador entrenadorActual;
+	private JPanel panel1;
+	private JPanel panel2;
+	private JPanel panel2a;
+	private JPanel panel2b;
+	private JPanel panel2c;
+	private JPanel hueco1;
+	private JPanel hueco2;
+	private JPanel hueco3;
+	private static String eleccionAvatar;
+	
+	
+	public VentanaFinCombate(Entrenador entrenadorActual, String eleccionAvatar){
 		this.setLayout(new FlowLayout());
-		
+		this.entrenadorActual = entrenadorActual;
+		this.eleccionAvatar = eleccionAvatar;
 		menuBar = new JMenuBar();
 		//entrenadorActual = entrenador;
 		salir = new JButton("Salir");
-		revancha = new JButton("Rematch");
+		salir.setPreferredSize(new Dimension(200,50));
+		revancha = new JButton("Revancha");
+		revancha.setPreferredSize(new Dimension(200,50));
 		cerrarSesion = new JButton("Log Out");
+		cerrarSesion.setPreferredSize(new Dimension(200,50));
 		
 		//entrenador = new JLabel(setEntrenador(entrenador););
 		
 		
-		
+		setResizable(false);
 		this.setSize(1100,1000);
 		this.setVisible(true);
 		this.setTitle("Pokemon Showdown");
+		this.setLayout(new GridLayout(2, 1));
+		panel1 = new JPanel();
+		panel1.setBackground(Color.RED);
+		this.add(panel1);
+		panel2 = new JPanel();
+		panel2.setBackground(Color.BLACK);
+		hueco1 = new JPanel();
+		hueco1.setVisible(false);
+		hueco2 = new JPanel();
+		hueco2.setVisible(false);
+		hueco3 = new JPanel();
+		hueco3.setVisible(false);
+		panel2.setLayout(new GridLayout(2,3));
+		panel2a= new JPanel(new FlowLayout());
+		panel2a.add(cerrarSesion);
+		panel2b= new JPanel(new FlowLayout());
+		panel2b.add(revancha);
+		panel2c= new JPanel(new FlowLayout());
+		panel2c.add(salir);
+		panel2.add(hueco1);
+		panel2.add(hueco2);
+		panel2.add(hueco3);
+		panel2.add(panel2a);
+		panel2.add(panel2b);
+		panel2.add(panel2c);
+		this.add(panel2);
+		
+		
+		salir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		
+		revancha.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+				VentanaInicio v = new VentanaInicio(entrenadorActual, eleccionAvatar);
+				v.setVisible(true);
+			}
+		});
+		
 	}
 	public void leerFicheroRanking() {
 		File archivo = null;
@@ -106,7 +172,7 @@ public class VentanaFinCombate extends JFrame {
         }
 	}
 	public static void main(String[] args) {
-		VentanaFinCombate v = new VentanaFinCombate();
+		VentanaFinCombate v = new VentanaFinCombate(entrenadorActual, eleccionAvatar);
 		
 	}
 	public JLabel getEntrenador() {

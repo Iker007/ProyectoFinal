@@ -222,13 +222,16 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		fondo.add(hueco4);
 		hueco4.setVisible(false);
 
+		int click = 0;
 		// Al hacer click pasar a VentanaCombate
 		fondo.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				System.exit(0);
+				cambiarVentana();	
+				
 			}
 		});
+		
 
 		fondo2.add(fondo);
 		this.add(fondo2);
@@ -239,6 +242,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
+				
 			}
 		});
 	}
@@ -246,15 +250,21 @@ public class VentanaInicio extends JFrame implements ActionListener {
 	public  ImageIcon ajustarSprite(String img) {
 
 		ImageIcon imageIcon = new ImageIcon(getClass().getResource("/resources/"+img.toLowerCase()+"Sprite.png")); // load the image to a imageIcon
-		Image image = imageIcon.getImage(); // transform it 
-		Image newimg = image.getScaledInstance(80, 80,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		imageIcon = new ImageIcon(newimg);  // transform it back
+		Image image = imageIcon.getImage(); // transformarlo
+		Image newimg = image.getScaledInstance(80, 80,  java.awt.Image.SCALE_SMOOTH); // escalarlo con smooth scaling  
+		imageIcon = new ImageIcon(newimg);  // vuelve a transformarlo
 		return imageIcon;
 }
 	
 	public static void main(String[] args) {
 		//VentanaInicio a = new VentanaInicio(entrenadorActual);
 		
+	}
+	
+	public static void cambiarVentana() {
+		this.setVisible(false);
+		//VentanaCombate v = new  VentanaCombate(entrenadorActual, eleccionAvatar);
+		//v.setVisible(true);
 	}
 
 	@Override
