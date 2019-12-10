@@ -256,11 +256,6 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		}
 
 	}
-
-	public boolean compararUsuario() {
-		return true;
-	}
-
 	public static void main(String[] args) throws BDException {
 		// TODO Auto-generated method stub
 		VentanaLogin v = new VentanaLogin();
