@@ -64,7 +64,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 	private ImageIcon pok6;
 	private Entrenador entrenadorActual;
 	private String avatar;
-	private String eleccionAvatar;
+	static String eleccionAvatar;
 
 	public VentanaInicio(Entrenador entrenadorActual, String eleccionAvatar) {
 
@@ -227,7 +227,11 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		fondo.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				cambiarVentana();	
+				setVisible(false);
+				
+				VentanaCombate v =new VentanaCombate();
+				v.setVisible(true);
+					
 				
 			}
 		});
@@ -261,11 +265,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		
 	}
 	
-	public static void cambiarVentana() {
-		this.setVisible(false);
-		//VentanaCombate v = new  VentanaCombate(entrenadorActual, eleccionAvatar);
-		//v.setVisible(true);
-	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

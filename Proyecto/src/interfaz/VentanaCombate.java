@@ -55,6 +55,7 @@ public class VentanaCombate extends JFrame{
 	private Entrenador rojo;
 	private Pokemon pokemonActualAliado;
 	private Pokemon pokemonRojo;
+	private String avatar = VentanaInicio.eleccionAvatar;
 
 	private int contadorAliado = 0;
 	private int contadorEnemigo = 0;
@@ -167,14 +168,15 @@ public class VentanaCombate extends JFrame{
 		String cadena = "\n\t" + pokemonActualAliado.getNombre() + "USÓ" + movimiento.getNombre();
 		textoLogger += cadena;
 		logger.setText(textoLogger);
-		
+		hpPokemonEnemigo.setValue(hpPokemonEnemigo.getValue()-movimiento.getDaño());
 		if(pokemonEsDerrotado(pokemonRojo)) {
 			contadorEnemigo++;
 			if(contadorEnemigo!=6) {
 				cargarPokemonEnemigo();
 			}
 		}
-		hpPokemonEnemigo.setValue(hpPokemonEnemigo.getValue()-movimiento.getDaño());
+		
+		comprobarganador();
 		
 		
 		
@@ -183,13 +185,15 @@ public class VentanaCombate extends JFrame{
 		String cadena = "\n\t" + pokemonRojo.getNombre() + "USÓ" + movimiento.getNombre();
 		textoLogger += cadena;
 		logger.setText(textoLogger);
+		hpPokemonAliado.setValue(hpPokemonAliado.getValue()-movimiento.getDaño());
 		if(pokemonEsDerrotado(pokemonActualAliado)) {
 			contadorEnemigo++;
 			if(contadorEnemigo!=6) {
 				cargarPokemonEnemigo();
 			}
 		}
-		hpPokemonAliado.setValue(hpPokemonAliado.getValue()-movimiento.getDaño());
+		
+		comprobarganador();
 	}
 	public boolean pokemonEsDerrotado(Pokemon pokemon) {
 		if(pokemon.getHp()<=0) {
@@ -199,12 +203,13 @@ public class VentanaCombate extends JFrame{
 		return false;
 	}
 	public void comprobarganador() {
+		VentanaFinCombate ventanaFinCombate;
 		if(contadorAliado ==6) {
-			ventanaFinCombate= new VentanaFinCombate();
+			ventanaFinCombate= new VentanaFinCombate(entrenador,avatar);
 			ventanaFinCombate.setVisible(true);
 		}
 		if(contadorEnemigo==6) {
-			ventanaFinCombate= new VentanaFinCombate();
+			ventanaFinCombate= new VentanaFinCombate(entrenador,avatar);
 			ventanaFinCombate.setVisible(true);
 		}
 	}

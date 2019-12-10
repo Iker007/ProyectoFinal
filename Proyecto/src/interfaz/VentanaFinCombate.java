@@ -109,6 +109,7 @@ public class VentanaFinCombate extends JFrame {
 			
 				VentanaInicio v = new VentanaInicio(entrenadorActual, eleccionAvatar);
 				v.setVisible(true);
+				dispose();
 			}
 		});
 		
