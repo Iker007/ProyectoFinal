@@ -12,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -128,6 +131,8 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		pComboBox.add(salir);
 
 		pContent.add(pComboBox);
+		
+		
 
 		pBotones.setBackground(Color.DARK_GRAY);
 		pComboBox.setBackground(Color.DARK_GRAY);
@@ -235,7 +240,6 @@ public class VentanaLogin extends JFrame implements ActionListener {
 					e.setContraseña(p);
 					e.setScore(0);
 					e.setPokemons(pokemons);
-					System.out.println(e.getUsuario());
 					entrenadorActual = e;
 					try {
 						baseDeDatos.insertarEntrenador(e);
@@ -259,6 +263,10 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		VentanaLogin v = new VentanaLogin();
 		v.setVisible(true);
+		Logger logger = Logger.getLogger(VentanaLogin.class.getName());
+		logger.setLevel(Level.FINE);
+        logger.addHandler(new ConsoleHandler());
+
 
 	}
 }
