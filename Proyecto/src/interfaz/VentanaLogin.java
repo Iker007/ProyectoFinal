@@ -74,12 +74,12 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		movimientos = baseDeDatos.obtenerTodosMovimientos();
 		pokemons = baseDeDatos.obtenerTodosPokemon(movimientos);
 		usuarios = baseDeDatos.obtenerTodosUsuarios(pokemons);
-		usernameLabel = new JLabel("Username:");
+		usernameLabel = new JLabel("Usuario:");
 		username = new JTextField();
 		username.setEditable(true);
 		username.setPreferredSize(new Dimension(250, 45));
 		username.setFont(new Font("Comic Sainz MS", Font.BOLD, 20));
-		passwordLabel = new JLabel("Password:");
+		passwordLabel = new JLabel("Contraseña:");
 		password = new JTextField();
 		password.setEditable(true);
 		password.setPreferredSize(new Dimension(250, 45));
@@ -96,10 +96,10 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		pBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 60));
 		pDatos.add(pUsername);
 		pDatos.add(pPassword);
-		tamanyoBotones = new Dimension(100, 50);
-		signInButton = new JButton("Sign In");
+		tamanyoBotones = new Dimension(120, 50);
+		signInButton = new JButton("Iniciar sesión");
 		signInButton.setPreferredSize(tamanyoBotones);
-		signUpButton = new JButton("Register");
+		signUpButton = new JButton("Registrarse");
 		signUpButton.setPreferredSize(tamanyoBotones);
 		pBotones.add(signInButton);
 		pBotones.add(signUpButton);
@@ -109,9 +109,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		blanco1 = new JPanel(new FlowLayout());
 		pContent.add(pDatos, BorderLayout.SOUTH);
 		blanco.setPreferredSize(new Dimension(300, 300));
-		background = new JLabel(new ImageIcon("C:\\ProyectoProgIII\\PokemonShowdownTitle.jpg"));
-		// background = new JLabel(new
-		// ImageIcon("C:\\\\Users\\\\oscar\\\\Downloads\\\\A.gif"));
+		background = new JLabel(new ImageIcon(getClass().getResource("/resources/PokemonShowdownTitle.jpg")));
 		this.add(background, BorderLayout.CENTER);
 		background.setLayout(new FlowLayout());
 		pContent.add(pBotones);
@@ -171,7 +169,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 						JOptionPane.showMessageDialog(this, "Se ha realizado con exito");
 						existe++;
 						entrenadorActual = entrenador;
-						this.setVisible(false);
+						dispose();
 						eleccionAvatar = (String) avatarComboBox.getSelectedItem();
 						VentanaInicio v = new VentanaInicio(entrenadorActual, eleccionAvatar);
 						v.setVisible(true);
@@ -256,6 +254,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		}
 
 	}
+
 	public static void main(String[] args) throws BDException {
 		// TODO Auto-generated method stub
 		VentanaLogin v = new VentanaLogin();

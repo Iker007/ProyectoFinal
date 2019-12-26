@@ -6,8 +6,6 @@ import javax.swing.*;
 
 import clases.Entrenador;
 
-
-
 public class VentanaInicio extends JFrame implements ActionListener {
 
 	private JPanel fondo;
@@ -16,11 +14,11 @@ public class VentanaInicio extends JFrame implements ActionListener {
 	private JPanel hueco2;
 	private JPanel hueco3;
 	private JPanel hueco4;
-	//private JPanel hueco5;
+	// private JPanel hueco5;
 	private JPanel hueco6;
 	private JPanel hueco7;
 	private JPanel hueco8;
-	//private JPanel hueco9;
+	// private JPanel hueco9;
 	private JPanel PanelEntrenador1;
 	private JPanel PanelEntrenador2;
 	private JPanel Equipo1;
@@ -71,7 +69,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		this.setLayout(new FlowLayout());
 		this.entrenadorActual = entrenadorActual;
 		this.eleccionAvatar = eleccionAvatar;
-		
+
 		fondo2 = new JLabel(new ImageIcon(getClass().getResource("/resources/InicioCombate.png")));
 		fondo = new JPanel();
 		fondo.setBackground(new Color(0, 0, 0, 0));
@@ -80,22 +78,22 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		fondo.setPreferredSize(new Dimension(1000, 800));
 
 		nombre1 = new JLabel();
-		nombre1.setText("TRAINER1");
+		nombre1.setText(entrenadorActual.getUsuario());
 		nombre1.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
-		PanelEntrenador1 = new JPanel(new FlowLayout(FlowLayout.CENTER,20,85) );
-		
-		//PanelEntrenador1.setLayout(new GridLayout(1, 3));
-		//hueco5 = new JPanel();
-		//PanelEntrenador1.add(hueco5);
-		//hueco5.setVisible(false);
+		PanelEntrenador1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 85));
+
+		// PanelEntrenador1.setLayout(new GridLayout(1, 3));
+		// hueco5 = new JPanel();
+		// PanelEntrenador1.add(hueco5);
+		// hueco5.setVisible(false);
 		PanelEntrenador1.add(nombre1);
 		PanelEntrenador1.setBackground(new Color(0, 0, 0, 0));
-		
-		//hueco9 = new JPanel();
-		//PanelEntrenador1.add(hueco9);
-		//hueco9.setVisible(false);
+
+		// hueco9 = new JPanel();
+		// PanelEntrenador1.add(hueco9);
+		// hueco9.setVisible(false);
 		fondo.add(PanelEntrenador1);
-		
+
 		hueco1 = new JPanel();
 		hueco1.setOpaque(false);
 		fondo.add(hueco1);
@@ -114,58 +112,59 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		hueco8.setVisible(false);
 		PanelEntrenador2.setBackground(new Color(0, 0, 0, 0));
 		fondo.add(PanelEntrenador2);
-		
-		if(eleccionAvatar.equals("Chico")) {
+
+		if (eleccionAvatar.equals("Chico")) {
 			avatar = "Chico";
-		}
-		else if(eleccionAvatar.equals("Chica")) {
+		} else if (eleccionAvatar.equals("Chica")) {
 			avatar = "Chica";
-		}
-		else if(eleccionAvatar.equals("Otros")) {
+		} else if (eleccionAvatar.equals("Otros")) {
 			avatar = "ApacheKawaii";
 		}
-		ImagenENT1 = new ImageIcon(getClass().getResource("/resources/"+avatar+".png"));
+		ImagenENT1 = new ImageIcon(getClass().getResource("/resources/" + avatar + ".png"));
 		ImageENT1B = ImagenENT1.getImage();
-		NewImageENT1 = ImageENT1B.getScaledInstance(150, 180, java.awt.Image.SCALE_SMOOTH); 
-		ImagenENT1 = new ImageIcon(NewImageENT1); 
-		//Pillar imagen H v M v O
+		NewImageENT1 = ImageENT1B.getScaledInstance(150, 180, java.awt.Image.SCALE_SMOOTH);
+		ImagenENT1 = new ImageIcon(NewImageENT1);
+		// Pillar imagen H v M v O
 		entrenador1 = new JLabel((ImagenENT1));
 		entrenador1.setBackground(new Color(0, 0, 0, 0));
 		entrenador1.setLayout(new FlowLayout());
 		fondo.add(entrenador1);
 
-		//entrenador1 = new JLabel(new ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\ApacheKawaii.png"));
-		//fondo.add(entrenador1);
+		// entrenador1 = new JLabel(new
+		// ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\ApacheKawaii.png"));
+		// fondo.add(entrenador1);
 
 		ImagenVS = new ImageIcon(getClass().getResource("/resources/Vs.png"));
 		ImageVS2 = ImagenVS.getImage();
-		NewImageVS = ImageVS2.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH); 
-		ImagenVS = new ImageIcon(NewImageVS); 
+		NewImageVS = ImageVS2.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
+		ImagenVS = new ImageIcon(NewImageVS);
 
 		versus = new JLabel((ImagenVS));
 		versus.setBackground(new Color(0, 0, 0, 0));
 		versus.setLayout(new FlowLayout());
 		fondo.add(versus);
-		
+
 		ImagenENT2 = new ImageIcon(getClass().getResource("/resources/Red.png"));
 		ImageENT2B = ImagenENT2.getImage();
-		NewImageENT2 = ImageENT2B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH); 
-		ImagenENT2 = new ImageIcon(NewImageENT2); 
+		NewImageENT2 = ImageENT2B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH);
+		ImagenENT2 = new ImageIcon(NewImageENT2);
 		entrenador2 = new JLabel((ImagenENT2));
 		entrenador2.setBackground(new Color(0, 0, 0, 0));
 		fondo.add(entrenador2);
-		
-		//entrenador2 = new JLabel(new ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\Red.png"));
-		//fondo.add(entrenador2);
 
-		
+		// entrenador2 = new JLabel(new
+		// ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\Red.png"));
+		// fondo.add(entrenador2);
+
 		Equipo1 = new JPanel();
-		Equipo1.setLayout(new GridLayout(2,3));
-		//Equipo1.setBackground(new Color(0, 0, 0, 0));
-		//ImagenPOK1 = new ImageIcon(getClass().getResource("/resources/ArceusSprite.png"));
-		//ImagePOK1B = ImagenPOK1.getImage();
-		//NewImagePOK1 = ImagePOK1B.getScaledInstance(80, 80, java.awt.Image.SCALE_SMOOTH); 
-		//ImagenPOK1 = new ImageIcon(NewImagePOK1);
+		Equipo1.setLayout(new GridLayout(2, 3));
+		// Equipo1.setBackground(new Color(0, 0, 0, 0));
+		// ImagenPOK1 = new
+		// ImageIcon(getClass().getResource("/resources/ArceusSprite.png"));
+		// ImagePOK1B = ImagenPOK1.getImage();
+		// NewImagePOK1 = ImagePOK1B.getScaledInstance(80, 80,
+		// java.awt.Image.SCALE_SMOOTH);
+		// ImagenPOK1 = new ImageIcon(NewImagePOK1);
 		pok1 = ajustarSprite(entrenadorActual.getPokemons().get(0).getNombre().toLowerCase());
 		Pokemon1 = new JLabel(pok1);
 		Equipo1.add(Pokemon1);
@@ -189,20 +188,20 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		hueco2 = new JPanel();
 		fondo.add(hueco2);
 		hueco2.setVisible(false);
-		
+
 		ImagenPOK2 = new ImageIcon(getClass().getResource("/resources/EnemyTeam.png"));
 		ImagePOK2 = ImagenPOK2.getImage();
-		NewImagePOK2 = ImagePOK2.getScaledInstance(300, 175, java.awt.Image.SCALE_SMOOTH); 
-		ImagenPOK2 = new ImageIcon(NewImagePOK2); 
-		
+		NewImagePOK2 = ImagePOK2.getScaledInstance(300, 175, java.awt.Image.SCALE_SMOOTH);
+		ImagenPOK2 = new ImageIcon(NewImagePOK2);
+
 		Equipo2 = new JLabel((ImagenPOK2));
 		Equipo2.setBackground(new Color(0, 0, 0, 0));
 		Equipo2.setLayout(new FlowLayout());
 		fondo.add(Equipo2);
-		
-		//pokemon2 = new JPanel();
-		//pokemon2.setBackground(Color.GREEN);
-		//fondo.add(pokemon2);
+
+		// pokemon2 = new JPanel();
+		// pokemon2.setBackground(Color.GREEN);
+		// fondo.add(pokemon2);
 
 		hueco3 = new JPanel();
 		fondo.add(hueco3);
@@ -227,15 +226,11 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		fondo.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				setVisible(false);
-				
-				VentanaCombate v =new VentanaCombate();
+				dispose();
+				VentanaCombate v = new VentanaCombate();
 				v.setVisible(true);
-					
-				
 			}
 		});
-		
 
 		fondo2.add(fondo);
 		this.add(fondo2);
@@ -246,26 +241,29 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
-				
+
 			}
 		});
 	}
-	
-	public  ImageIcon ajustarSprite(String img) {
 
-		ImageIcon imageIcon = new ImageIcon(getClass().getResource("/resources/"+img.toLowerCase()+"Sprite.png")); // load the image to a imageIcon
+	public ImageIcon ajustarSprite(String img) {
+
+		ImageIcon imageIcon = new ImageIcon(getClass().getResource("/resources/" + img.toLowerCase() + "Sprite.png")); // load
+																														// the
+																														// image
+																														// to
+																														// a
+																														// imageIcon
 		Image image = imageIcon.getImage(); // transformarlo
-		Image newimg = image.getScaledInstance(80, 80,  java.awt.Image.SCALE_SMOOTH); // escalarlo con smooth scaling  
-		imageIcon = new ImageIcon(newimg);  // vuelve a transformarlo
+		Image newimg = image.getScaledInstance(80, 80, java.awt.Image.SCALE_SMOOTH); // escalarlo con smooth scaling
+		imageIcon = new ImageIcon(newimg); // vuelve a transformarlo
 		return imageIcon;
-}
-	
-	public static void main(String[] args) {
-		//VentanaInicio a = new VentanaInicio(entrenadorActual);
-		
 	}
-	
-	
+
+	public static void main(String[] args) {
+		// VentanaInicio a = new VentanaInicio(entrenadorActual);
+
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
