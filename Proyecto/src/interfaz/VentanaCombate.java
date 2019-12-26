@@ -165,6 +165,10 @@ public class VentanaCombate extends JFrame{
 					}
 				else {
 				atacarRojo(pokemonRojo.getMovimiento1());
+				if(pokemonEsDerrotado(pokemonActualAliado)){
+					cargarPokemonAliado();
+				}
+				
 				}
 			}
 			inicioDeTurno();
@@ -179,6 +183,9 @@ public class VentanaCombate extends JFrame{
 					}
 				else {
 				atacarJugador(pokemonActualAliado.getMovimiento2());
+				if(pokemonEsDerrotado(pokemonRojo)) {
+					cargarPokemonEnemigo();
+				}
 				}
 			}
 			inicioDeTurno();
@@ -201,7 +208,13 @@ public class VentanaCombate extends JFrame{
 		String cadena = "\n\t" + pokemonActualAliado.getNombre() + "USÓ" + movimiento.getNombre();
 		textoLogger += cadena;
 		logger.setText(textoLogger);
-		hpPokemonEnemigo.setValue(hpPokemonEnemigo.getValue()-movimiento.getDaño());
+		if(hpPokemonEnemigo.getValue()-movimiento.getDaño()>0) {
+			hpPokemonEnemigo.setValue(hpPokemonEnemigo.getValue()-movimiento.getDaño());
+			}
+			else {
+				hpPokemonEnemigo.setValue(hpPokemonEnemigo.getValue()-10);
+			}
+		
 		if(pokemonEsDerrotado(pokemonRojo)) {
 			contadorEnemigo++;
 			if(contadorEnemigo!=6) {
@@ -218,7 +231,12 @@ public class VentanaCombate extends JFrame{
 		String cadena = "\n\t" + pokemonRojo.getNombre() + "USÓ" + movimiento.getNombre();
 		textoLogger += cadena;
 		logger.setText(textoLogger);
+		if(hpPokemonAliado.getValue()-movimiento.getDaño()>0) {
 		hpPokemonAliado.setValue(hpPokemonAliado.getValue()-movimiento.getDaño());
+		}
+		else {
+			hpPokemonAliado.setValue(hpPokemonAliado.getValue()-10);
+		}
 		if(pokemonEsDerrotado(pokemonActualAliado)) {
 			contadorAliado++;
 			if(contadorAliado!=6) {
