@@ -72,42 +72,36 @@ public class CreacionBD {
 				System.out.println("name = " + rs.getString("nombre_t"));
 			}
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('JUDGEMENT', 'NORMAL', 100, NULL);");
-			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('RECOVER', 'NORMAL', NULL, 'HP + HP/2');");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('PSYCHYC', 'PSYCHYC', 90, NULL);");
-			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('MOONLIGHT', 'FAIRY', NULL, 'HP + HP/2');");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('DARK PULSE', 'DARK', 80, NULL);");
-			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('NASTY PLOT', 'DARK', NULL, 'ATAQUE * 2');");
 			res = statement
-					.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('PSYCHOATTACK', 'PSYCHYC', 140, 'ATAQUE / 2');");
-			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('PROTECT', 'NORMAL', NULL, 'NEXT DMG = 0');");
+					.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('PSYCHOATTACK', 'PSYCHYC', 140, NULL);");
 			res = statement
-					.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('DISTORSION', 'DRAGON', 150, 'NEXT TURN NULL');");
+					.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('DISTORSION', 'DRAGON', 150, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('FLASH CANNON', 'STEEL', 80, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('DRAGON PULSE', 'DRAGON', 80, NULL);");
 			res = statement
-					.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('SHADOW FORCE', 'GHOST', 150, 'NEXT TURN NULL');");
+					.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('SHADOW FORCE', 'GHOST', 150, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('LAVA PLUME', 'FIRE', 80, NULL);");
-			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('EXPLOSION', 'NORMAL', 300, 'HP -HP');");
+			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('EXPLOSION', 'NORMAL', 300, 'BOOM');");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('SACRED FIRE', 'FIRE', 100, NULL);");
-			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('ROOST', 'FLYING', NULL, 'HP + HP/2');");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('MIST BALL', 'PSYCHYC', 90, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('LUSTER PURGE', 'PSYCHYC', 90, NULL);");
 			res = statement
-					.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('DRACO METEOR', 'DRAGON', 140, 'ATAQUE / 2');");
+					.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('DRACO METEOR', 'DRAGON', 140, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('AEROBLAST', 'FLYING', 100, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('HYDRO PUMP', 'WATER', 100, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('SPACIAL REND', 'DRAGON', 100, NULL);");
-			res = statement
-					.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('SWORDS DANCE', 'NORMAL', NULL, 'ATAQUE * 2');");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('RETURN', 'NORMAL', 100, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('THUNDERBOLT', 'ELECTRIC', 80, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('IRON TAIL', 'STEEL', 100, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('SLUDGE BOMB', 'POISON', 90, NULL);");
-			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('GIGA DRAIN', 'GRASS', 80, 'HP + DMG/2');");
+			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('GIGA DRAIN', 'GRASS', 90, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('FIRE BLAST', 'FIRE', 120, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('SLASH', 'NORMAL', 80, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('BODY SLAM', 'NORMAL', 80, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('ICE BEAM', 'ICE', 90, NULL);");
+			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('SHADOW BALL', 'GHOST', 90, NULL);");
 			rs = statement.executeQuery("select * from MOVIMIENTOS");
 			while (rs.next()) {
 				// Leer el resultset
@@ -118,13 +112,13 @@ public class CreacionBD {
 				System.out.println();
 			}
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(0, 'ARCEUS', 'NORMAL', NULL, 100, 100, 500, 100, 'JUDGEMENT', 'RECOVER');");
+					"INSERT INTO POKEMON VALUES(0, 'ARCEUS', 'NORMAL', NULL, 100, 100, 500, 100, 'JUDGEMENT', 'FIRE BLAST');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(1, 'CRESSELIA', 'PSYCHYC', NULL, 50, 200, 600, 50, 'PSYCHYC', 'MOONLIGHT');");
+					"INSERT INTO POKEMON VALUES(1, 'CRESSELIA', 'PSYCHYC', NULL, 50, 200, 600, 50, 'PSYCHYC', 'ICE BEAM');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(2, 'DARKRAI', 'DARK', NULL, 200, 50, 350, 200, 'NASTY PLOT', 'DARK PULSE');");
+					"INSERT INTO POKEMON VALUES(2, 'DARKRAI', 'DARK', NULL, 200, 50, 350, 200, 'SLUDGE BOMB', 'DARK PULSE');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(3, 'DEOXIS', 'PSYCHYC', NULL, 250, 20, 350, 250, 'PSYCHOATTACK', 'PROTECT');");
+					"INSERT INTO POKEMON VALUES(3, 'DEOXIS', 'PSYCHYC', NULL, 250, 20, 350, 250, 'PSYCHOATTACK', 'THUNDERBOLT');");
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(4, 'DIALGA', 'DRAGON', 'STEEL', 100, 150, 500, 50, 'DISTORSION', 'FLASH CANNON');");
 			res = statement.executeUpdate(
@@ -132,19 +126,19 @@ public class CreacionBD {
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(6, 'HEATRAN', 'STEEL', 'FIRE', 150, 150, 500, 60, 'LAVA PLUME', 'EXPLOSION');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(7, 'HO-OH', 'FIRE', 'FLYING', 120, 120, 500, 90, 'SACRED FIRE', 'ROOST');");
+					"INSERT INTO POKEMON VALUES(7, 'HO-OH', 'FIRE', 'FLYING', 120, 120, 500, 90, 'SACRED FIRE', 'SLASH');");
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(8, 'LATIAS', 'DRAGON', 'PSYCHYC', 130, 70, 400, 250, 'MIST BALL', 'DRACO METEOR');");
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(9, 'LATIOS', 'DRAGON', 'PSYCHYC', 130, 70, 400, 250, 'LUSTER PURGE', 'DRACO METEOR');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(10, 'LUGIA', 'PSYCHYC', 'FLYING', 80, 150, 600, 80, 'AEROBLAST', 'ROOST');");
+					"INSERT INTO POKEMON VALUES(10, 'LUGIA', 'PSYCHYC', 'FLYING', 80, 150, 600, 80, 'AEROBLAST', 'PSYCHYC');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(11, 'MEW', 'PSYCHYC', NULL, 70, 150, 500, 100, 'PSYCHYC', 'NASTY PLOT');");
+					"INSERT INTO POKEMON VALUES(11, 'MEW', 'PSYCHYC', NULL, 70, 150, 500, 100, 'PSYCHYC', 'SHADOW BALL');");
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(12, 'PALKIA', 'DRAGON', 'WATER', 130, 100, 500, 65, 'HYDRO PUMP', 'SPACIAL REND');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(13, 'REGIGIGAS', 'NORMAL', NULL, 100, 200, 800, 20, 'SWORDS DANCE', 'RETURN');");
+					"INSERT INTO POKEMON VALUES(13, 'REGIGIGAS', 'NORMAL', NULL, 100, 200, 800, 20, 'EXPLOSION', 'RETURN');");
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(14, 'PIKACHU', 'ELECTRIC', NULL, 160, 75, 400, 300, 'THUNDERBOLT', 'IRON TAIL');");
 			res = statement.executeUpdate(
@@ -152,9 +146,9 @@ public class CreacionBD {
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(16, 'CHARIZARD', 'FIRE', 'FLYING', 130, 80, 500, 90, 'FIRE BLAST', 'SLASH');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(17, 'BLASTOISE', 'WATER', NULL, 70, 250, 750, 10, 'HYDRO PUMP', 'PROTECT');");
+					"INSERT INTO POKEMON VALUES(17, 'BLASTOISE', 'WATER', NULL, 70, 250, 750, 10, 'HYDRO PUMP', 'BODY SLAM');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(18, 'SNORLAX', 'NORMAL', NULL, 100, 150, 1000, 30, 'BODY SLAM', 'RECOVER');");
+					"INSERT INTO POKEMON VALUES(18, 'SNORLAX', 'NORMAL', NULL, 100, 150, 1000, 30, 'BODY SLAM', 'SHADOW BALL');");
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(19, 'LAPRAS', 'WATER', 'ICE', 100, 150, 800, 120, 'ICE BEAM', 'HYDRO PUMP');");
 			rs = statement.executeQuery("select * from pokemon");
