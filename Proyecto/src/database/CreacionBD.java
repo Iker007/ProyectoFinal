@@ -168,8 +168,6 @@ public class CreacionBD {
 			}
 			res = statement.executeUpdate(
                     "INSERT INTO ENTRENADOR VALUES('RED', 'C', 999, 14, 15, 16, 17, 18, 19);");
-			res = statement.executeUpdate(
-                    "INSERT INTO ENTRENADOR VALUES('BLUE', 'C', 0, 10, 7, 16, 12, 18, 19);");
 			rs = statement.executeQuery("select * from entrenador");
 			while(rs.next()) {
 			System.out.println("usuario = " + rs.getString("usuario"));

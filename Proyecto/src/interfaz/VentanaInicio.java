@@ -23,6 +23,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 	private JPanel PanelEntrenador2;
 	private JPanel Equipo1;
 	private JLabel Equipo2;
+	private JLabel Equipo1Red;
 	private JLabel entrenador1;
 	private JLabel entrenador2;
 	private JLabel nombre1;
@@ -54,6 +55,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 	private ImageIcon img1;
 	private Image img2;
 	private Image img3;
+	private Image ImagePOK1;
 	private ImageIcon pok1;
 	private ImageIcon pok2;
 	private ImageIcon pok3;
@@ -120,6 +122,15 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		} else if (eleccionAvatar.equals("Otros")) {
 			avatar = "ApacheKawaii";
 		}
+		if(entrenadorActual.getPokemons().get(0).getId()==14) {
+			ImagenENT1 = new ImageIcon(getClass().getResource("/resources/Red.png"));
+			ImageENT1B = ImagenENT1.getImage();
+			NewImageENT1 = ImageENT1B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH);
+			ImagenENT1 = new ImageIcon(NewImageENT1);
+			entrenador1 = new JLabel((ImagenENT1));
+			entrenador1.setBackground(new Color(0, 0, 0, 0));
+			fondo.add(entrenador1);
+		}else {
 		ImagenENT1 = new ImageIcon(getClass().getResource("/resources/" + avatar + ".png"));
 		ImageENT1B = ImagenENT1.getImage();
 		NewImageENT1 = ImageENT1B.getScaledInstance(150, 180, java.awt.Image.SCALE_SMOOTH);
@@ -129,6 +140,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		entrenador1.setBackground(new Color(0, 0, 0, 0));
 		entrenador1.setLayout(new FlowLayout());
 		fondo.add(entrenador1);
+		}
 
 		// entrenador1 = new JLabel(new
 		// ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\ApacheKawaii.png"));
@@ -152,19 +164,18 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		entrenador2.setBackground(new Color(0, 0, 0, 0));
 		fondo.add(entrenador2);
 
-		// entrenador2 = new JLabel(new
-		// ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\Red.png"));
-		// fondo.add(entrenador2);
-
-		Equipo1 = new JPanel();
+		if(entrenadorActual.getPokemons().get(0).getId()==14){
+			ImagenPOK1 = new ImageIcon(getClass().getResource("/resources/EnemyTeam.png"));
+			ImagePOK1 = ImagenPOK1.getImage();
+			NewImagePOK1 = ImagePOK1.getScaledInstance(300, 175, java.awt.Image.SCALE_SMOOTH);
+			ImagenPOK1 = new ImageIcon(NewImagePOK1);
+			Equipo1Red = new JLabel((ImagenPOK1));
+			Equipo1Red.setBackground(new Color(0, 0, 0, 0));
+			Equipo1Red.setLayout(new FlowLayout());
+			fondo.add(Equipo1Red);
+		}else {
+			Equipo1 = new JPanel();
 		Equipo1.setLayout(new GridLayout(2, 3));
-		// Equipo1.setBackground(new Color(0, 0, 0, 0));
-		// ImagenPOK1 = new
-		// ImageIcon(getClass().getResource("/resources/ArceusSprite.png"));
-		// ImagePOK1B = ImagenPOK1.getImage();
-		// NewImagePOK1 = ImagePOK1B.getScaledInstance(80, 80,
-		// java.awt.Image.SCALE_SMOOTH);
-		// ImagenPOK1 = new ImageIcon(NewImagePOK1);
 		pok1 = ajustarSprite(entrenadorActual.getPokemons().get(0).getNombre().toLowerCase());
 		Pokemon1 = new JLabel(pok1);
 		Equipo1.add(Pokemon1);
@@ -185,6 +196,8 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		Equipo1.add(Pokemon6);
 		fondo.add(Equipo1);
 
+		}
+
 		hueco2 = new JPanel();
 		fondo.add(hueco2);
 		hueco2.setVisible(false);
@@ -193,7 +206,6 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		ImagePOK2 = ImagenPOK2.getImage();
 		NewImagePOK2 = ImagePOK2.getScaledInstance(300, 175, java.awt.Image.SCALE_SMOOTH);
 		ImagenPOK2 = new ImageIcon(NewImagePOK2);
-
 		Equipo2 = new JLabel((ImagenPOK2));
 		Equipo2.setBackground(new Color(0, 0, 0, 0));
 		Equipo2.setLayout(new FlowLayout());
