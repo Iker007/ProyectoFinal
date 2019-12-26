@@ -69,7 +69,7 @@ public class VentanaCombate extends JFrame{
 		this.setSize(new Dimension(1200,800));
 		setTitle("POKEMON SHOWDOWN");
 		setLayout(new BorderLayout());
-		logger = new JTextArea("Hola puta");
+		logger = new JTextArea("Hola ");
 		logger.setEditable(false);
 		loggerWidth = 200;
 		loggerHeigth = 810;
@@ -126,7 +126,14 @@ public class VentanaCombate extends JFrame{
 		cargarPokemonAliado();
 		cargarPokemonEnemigo();
 		setVisible(true);
+		
+		movimiento1.addActionListener((ActionListener) this);
+		movimiento2.addActionListener((ActionListener) this);
+		
+		
+		
 	}
+	
 	public void cargarPokemonAliado() {
 		
 			pokemonActualAliado = entrenador.getPokemons().get(contadorAliado); 
@@ -149,12 +156,12 @@ public class VentanaCombate extends JFrame{
 		VentanaCombate v = new VentanaCombate();
 		
 	}
-	public int quienAtacaPrimero(int velocidad1, int velocidad2) {
-		if(velocidad1 > velocidad2) {
+	public int quienAtacaPrimero() {
+		if(pokemonActualAliado.getSpeed() > pokemonRojo.getSpeed()) {
 			
 			return 1;
 		}
-		if(velocidad2 < velocidad1) {
+		if(pokemonRojo.getSpeed() < pokemonActualAliado.getSpeed()) {
 			return 2;
 		}
 		else {
@@ -162,7 +169,47 @@ public class VentanaCombate extends JFrame{
 		}
 
 	}
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == movimiento1) {
+			esconderBotones();
+			if(quienAtacaPrimero()==1) {
+				atacarJugador(pokemonActualAliado.getMovimiento1());
+				if(pokemonEsDerrotado(pokemonRojo)) {
+					cargarPokemonEnemigo();
+					}
+				else {
+				atacarRojo(pokemonRojo.getMovimiento1());
+				}
+			}
+			inicioDeTurno();
+		}
+
+		if(e.getSource() == movimiento2) {
+			esconderBotones();
+			if(quienAtacaPrimero()==2) {
+				atacarRojo(pokemonRojo.getMovimiento2());
+				if(pokemonEsDerrotado(pokemonActualAliado)) {
+					cargarPokemonAliado();
+					}
+				else {
+				atacarJugador(pokemonActualAliado.getMovimiento2());
+				}
+			}
+			inicioDeTurno();
+		}
+	}
+	public void esconderBotones() {
+		movimiento1.setVisible(false);
+		movimiento2.setVisible(false);
 	
+	}
+	
+	public void inicioDeTurno() {
+		movimiento1.setVisible(true);
+		movimiento2.setVisible(true);
+		
+	
+	}
 	
 	public void atacarJugador(Movimiento movimiento) {
 		String cadena = "\n\t" + pokemonActualAliado.getNombre() + "USÓ" + movimiento.getNombre();
@@ -187,9 +234,9 @@ public class VentanaCombate extends JFrame{
 		logger.setText(textoLogger);
 		hpPokemonAliado.setValue(hpPokemonAliado.getValue()-movimiento.getDaño());
 		if(pokemonEsDerrotado(pokemonActualAliado)) {
-			contadorEnemigo++;
-			if(contadorEnemigo!=6) {
-				cargarPokemonEnemigo();
+			contadorAliado++;
+			if(contadorAliado!=6) {
+				cargarPokemonAliado();
 			}
 		}
 		
@@ -202,15 +249,18 @@ public class VentanaCombate extends JFrame{
 		}
 		return false;
 	}
+	
 	public void comprobarganador() {
 		VentanaFinCombate ventanaFinCombate;
-		if(contadorAliado ==6) {
+		if(contadorAliado == 6) {
 			ventanaFinCombate= new VentanaFinCombate(entrenador,avatar);
 			ventanaFinCombate.setVisible(true);
+			dispose();
 		}
-		if(contadorEnemigo==6) {
+		if(contadorEnemigo== 6) {
 			ventanaFinCombate= new VentanaFinCombate(entrenador,avatar);
 			ventanaFinCombate.setVisible(true);
+			dispose();
 		}
 	}
 }
