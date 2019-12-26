@@ -89,24 +89,11 @@ public class VentanaCombate extends JFrame{
 		movimiento1 = new JButton("");
 		movimiento1.setPreferredSize(movimientosDimension);
 		pMovimientos.add(movimiento1);
-		movimiento1.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		} );
+		movimiento1.addActionListener((ActionListener) this);
+		
 		movimiento2 = new JButton("");
 		pMovimientos.add(movimiento2);
-		movimiento2.addActionListener(new ActionListener() {
-		
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		} );
+		movimiento2.addActionListener((ActionListener) this);
 		pContent = new JPanel(new BorderLayout());
 		lblNombreAliado  = new JLabel();
 		lblNombreAliado.setForeground(Color.WHITE);
@@ -127,8 +114,7 @@ public class VentanaCombate extends JFrame{
 		cargarPokemonEnemigo();
 		setVisible(true);
 		
-		movimiento1.addActionListener((ActionListener) this);
-		movimiento2.addActionListener((ActionListener) this);
+		
 		
 		
 		
