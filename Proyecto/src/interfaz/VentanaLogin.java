@@ -67,11 +67,13 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	public List<Pokemon> pokemons = new ArrayList<Pokemon>();
 	public List<Tipo> tipos = new ArrayList<Tipo>();
 	public List<Movimiento> movimientos = new ArrayList<Movimiento>();
-
+	private static Logger logger_Login = Logger.getLogger(VentanaLogin.class.getName());
+	
 	public VentanaLogin() throws BDException {
 		this.setSize(800, 600);
 		this.setLayout(new BorderLayout());
 		this.setTitle("Pokemon Showdown");
+		this.setResizable(false);
 		baseDeDatos.conectar();
 		tipos = baseDeDatos.obtenerTodosTipos();
 		movimientos = baseDeDatos.obtenerTodosMovimientos();
@@ -263,10 +265,10 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		VentanaLogin v = new VentanaLogin();
 		v.setVisible(true);
-		Logger logger = Logger.getLogger(VentanaLogin.class.getName());
-		logger.setLevel(Level.FINE);
-        logger.addHandler(new ConsoleHandler());
-
-
+		
+		logger_Login.setLevel(Level.ALL);
+		try {
+			H
+		}
 	}
 }

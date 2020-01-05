@@ -22,7 +22,7 @@ import clases.Entrenador;
 import clases.Movimiento;
 import clases.Pokemon;
 
-public class VentanaCombate extends JFrame{
+public class VentanaCombate extends JFrame implements ActionListener{
 	private JPanel pDerecha;
 	private JPanel pContent;
 	private JPanel pMovimientos;
@@ -89,11 +89,11 @@ public class VentanaCombate extends JFrame{
 		movimiento1 = new JButton("");
 		movimiento1.setPreferredSize(movimientosDimension);
 		pMovimientos.add(movimiento1);
-		movimiento1.addActionListener((ActionListener) this);
+		movimiento1.addActionListener(this);
 		
 		movimiento2 = new JButton("");
 		pMovimientos.add(movimiento2);
-		movimiento2.addActionListener((ActionListener) this);
+		movimiento2.addActionListener(this);
 		pContent = new JPanel(new BorderLayout());
 		lblNombreAliado  = new JLabel();
 		lblNombreAliado.setForeground(Color.WHITE);
@@ -113,8 +113,6 @@ public class VentanaCombate extends JFrame{
 		cargarPokemonAliado();
 		cargarPokemonEnemigo();
 		setVisible(true);
-		
-		
 		
 		
 		
