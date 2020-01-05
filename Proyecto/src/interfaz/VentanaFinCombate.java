@@ -196,5 +196,6 @@ public class VentanaFinCombate extends JFrame {
 	public void setEntrenador(Entrenador entrenador) {
 		this.entrenador.setText(entrenador.getUsuario());
 	}
-
+	
+	
 }

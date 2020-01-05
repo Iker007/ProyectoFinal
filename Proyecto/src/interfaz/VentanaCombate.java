@@ -9,6 +9,10 @@ import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,10 +21,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
+import javax.swing.table.TableColumn;
 
 import clases.Entrenador;
 import clases.Movimiento;
 import clases.Pokemon;
+import clases.Tipo;
 
 public class VentanaCombate extends JFrame implements ActionListener{
 	private JPanel pDerecha;
@@ -51,11 +57,12 @@ public class VentanaCombate extends JFrame implements ActionListener{
 	private int loggerHeigth;
 	private Dimension loggerDimension;
 	private Dimension movimientosDimension;
-	private Entrenador entrenador = VentanaLogin.entrenadorActual;
+	private Entrenador entrenador;
 	private Entrenador rojo;
 	private Pokemon pokemonActualAliado;
 	private Pokemon pokemonRojo;
 	private String avatar = VentanaInicio.eleccionAvatar;
+	private List<Pokemon> equipo;
 
 	private int contadorAliado = 0;
 	private int contadorEnemigo = 0;
@@ -65,10 +72,12 @@ public class VentanaCombate extends JFrame implements ActionListener{
 
 
 
-	public VentanaCombate() {
+	public VentanaCombate(Entrenador entrenadorActual, Entrenador rojo) {
 		this.setSize(new Dimension(1200,800));
 		setTitle("POKEMON SHOWDOWN");
 		setLayout(new BorderLayout());
+		this.entrenador = entrenadorActual;
+		this.rojo = rojo;
 		logger = new JTextArea("Hola ");
 		logger.setEditable(false);
 		loggerWidth = 200;
@@ -80,11 +89,6 @@ public class VentanaCombate extends JFrame implements ActionListener{
 		add(pComentarista,BorderLayout.EAST);
 		movimientosDimension = new Dimension(20, 100);
 		pMovimientos = new JPanel(new GridLayout(1,2));
-		
-		
-		
-
-		
 		
 		movimiento1 = new JButton("");
 		movimiento1.setPreferredSize(movimientosDimension);
@@ -100,6 +104,9 @@ public class VentanaCombate extends JFrame implements ActionListener{
 		lblNombreAliado.setBounds(54,22,135,15);
 		pContent.add(lblNombreAliado);
 		
+		lblNombreEnemigo  = new JLabel();
+		lblNombreEnemigo.setForeground(Color.WHITE);
+		lblNombreEnemigo.setBounds(54,22,135,15);
 		
 		pContent.add(pMovimientos,BorderLayout.SOUTH);
 		add(pContent,BorderLayout.CENTER);
@@ -107,14 +114,20 @@ public class VentanaCombate extends JFrame implements ActionListener{
 		hpPokemonAliado = new JProgressBar();
 		hpPokemonAliado.setStringPainted(true);
 		hpPokemonAliado.setForeground(Color.GREEN);
-		hpPokemonAliado.setBounds(50,50,0,0);
+		//hpPokemonAliado.setBounds(50,50,0,0);
 		pContent.add(hpPokemonAliado);
 		hpPokemonEnemigo = new JProgressBar();
+		hpPokemonEnemigo.setStringPainted(true);
+		hpPokemonEnemigo.setForeground(Color.GREEN);
 		cargarPokemonAliado();
 		cargarPokemonEnemigo();
 		setVisible(true);
 		
-		
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);			
+			}
+		});
 		
 	}
 	
@@ -123,23 +136,20 @@ public class VentanaCombate extends JFrame implements ActionListener{
 			pokemonActualAliado = entrenador.getPokemons().get(contadorAliado); 
 			lblNombreAliado.setText(pokemonActualAliado.getNombre());
 			hpPokemonAliado.setMaximum(pokemonActualAliado.getHp());
-			hpPokemonAliado.setMaximum(0);
+			hpPokemonAliado.setMinimum(0);
 			hpPokemonAliado.setValue(pokemonActualAliado.getHp());
-			movimiento1.setText(pokemonActualAliado.getMovimiento1().toString());
-			movimiento2.setText(pokemonActualAliado.getMovimiento2().toString());
+			movimiento1.setText(pokemonActualAliado.getMovimiento1().getNombre());
+			movimiento2.setText(pokemonActualAliado.getMovimiento2().getNombre());
 			
 	}
 	public void cargarPokemonEnemigo() {
-		pokemonRojo = entrenador.getPokemons().get(contadorEnemigo); 
+		pokemonRojo = rojo.getPokemons().get(contadorEnemigo); 
 		lblNombreEnemigo.setText(pokemonRojo.getNombre());
 		hpPokemonEnemigo.setMaximum(pokemonRojo.getHp());
-		hpPokemonEnemigo.setMaximum(0);
+		hpPokemonEnemigo.setMinimum(0);
 		hpPokemonEnemigo.setValue(pokemonRojo.getHp());
 	}
-	public static void main(String[] args) {
-		VentanaCombate v = new VentanaCombate();
-		
-	}
+	
 	public int quienAtacaPrimero() {
 		if(pokemonActualAliado.getSpeed() > pokemonRojo.getSpeed()) {
 			
@@ -250,6 +260,46 @@ public class VentanaCombate extends JFrame implements ActionListener{
 			
 		}
 		return false;
+	}
+	
+	public static void main(String[] args) {
+		List<Pokemon> equipo = new ArrayList<Pokemon>();
+		List<Pokemon> equipo2 = new ArrayList<Pokemon>();
+		Tipo t1 = new Tipo("t1");
+		Tipo t2 = new Tipo("t2");
+
+		Movimiento m1 = new Movimiento("as", t1, 12, "a");
+		Movimiento m2 = new Movimiento("df", t2, 12, "b");
+
+		Pokemon p1  = new Pokemon("a", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+		Pokemon p2  = new Pokemon("b", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+		Pokemon p3  = new Pokemon("c", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+		Pokemon p4  = new Pokemon("d", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+		Pokemon p5  = new Pokemon("e", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+		Pokemon p6  = new Pokemon("f", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+		Pokemon p7  = new Pokemon("a", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+		Pokemon p8  = new Pokemon("b", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+		Pokemon p9  = new Pokemon("c", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+		Pokemon p10  = new Pokemon("d", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+		Pokemon p11 = new Pokemon("e", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+		Pokemon p12  = new Pokemon("f", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+
+		equipo.add(p1);
+		equipo.add(p2);
+		equipo.add(p3);
+		equipo.add(p4);
+		equipo.add(p5);
+		equipo.add(p6);
+		equipo2.add(p7);
+		equipo2.add(p8);
+		equipo2.add(p9);
+		equipo2.add(p10);
+		equipo2.add(p11);
+		equipo2.add(p12);
+		Entrenador entrenadorActual = new Entrenador("a", 0, "a", equipo);
+		Entrenador rojo = new Entrenador("b", 0, "c", equipo2);
+		VentanaCombate v = new VentanaCombate(entrenadorActual, rojo);
+		
 	}
 	
 	public void comprobarganador() {
