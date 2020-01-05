@@ -61,6 +61,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	private JPanel blanco1;
 	private JMenuBar menuBar;
 	private Color southPanel;
+	private Entrenador rojo;
 	private Dimension tamanyoBotones;
 	private String eleccionAvatar;
 	private GestorBD baseDeDatos = new GestorBD();
@@ -126,9 +127,6 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		avatar.setForeground(Color.WHITE);
 		avatarComboBox = new JComboBox<>(avatarNames);
 		avatarComboBox.setPreferredSize(new Dimension(100, 50));
-		// .addItem(avatarNames[0]);
-		// avatarComboBox.addItem(avatarNames[1]);
-		// avatarComboBox.addItem(avatarNames[2]);
 		pComboBox = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 40));
 		pComboBox.add(avatar);
 		pComboBox.add(avatarComboBox);
@@ -136,6 +134,14 @@ public class VentanaLogin extends JFrame implements ActionListener {
 
 		pContent.add(pComboBox);
 		
+
+		try {
+			usuarios = baseDeDatos.obtenerTodosUsuarios(pokemons);
+			rojo = usuarios.get(0);
+			System.out.println(rojo.getUsuario());
+		} catch (BDException e3) {
+			e3.printStackTrace();
+		}
 		
 
 		pBotones.setBackground(Color.DARK_GRAY);
@@ -144,7 +150,6 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		background.setMinimumSize(new Dimension(200, 200));
 		this.add(pContent, BorderLayout.SOUTH);
 		pBotones.setBounds(100, 100, 1000, 100);
-		//// this.add(pBotones,BorderLayout.SOUTH);
 		this.setMinimumSize(new Dimension(825, 670));
 		signInButton.addActionListener(this);
 		salir.addActionListener(new ActionListener() {
@@ -185,7 +190,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 						entrenadorActual = entrenador;
 						dispose();
 						eleccionAvatar = (String) avatarComboBox.getSelectedItem();
-						VentanaInicio v = new VentanaInicio(entrenadorActual, eleccionAvatar);
+						VentanaInicio v = new VentanaInicio(entrenadorActual, eleccionAvatar, rojo);
 						v.setVisible(true);
 
 					}

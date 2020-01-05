@@ -305,12 +305,12 @@ public class VentanaCombate extends JFrame implements ActionListener{
 	public void comprobarganador() {
 		VentanaFinCombate ventanaFinCombate;
 		if(contadorAliado == 6) {
-			ventanaFinCombate= new VentanaFinCombate(entrenador,avatar);
+			ventanaFinCombate= new VentanaFinCombate(entrenador,avatar, rojo);
 			ventanaFinCombate.setVisible(true);
 			dispose();
 		}
 		if(contadorEnemigo== 6) {
-			ventanaFinCombate= new VentanaFinCombate(entrenador,avatar);
+			ventanaFinCombate= new VentanaFinCombate(entrenador,avatar, rojo);
 			ventanaFinCombate.setVisible(true);
 			dispose();
 		}

@@ -36,6 +36,7 @@ public class VentanaFinCombate extends JFrame {
 	private JMenuBar menuBar;
 	private JMenu exportar;
 	private static Entrenador entrenadorActual;
+	private Entrenador rojo;
 	private JPanel panel1;
 	private JPanel panel2;
 	private JPanel panel2a;
@@ -46,10 +47,11 @@ public class VentanaFinCombate extends JFrame {
 	private JPanel hueco3;
 	private static String eleccionAvatar;
 
-	public VentanaFinCombate(Entrenador entrenadorActual, String eleccionAvatar) {
+	public VentanaFinCombate(Entrenador entrenadorActual, String eleccionAvatar, Entrenador rojo) {
 		this.setLayout(new FlowLayout());
 		this.entrenadorActual = entrenadorActual;
 		this.eleccionAvatar = eleccionAvatar;
+		this.rojo = rojo;
 		menuBar = new JMenuBar();
 		salir = new JButton("Salir");
 		salir.setPreferredSize(new Dimension(200, 50));
@@ -104,7 +106,7 @@ public class VentanaFinCombate extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				VentanaInicio v = new VentanaInicio(entrenadorActual, eleccionAvatar);
+				VentanaInicio v = new VentanaInicio(entrenadorActual, eleccionAvatar, rojo);
 				v.setVisible(true);
 			}
 		});
@@ -185,7 +187,7 @@ public class VentanaFinCombate extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		VentanaFinCombate v = new VentanaFinCombate(entrenadorActual, eleccionAvatar);
+		//VentanaFinCombate v = new VentanaFinCombate(entrenadorActual, eleccionAvatar, rojo);
 
 	}
 

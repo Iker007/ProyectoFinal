@@ -64,9 +64,10 @@ public class VentanaInicio extends JFrame implements ActionListener {
 	private ImageIcon pok6;
 	private Entrenador entrenadorActual;
 	private String avatar;
+	private Entrenador rojo;
 	static String eleccionAvatar;
 
-	public VentanaInicio(Entrenador entrenadorActual, String eleccionAvatar) {
+	public VentanaInicio(Entrenador entrenadorActual, String eleccionAvatar, Entrenador rojo) {
 
 		this.setLayout(new FlowLayout());
 		this.entrenadorActual = entrenadorActual;
@@ -78,6 +79,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		fondo2.setLayout(new FlowLayout());
 		fondo.setLayout(new GridLayout(4, 3));
 		fondo.setPreferredSize(new Dimension(1000, 800));
+		this.rojo = rojo;
 
 		nombre1 = new JLabel();
 		nombre1.setText(entrenadorActual.getUsuario());
@@ -122,7 +124,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		} else if (eleccionAvatar.equals("Otros")) {
 			avatar = "ApacheKawaii";
 		}
-		if(entrenadorActual.getPokemons().get(0).getId()==14) {
+		if(this.entrenadorActual.getPokemons().get(0).getId()==14) {
 			ImagenENT1 = new ImageIcon(getClass().getResource("/resources/Red.png"));
 			ImageENT1B = ImagenENT1.getImage();
 			NewImageENT1 = ImageENT1B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH);
@@ -239,7 +241,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
 				dispose();
-				VentanaCombate v = new VentanaCombate(entrenadorActual);
+				VentanaCombate v = new VentanaCombate(entrenadorActual, rojo);
 				v.setVisible(true);
 			}
 		});
