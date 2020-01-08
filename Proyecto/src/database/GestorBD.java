@@ -44,32 +44,6 @@ public class GestorBD {
 
 	}
 
-	public List<Pokemon> obtenerTodosPokemon2() throws BDException {
-		List<Pokemon> pokemons = new ArrayList<Pokemon>();
-		try (Statement stmt = connection.createStatement();) {
-			ResultSet result = stmt.executeQuery("SELECT id, " + "nombre, " + "tipo1, " + "tipo2, " + "hp, "
-					+ "attack, " + "defense, " + "movimiento1, " + "movimiento2 FROM pokemon");
-			while (result.next()) {
-				Pokemon p = new Pokemon();
-				Tipo[] tipos = new Tipo[2];
-				tipos[0].setNombre(result.getString("tipo1"));
-				tipos[1].setNombre(result.getString("tipo2"));
-				List<Movimiento> movimientos = new ArrayList<Movimiento>();
-				// movimientos.add(Movimiento m = new )
-				// p.set
-				p.setNombre(result.getString("nombre"));
-				// p.setTipo(tipos);
-				p.setHp(result.getInt("hp"));
-				p.setAtak(result.getInt("attack"));
-				p.setDefense(result.getInt("defense"));
-				// p.setMovimientos(movimientos);
-				pokemons.add(p);
-			}
-			return pokemons;
-		} catch (SQLException e) {
-			throw new BDException("No se pudo obtener el pokemons", e);
-		}
-	}
 
 	public boolean comprobarEntrenadorExiste(Entrenador e, List<Entrenador> usuarios) {
 		for (Entrenador e2 : usuarios) {
@@ -143,7 +117,7 @@ public class GestorBD {
 				p.setTipo1(tipo1);
 				Tipo tipo2 = new Tipo(rs.getString("TIPO2"));
 				p.setTipo2(tipo2);
-				p.setAtak(rs.getInt("ATAQUE"));
+				p.setAttack(rs.getInt("ATAQUE"));
 				p.setDefense(rs.getInt("DEFENSA"));
 				p.setHp(rs.getInt("HP"));
 				p.setSpeed(rs.getInt("VELOCIDAD"));
@@ -195,7 +169,7 @@ public class GestorBD {
 						pokemon1.setNombre(p.getNombre());
 						pokemon1.setTipo1(p.getTipo1());
 						pokemon1.setTipo2(p.getTipo2());
-						pokemon1.setAtak(p.getAtak());
+						pokemon1.setAttack(p.getAttack());
 						pokemon1.setDefense(p.getDefense());
 						pokemon1.setHp(p.getHp());
 						pokemon1.setSpeed(p.getSpeed());
@@ -212,7 +186,7 @@ public class GestorBD {
 						pokemon2.setNombre(p.getNombre());
 						pokemon2.setTipo1(p.getTipo1());
 						pokemon2.setTipo2(p.getTipo2());
-						pokemon2.setAtak(p.getAtak());
+						pokemon2.setAttack(p.getAttack());
 						pokemon2.setDefense(p.getDefense());
 						pokemon2.setHp(p.getHp());
 						pokemon2.setSpeed(p.getSpeed());
@@ -229,7 +203,7 @@ public class GestorBD {
 						pokemon3.setNombre(p.getNombre());
 						pokemon3.setTipo1(p.getTipo1());
 						pokemon3.setTipo2(p.getTipo2());
-						pokemon3.setAtak(p.getAtak());
+						pokemon3.setAttack(p.getAttack());
 						pokemon3.setDefense(p.getDefense());
 						pokemon3.setHp(p.getHp());
 						pokemon3.setSpeed(p.getSpeed());
@@ -246,7 +220,7 @@ public class GestorBD {
 						pokemon4.setNombre(p.getNombre());
 						pokemon4.setTipo1(p.getTipo1());
 						pokemon4.setTipo2(p.getTipo2());
-						pokemon4.setAtak(p.getAtak());
+						pokemon4.setAttack(p.getAttack());
 						pokemon4.setDefense(p.getDefense());
 						pokemon4.setHp(p.getHp());
 						pokemon4.setSpeed(p.getSpeed());
@@ -263,7 +237,7 @@ public class GestorBD {
 						pokemon5.setNombre(p.getNombre());
 						pokemon5.setTipo1(p.getTipo1());
 						pokemon5.setTipo2(p.getTipo2());
-						pokemon5.setAtak(p.getAtak());
+						pokemon5.setAttack(p.getAttack());
 						pokemon5.setDefense(p.getDefense());
 						pokemon5.setHp(p.getHp());
 						pokemon5.setSpeed(p.getSpeed());
@@ -280,7 +254,7 @@ public class GestorBD {
 						pokemon6.setNombre(p.getNombre());
 						pokemon6.setTipo1(p.getTipo1());
 						pokemon6.setTipo2(p.getTipo2());
-						pokemon6.setAtak(p.getAtak());
+						pokemon6.setAttack(p.getAttack());
 						pokemon6.setDefense(p.getDefense());
 						pokemon6.setHp(p.getHp());
 						pokemon6.setSpeed(p.getSpeed());

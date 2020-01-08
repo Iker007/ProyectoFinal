@@ -119,10 +119,22 @@ public class VentanaInicio extends JFrame implements ActionListener {
 
 		if (eleccionAvatar.equals("Chico")) {
 			avatar = "Chico";
+			ImagenENT1 = new ImageIcon(getClass().getResource("/resources/" + avatar + ".png"));
+			ImageENT1B = ImagenENT1.getImage();
+			NewImageENT1 = ImageENT1B.getScaledInstance(150, 180, java.awt.Image.SCALE_SMOOTH);
+			ImagenENT1 = new ImageIcon(NewImageENT1);
 		} else if (eleccionAvatar.equals("Chica")) {
 			avatar = "Chica";
+			ImagenENT1 = new ImageIcon(getClass().getResource("/resources/" + avatar + ".png"));
+			ImageENT1B = ImagenENT1.getImage();
+			NewImageENT1 = ImageENT1B.getScaledInstance(150, 180, java.awt.Image.SCALE_SMOOTH);
+			ImagenENT1 = new ImageIcon(NewImageENT1);
 		} else if (eleccionAvatar.equals("Otros")) {
 			avatar = "ApacheKawaii";
+			ImagenENT1 = new ImageIcon(getClass().getResource("/resources/" + avatar + ".png"));
+			ImageENT1B = ImagenENT1.getImage();
+			NewImageENT1 = ImageENT1B.getScaledInstance(300, 200, java.awt.Image.SCALE_SMOOTH);
+			ImagenENT1 = new ImageIcon(NewImageENT1);
 		}
 		if(this.entrenadorActual.getPokemons().get(0).getId()==14) {
 			ImagenENT1 = new ImageIcon(getClass().getResource("/resources/Red.png"));
@@ -132,17 +144,13 @@ public class VentanaInicio extends JFrame implements ActionListener {
 			entrenador1 = new JLabel((ImagenENT1));
 			entrenador1.setBackground(new Color(0, 0, 0, 0));
 			fondo.add(entrenador1);
-		}else {
-		ImagenENT1 = new ImageIcon(getClass().getResource("/resources/" + avatar + ".png"));
-		ImageENT1B = ImagenENT1.getImage();
-		NewImageENT1 = ImageENT1B.getScaledInstance(150, 180, java.awt.Image.SCALE_SMOOTH);
-		ImagenENT1 = new ImageIcon(NewImageENT1);
+		}
 		// Pillar imagen H v M v O
 		entrenador1 = new JLabel((ImagenENT1));
 		entrenador1.setBackground(new Color(0, 0, 0, 0));
 		entrenador1.setLayout(new FlowLayout());
 		fondo.add(entrenador1);
-		}
+		
 
 		// entrenador1 = new JLabel(new
 		// ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\ApacheKawaii.png"));

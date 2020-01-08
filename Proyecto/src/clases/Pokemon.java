@@ -10,7 +10,7 @@ public class Pokemon {
 	private Tipo tipo2;	
 	private Movimiento movimiento1;
 	private Movimiento movimiento2;
-	private int atak;
+	private int attack;
 	private int defense;
 	private int hp;
 	private int speed;
@@ -19,8 +19,8 @@ public class Pokemon {
 		super();
 	}
 
-	public Pokemon(String nombre, int uid, Tipo tipo1, Tipo tipo2, Movimiento movimiento1, Movimiento movimiento2,
-			int atak, int defense, int hp, int speed) {
+	public Pokemon(String nombre, int id, Tipo tipo1, Tipo tipo2, Movimiento movimiento1, Movimiento movimiento2,
+			int attack, int defense, int hp, int speed) {
 		super();
 		this.nombre = nombre;
 		this.id = id;
@@ -28,7 +28,7 @@ public class Pokemon {
 		this.tipo2 = tipo2;
 		this.movimiento1 = movimiento1;
 		this.movimiento2 = movimiento2;
-		this.atak = atak;
+		this.attack = attack;
 		this.defense = defense;
 		this.hp = hp;
 		this.speed = speed;
@@ -83,12 +83,12 @@ public class Pokemon {
 		this.movimiento2 = movimiento2;
 	}
 
-	public int getAtak() {
-		return atak;
+	public int getAttack() {
+		return attack;
 	}
 
-	public void setAtak(int atak) {
-		this.atak = atak;
+	public void setAttack(int atak) {
+		this.attack = atak;
 	}
 
 	public int getDefense() {
@@ -115,28 +115,6 @@ public class Pokemon {
 		this.speed = speed;
 	}
 
-	public static void main(String[] arg0) {
-		List<Pokemon> a = new ArrayList<Pokemon>();
-		Pokemon p1 = new Pokemon();
-		Pokemon p2 = new Pokemon();
-		Pokemon p3 = new Pokemon();
-		Pokemon p4 = new Pokemon();
-		Pokemon p5 = new Pokemon();
-		Pokemon p6 = new Pokemon();
-		a.add(p1);
-		a.add(p2);
-		a.add(p3);
-		a.add(p4);
-		a.add(p5);
-		a.add(p6);
 
-		for (int i = 0; i <= 5; i++) {
-			System.out.println(a.get(i).getId());
-		}
-
-	}
-	public int atacar() {
-		return this.getAtak();
-	}
-
+	
 }

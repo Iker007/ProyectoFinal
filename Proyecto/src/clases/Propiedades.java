@@ -16,7 +16,7 @@ public class Propiedades {
 		p.setProperty("ventana", "800, 600");
 
 		try {
-			FileOutputStream fos = new FileOutputStream(new File("usuario.ini"));
+			FileOutputStream fos = new FileOutputStream(new File("config.ini"));
 			try {
 				p.store(fos, "Configuración inicial");
 			} catch (IOException e) {
