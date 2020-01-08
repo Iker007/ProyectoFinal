@@ -245,7 +245,8 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	}
 
 	public void atacarRojo(Movimiento movimiento) {
-		String cadena = "\n\t" + pokemonRojo.getNombre() + " USÓ " + movimiento.getNombre();
+		String cadena = "\n\t" + pokemonRojo.getNombre() + " USÓ " +  movimiento.getNombre();
+		
 		textoLogger += cadena + "\n\t";
 		logger.setText(textoLogger);
 		if (hpPokemonAliado.getValue() - movimiento.getDaño() > 0) {
