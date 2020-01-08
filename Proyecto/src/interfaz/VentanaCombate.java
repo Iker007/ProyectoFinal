@@ -42,7 +42,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	private JPanel pComentarista;
 	private JButton movimiento1;
 	private JButton movimiento2;
-	private JTextArea logger;
+	private JTextArea logger ;
 	private int ventanaWidth;
 	private int ventanaHeigth;
 	private Dimension ventanaDimension;
@@ -76,7 +76,9 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		this.entrenador = entrenadorActual;
 		this.rojo = rojo;
 		this.avatar = eleccionAvatar;
-		logger = new JTextArea("Datos del combate:");
+		logger = new JTextArea();
+		textoLogger = "Datos del combate:";
+		logger.setText(textoLogger);
 		logger.setEditable(false);
 		loggerWidth = 200;
 		loggerHeigth = 810;
@@ -155,6 +157,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 
 	public void cargarPokemonEnemigo() {
 		pokemonRojo = rojo.getPokemons().get(contadorEnemigo);
+		
 		lblNombreEnemigo.setText(pokemonRojo.getNombre());
 		hpPokemonEnemigo.setMaximum(pokemonRojo.getHp());
 		hpPokemonEnemigo.setMinimum(0);
@@ -179,11 +182,11 @@ public class VentanaCombate extends JFrame implements ActionListener {
 			esconderBotones();
 			if (quienAtacaPrimero() == 1) {
 				atacarJugador(pokemonActualAliado.getMovimiento1());
-				if (pokemonEsDerrotado(pokemonRojo)) {
+				if (pokemonEsDerrotado(hpPokemonEnemigo)) {
 					cargarPokemonEnemigo();
 				} else {
 					atacarRojo(pokemonRojo.getMovimiento1());
-					if (pokemonEsDerrotado(pokemonActualAliado)) {
+					if (pokemonEsDerrotado(hpPokemonAliado)) {
 						cargarPokemonAliado();
 					}
 				}
@@ -195,11 +198,11 @@ public class VentanaCombate extends JFrame implements ActionListener {
 			esconderBotones();
 			if (quienAtacaPrimero() == 2) {
 				atacarRojo(pokemonRojo.getMovimiento2());
-				if (pokemonEsDerrotado(pokemonActualAliado)) {
+				if (pokemonEsDerrotado(hpPokemonAliado)) {
 					cargarPokemonAliado();
 				} else {
 					atacarJugador(pokemonActualAliado.getMovimiento2());
-					if (pokemonEsDerrotado(pokemonRojo)) {
+					if (pokemonEsDerrotado(hpPokemonEnemigo)) {
 						cargarPokemonEnemigo();
 					}
 				}
@@ -221,7 +224,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	}
 
 	public void atacarJugador(Movimiento movimiento) {
-		String cadena = "\n\t" + pokemonActualAliado.getNombre() + "USÓ" + movimiento.getNombre();
+		String cadena = "\n\t" + pokemonActualAliado.getNombre() + " USÓ " + movimiento.getNombre();
 		textoLogger += cadena;
 		logger.setText(textoLogger);
 		if (hpPokemonEnemigo.getValue() - movimiento.getDaño() > 0) {
@@ -230,7 +233,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 			hpPokemonEnemigo.setValue(hpPokemonEnemigo.getValue() - 10);
 		}
 
-		if (pokemonEsDerrotado(pokemonRojo)) {
+		if (pokemonEsDerrotado(hpPokemonEnemigo)) {
 			contadorEnemigo++;
 			if (contadorEnemigo != 6) {
 				cargarPokemonEnemigo();
@@ -242,15 +245,15 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	}
 
 	public void atacarRojo(Movimiento movimiento) {
-		String cadena = "\n\t" + pokemonRojo.getNombre() + "USÓ" + movimiento.getNombre();
-		textoLogger += cadena;
+		String cadena = "\n\t" + pokemonRojo.getNombre() + " USÓ " + movimiento.getNombre();
+		textoLogger += cadena + "\n\t";
 		logger.setText(textoLogger);
 		if (hpPokemonAliado.getValue() - movimiento.getDaño() > 0) {
 			hpPokemonAliado.setValue(hpPokemonAliado.getValue() - movimiento.getDaño());
 		} else {
 			hpPokemonAliado.setValue(hpPokemonAliado.getValue() - 10);
 		}
-		if (pokemonEsDerrotado(pokemonActualAliado)) {
+		if (pokemonEsDerrotado(hpPokemonAliado)) {
 			contadorAliado++;
 			if (contadorAliado != 6) {
 				cargarPokemonAliado();
@@ -260,8 +263,8 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		comprobarganador();
 	}
 
-	public boolean pokemonEsDerrotado(Pokemon pokemon) {
-		if (pokemon.getHp() <= 0) {
+	public boolean pokemonEsDerrotado(JProgressBar hppokemon) {
+		if (hppokemon.getValue() <= 0) {
 			return true;
 
 		}
