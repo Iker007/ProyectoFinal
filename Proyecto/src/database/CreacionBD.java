@@ -118,7 +118,7 @@ public class CreacionBD {
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(2, 'DARKRAI', 'DARK', NULL, 200, 50, 350, 200, 'SLUDGE BOMB', 'DARK PULSE');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(3, 'DEOXIS', 'PSYCHYC', NULL, 250, 20, 350, 250, 'PSYCHOATTACK', 'THUNDERBOLT');");
+					"INSERT INTO POKEMON VALUES(3, 'DEOXYS', 'PSYCHYC', NULL, 250, 20, 350, 250, 'PSYCHOATTACK', 'THUNDERBOLT');");
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(4, 'DIALGA', 'DRAGON', 'STEEL', 100, 150, 500, 50, 'DISTORSION', 'FLASH CANNON');");
 			res = statement.executeUpdate(

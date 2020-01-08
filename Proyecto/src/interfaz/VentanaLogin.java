@@ -79,7 +79,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		this.setResizable(false);
 		baseDeDatos.conectar();
 		tipos = baseDeDatos.obtenerTodosTipos();
-		movimientos = baseDeDatos.obtenerTodosMovimientos();
+		movimientos = baseDeDatos.obtenerTodosMovimientos(tipos);
 		pokemons = baseDeDatos.obtenerTodosPokemon(movimientos);
 		usuarios = baseDeDatos.obtenerTodosUsuarios(pokemons);
 		usernameLabel = new JLabel("Usuario:");
@@ -231,14 +231,14 @@ public class VentanaLogin extends JFrame implements ActionListener {
 					List<Pokemon> pokemons = new ArrayList<Pokemon>();
 
 					try {
-						movimientos.addAll(GestorBD.obtenerTodosMovimientos());
+						movimientos.addAll(GestorBD.obtenerTodosMovimientos(tipos));
 					} catch (BDException e2) {
 						e2.printStackTrace();
 					}
 
 					for (int i = 0; i < 6; i++) {
 						Random rnd = new Random();
-						equipo.add((int) (rnd.nextDouble() * 13));
+						equipo.add((int) (rnd.nextDouble() * 14));
 					}
 					try {
 						TodosPokemons.addAll(GestorBD.obtenerTodosPokemon(movimientos));

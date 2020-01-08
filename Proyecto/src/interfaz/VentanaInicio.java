@@ -241,7 +241,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
 				dispose();
-				VentanaCombate v = new VentanaCombate(entrenadorActual, rojo);
+				VentanaCombate v = new VentanaCombate(entrenadorActual, eleccionAvatar, rojo);
 				v.setVisible(true);
 			}
 		});

@@ -61,7 +61,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	private Entrenador rojo;
 	private Pokemon pokemonActualAliado;
 	private Pokemon pokemonRojo;
-	private String avatar = VentanaInicio.eleccionAvatar;
+	private String avatar;
 	private List<Pokemon> equipo;
 
 	private int contadorAliado = 0;
@@ -69,12 +69,13 @@ public class VentanaCombate extends JFrame implements ActionListener {
 
 	private VentanaFinCombate ventanaFinCombate;
 
-	public VentanaCombate(Entrenador entrenadorActual, Entrenador rojo) {
+	public VentanaCombate(Entrenador entrenadorActual, String eleccionAvatar, Entrenador rojo) {
 		this.setSize(new Dimension(1200, 800));
 		setTitle("POKEMON SHOWDOWN");
 		setLayout(new BorderLayout());
 		this.entrenador = entrenadorActual;
 		this.rojo = rojo;
+		this.avatar = eleccionAvatar;
 		logger = new JTextArea("Datos del combate:");
 		logger.setEditable(false);
 		loggerWidth = 200;
@@ -93,6 +94,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		movimiento1.addActionListener(this);
 
 		movimiento2 = new JButton("");
+		movimiento1.setPreferredSize(movimientosDimension);
 		pMovimientos.add(movimiento2);
 		movimiento2.addActionListener(this);
 		pContent = new JPanel(new BorderLayout());
@@ -104,9 +106,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		lblNombreEnemigo = new JLabel();
 		lblNombreEnemigo.setForeground(Color.WHITE);
 		lblNombreEnemigo.setBounds(54, 22, 135, 15);
-
-		pContent.add(pMovimientos, BorderLayout.SOUTH);
-		add(pContent, BorderLayout.CENTER);
+		
 
 		hpPokemonAliado = new JProgressBar();
 		hpPokemonAliado.setStringPainted(true);
@@ -116,6 +116,20 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		hpPokemonEnemigo = new JProgressBar();
 		hpPokemonEnemigo.setStringPainted(true);
 		hpPokemonEnemigo.setForeground(Color.GREEN);
+		
+		pPokemon1 = new JPanel();
+		pPokemon1.setLayout(new BorderLayout());
+		pPokemon1.add(hpPokemonAliado);
+		pContent.add(pPokemon1, BorderLayout.WEST);
+		
+		pPokemon2 = new JPanel();
+		pPokemon2.setLayout(new BorderLayout());
+		pPokemon2.add(hpPokemonEnemigo);
+		pContent.add(pPokemon2, BorderLayout.EAST);
+		
+		pContent.add(pMovimientos, BorderLayout.SOUTH);
+		add(pContent, BorderLayout.CENTER);
+		
 		cargarPokemonAliado();
 		cargarPokemonEnemigo();
 		setVisible(true);
@@ -254,45 +268,45 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		return false;
 	}
 
-	public static void main(String[] args) {
-		List<Pokemon> equipo = new ArrayList<Pokemon>();
-		List<Pokemon> equipo2 = new ArrayList<Pokemon>();
-		Tipo t1 = new Tipo("t1");
-		Tipo t2 = new Tipo("t2");
-
-		Movimiento m1 = new Movimiento("as", t1, 12, "a");
-		Movimiento m2 = new Movimiento("df", t2, 12, "b");
-
-		Pokemon p1 = new Pokemon("a", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-		Pokemon p2 = new Pokemon("b", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-		Pokemon p3 = new Pokemon("c", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-		Pokemon p4 = new Pokemon("d", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-		Pokemon p5 = new Pokemon("e", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-		Pokemon p6 = new Pokemon("f", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-		Pokemon p7 = new Pokemon("a", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-		Pokemon p8 = new Pokemon("b", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-		Pokemon p9 = new Pokemon("c", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-		Pokemon p10 = new Pokemon("d", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-		Pokemon p11 = new Pokemon("e", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-		Pokemon p12 = new Pokemon("f", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-
-		equipo.add(p1);
-		equipo.add(p2);
-		equipo.add(p3);
-		equipo.add(p4);
-		equipo.add(p5);
-		equipo.add(p6);
-		equipo2.add(p7);
-		equipo2.add(p8);
-		equipo2.add(p9);
-		equipo2.add(p10);
-		equipo2.add(p11);
-		equipo2.add(p12);
-		Entrenador entrenadorActual = new Entrenador("a", 0, "a", equipo);
-		Entrenador rojo = new Entrenador("b", 0, "c", equipo2);
-		VentanaCombate v = new VentanaCombate(entrenadorActual, rojo);
-
-	}
+//	public static void main(String[] args) {
+//		List<Pokemon> equipo = new ArrayList<Pokemon>();
+//		List<Pokemon> equipo2 = new ArrayList<Pokemon>();
+//		Tipo t1 = new Tipo("t1");
+//		Tipo t2 = new Tipo("t2");
+//
+//		Movimiento m1 = new Movimiento("as", t1, 12, "a");
+//		Movimiento m2 = new Movimiento("df", t2, 12, "b");
+//
+//		Pokemon p1 = new Pokemon("a", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+//		Pokemon p2 = new Pokemon("b", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+//		Pokemon p3 = new Pokemon("c", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+//		Pokemon p4 = new Pokemon("d", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+//		Pokemon p5 = new Pokemon("e", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+//		Pokemon p6 = new Pokemon("f", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+//		Pokemon p7 = new Pokemon("a", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+//		Pokemon p8 = new Pokemon("b", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+//		Pokemon p9 = new Pokemon("c", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+//		Pokemon p10 = new Pokemon("d", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+//		Pokemon p11 = new Pokemon("e", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+//		Pokemon p12 = new Pokemon("f", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+//
+//		equipo.add(p1);
+//		equipo.add(p2);
+//		equipo.add(p3);
+//		equipo.add(p4);
+//		equipo.add(p5);
+//		equipo.add(p6);
+//		equipo2.add(p7);
+//		equipo2.add(p8);
+//		equipo2.add(p9);
+//		equipo2.add(p10);
+//		equipo2.add(p11);
+//		equipo2.add(p12);
+//		Entrenador entrenadorActual = new Entrenador("a", 0, "a", equipo);
+//		Entrenador rojo = new Entrenador("b", 0, "c", equipo2);
+//		VentanaCombate v = new VentanaCombate(entrenadorActual, rojo);
+//
+//	}
 
 	public void comprobarganador() {
 		VentanaFinCombate ventanaFinCombate;

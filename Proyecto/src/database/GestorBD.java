@@ -109,7 +109,7 @@ public class GestorBD {
 		}
 	}
 
-	public static List<Movimiento> obtenerTodosMovimientos() throws BDException {
+	public static List<Movimiento> obtenerTodosMovimientos(List<Tipo> tipos) throws BDException {
 		List<Movimiento> movimientos = new ArrayList<Movimiento>();
 		try (Statement stmt = connection.createStatement()) {
 			ResultSet rs = stmt.executeQuery("SELECT NOMBRE_M, TIPO, DAMAGE, EFECTO FROM MOVIMIENTOS");
@@ -165,7 +165,7 @@ public class GestorBD {
 						movimiento2.setEfecto(m.getEfecto());
 						movimiento2.setTipo(m.getTipo());
 					}
-					p.setMovimiento1(movimiento2);
+					p.setMovimiento2(movimiento2);
 				}
 				pokemon.add(p);
 			}
