@@ -114,17 +114,17 @@ public class CreacionBD {
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(0, 'ARCEUS', 'NORMAL', NULL, 100, 100, 500, 100, 'JUDGEMENT', 'FIRE BLAST');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(1, 'CRESSELIA', 'PSYCHYC', NULL, 50, 200, 600, 50, 'PSYCHYC', 'ICE BEAM');");
+					"INSERT INTO POKEMON VALUES(1, 'CRESSELIA', 'PSYCHYC', NULL, 50, 200, 400, 50, 'PSYCHYC', 'ICE BEAM');");
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(2, 'DARKRAI', 'DARK', NULL, 200, 50, 350, 200, 'SLUDGE BOMB', 'DARK PULSE');");
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(3, 'DEOXYS', 'PSYCHYC', NULL, 250, 20, 350, 250, 'PSYCHOATTACK', 'THUNDERBOLT');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(4, 'DIALGA', 'DRAGON', 'STEEL', 100, 150, 500, 50, 'DISTORSION', 'FLASH CANNON');");
+					"INSERT INTO POKEMON VALUES(4, 'DIALGA', 'DRAGON', 'STEEL', 100, 150, 450, 50, 'DISTORSION', 'FLASH CANNON');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(5, 'GIRATINA', 'DRAGON', 'GHOST', 80, 120, 600, 70, 'DRAGON PULSE', 'SHADOW FORCE');");
+					"INSERT INTO POKEMON VALUES(5, 'GIRATINA', 'DRAGON', 'GHOST', 80, 120, 500, 70, 'DRAGON PULSE', 'SHADOW FORCE');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(6, 'HEATRAN', 'STEEL', 'FIRE', 150, 150, 500, 60, 'LAVA PLUME', 'EXPLOSION');");
+					"INSERT INTO POKEMON VALUES(6, 'HEATRAN', 'STEEL', 'FIRE', 150, 150, 450, 60, 'LAVA PLUME', 'EXPLOSION');");
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(7, 'HO-OH', 'FIRE', 'FLYING', 120, 120, 500, 90, 'SACRED FIRE', 'SLASH');");
 			res = statement.executeUpdate(
@@ -132,23 +132,23 @@ public class CreacionBD {
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(9, 'LATIOS', 'DRAGON', 'PSYCHYC', 130, 70, 400, 250, 'LUSTER PURGE', 'DRACO METEOR');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(10, 'LUGIA', 'PSYCHYC', 'FLYING', 80, 150, 600, 80, 'AEROBLAST', 'PSYCHYC');");
+					"INSERT INTO POKEMON VALUES(10, 'LUGIA', 'PSYCHYC', 'FLYING', 80, 150, 500, 80, 'AEROBLAST', 'PSYCHYC');");
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(11, 'MEW', 'PSYCHYC', NULL, 70, 150, 500, 100, 'PSYCHYC', 'SHADOW BALL');");
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(12, 'PALKIA', 'DRAGON', 'WATER', 130, 100, 500, 65, 'HYDRO PUMP', 'SPACIAL REND');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(13, 'REGIGIGAS', 'NORMAL', NULL, 100, 200, 800, 20, 'EXPLOSION', 'RETURN');");
+					"INSERT INTO POKEMON VALUES(13, 'REGIGIGAS', 'NORMAL', NULL, 100, 200, 650, 20, 'EXPLOSION', 'RETURN');");
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(14, 'PIKACHU', 'ELECTRIC', NULL, 160, 75, 400, 300, 'THUNDERBOLT', 'IRON TAIL');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(15, 'VENUSAUR', 'GRASS', 'POISON', 80, 200, 700, 40, 'GIGA DRAIN', 'SLUDGE BOMB');");
+					"INSERT INTO POKEMON VALUES(15, 'VENUSAUR', 'GRASS', 'POISON', 80, 180, 550, 40, 'GIGA DRAIN', 'SLUDGE BOMB');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(16, 'CHARIZARD', 'FIRE', 'FLYING', 130, 80, 500, 90, 'FIRE BLAST', 'SLASH');");
+					"INSERT INTO POKEMON VALUES(16, 'CHARIZARD', 'FIRE', 'FLYING', 130, 80, 550, 90, 'FIRE BLAST', 'SLASH');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(17, 'BLASTOISE', 'WATER', NULL, 70, 250, 750, 10, 'HYDRO PUMP', 'BODY SLAM');");
+					"INSERT INTO POKEMON VALUES(17, 'BLASTOISE', 'WATER', NULL, 70, 180, 500, 10, 'HYDRO PUMP', 'BODY SLAM');");
 			res = statement.executeUpdate(
-					"INSERT INTO POKEMON VALUES(18, 'SNORLAX', 'NORMAL', NULL, 100, 150, 1000, 30, 'BODY SLAM', 'SHADOW BALL');");
+					"INSERT INTO POKEMON VALUES(18, 'SNORLAX', 'NORMAL', NULL, 100, 140, 1000, 30, 'BODY SLAM', 'SHADOW BALL');");
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(19, 'LAPRAS', 'WATER', 'ICE', 100, 150, 800, 120, 'ICE BEAM', 'HYDRO PUMP');");
 			rs = statement.executeQuery("select * from pokemon");
