@@ -262,7 +262,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		String cadena = "\n\t" + pokemonActualAliado.getNombre() + " USÓ " + movimiento.getNombre();
 		textoLogger += cadena;
 		logger.setText(textoLogger);
-		if ((pokemonRojo.getDefense() - (movimiento.getDaño()+pokemonActualAliado.getAtak())) < 0) {
+		if ((pokemonRojo.getDefense() - (movimiento.getDaño()+pokemonActualAliado.getAttack())) < 0) {
 			hpPokemonEnemigo.setValue(hpPokemonEnemigo.getValue() - movimiento.getDaño());
 		} else {
 			hpPokemonEnemigo.setValue(hpPokemonEnemigo.getValue() - 10);
@@ -284,7 +284,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 
 		textoLogger += cadena + "\n\t";
 		logger.setText(textoLogger);
-		if ((pokemonActualAliado.getDefense() - (movimiento.getDaño()+ pokemonRojo.getAtak())) < 0) {
+		if ((pokemonActualAliado.getDefense() - (movimiento.getDaño()+ pokemonRojo.getAttack())) < 0) {
 			hpPokemonAliado.setValue(hpPokemonAliado.getValue() - movimiento.getDaño());
 		} else {
 			hpPokemonAliado.setValue(hpPokemonAliado.getValue() - 10);

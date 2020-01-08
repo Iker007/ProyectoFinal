@@ -238,7 +238,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 
 					for (int i = 0; i < 6; i++) {
 						Random rnd = new Random();
-						equipo.add((int) (rnd.nextDouble() * 14));
+						equipo.add((int) (rnd.nextDouble() * 19));
 					}
 					try {
 						TodosPokemons.addAll(GestorBD.obtenerTodosPokemon(movimientos));
