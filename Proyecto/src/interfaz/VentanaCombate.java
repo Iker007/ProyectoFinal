@@ -45,7 +45,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	private JPanel pComentarista;
 	private JButton movimiento1;
 	private JButton movimiento2;
-	private JTextArea logger ;
+	private JTextArea logger;
 	private int ventanaWidth;
 	private int ventanaHeigth;
 	private Dimension ventanaDimension;
@@ -107,12 +107,10 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		movimiento1 = new JButton("");
 		movimiento1.setPreferredSize(movimientosDimension);
 		pMovimientos.add(movimiento1);
-		movimiento1.addActionListener(this);
 
 		movimiento2 = new JButton("");
 		movimiento1.setPreferredSize(movimientosDimension);
 		pMovimientos.add(movimiento2);
-		movimiento2.addActionListener(this);
 		pContent = new JPanel(new BorderLayout());
 		lblNombreAliado = new JLabel();
 		lblNombreAliado.setForeground(Color.BLACK);
@@ -123,7 +121,6 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		lblNombreEnemigo.setForeground(Color.BLACK);
 		lblNombreEnemigo.setBounds(54, 22, 135, 15);
 
-
 		hpPokemonAliado = new JProgressBar();
 		hpPokemonAliado.setStringPainted(true);
 		hpPokemonAliado.setForeground(Color.GREEN);
@@ -133,14 +130,14 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		hpPokemonEnemigo.setStringPainted(true);
 		hpPokemonEnemigo.setForeground(Color.GREEN);
 		pCombate = new JPanel(new BorderLayout());
-		
-		ImagenPOK1 = new ImageIcon(getClass().getResource("/resources/"+pokemonActualAliado.getNombre().toLowerCase()+".png"));
+
+		ImagenPOK1 = new ImageIcon(
+				getClass().getResource("/resources/" + pokemonActualAliado.getNombre().toLowerCase() + ".png"));
 		ImagenPOK1B = ImagenPOK1.getImage();
 		NewImagenPOK1 = ImagenPOK1B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH);
 		ImagenPOK1 = new ImageIcon(NewImagenPOK1);
 		pokemonAliado = new JLabel((ImagenPOK1));
 		pokemonAliado.setBackground(new Color(0, 0, 0, 0));
-		
 
 		pPokemon1 = new JPanel(new GridLayout());
 		pPokemon1Hp = new JPanel(new FlowLayout());
@@ -149,28 +146,34 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		pPokemon1.add(hpPokemonEnemigo);
 		pCombate.add(pPokemon1, BorderLayout.NORTH);
 
-		ImagenPOK2 = new ImageIcon(getClass().getResource("/resources/"+pokemonRojo.getNombre().toLowerCase()+".png"));
+		ImagenPOK2 = new ImageIcon(
+				getClass().getResource("/resources/" + pokemonRojo.getNombre().toLowerCase() + ".png"));
 		ImagenPOK2B = ImagenPOK2.getImage();
-		NewImagenPOK2 = ImagenPOK2B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH);
+		NewImagenPOK2 = ImagenPOK2B.getScaledInstance(300, 300, java.awt.Image.SCALE_SMOOTH);
 		ImagenPOK2 = new ImageIcon(NewImagenPOK2);
 		pokemonRival = new JLabel((ImagenPOK2));
 		pokemonRival.setBackground(new Color(0, 0, 0, 0));
-		
-		zonaCombate = new JLabel();
-		zonaCombate.setLayout(new GridLayout(1,2));
-		
+
+		ImageIcon imageIcon = new ImageIcon(getClass().getResource("/resources/FondoCombate.png")); // load
+		Image image = imageIcon.getImage(); // transformarlo
+		Image newimg = image.getScaledInstance(1000, 600, java.awt.Image.SCALE_SMOOTH); // escalarlo con smooth scaling
+		imageIcon = new ImageIcon(newimg); // vuelve a transformarlo
+
+		zonaCombate = new JLabel(imageIcon);
+		zonaCombate.setLayout(new GridLayout(1, 2));
+
 		zonaCombate.add(pokemonAliado);
 		zonaCombate.add(pokemonRival);
-		
+
 		pCombate.add(zonaCombate);
-		
+
 		pPokemon2 = new JPanel(new GridLayout());
 		pPokemon2Hp = new JPanel(new FlowLayout());
 		pPokemon2Hp.add(lblNombreAliado);
 		pPokemon2.add(hpPokemonAliado);
 		pPokemon2.add(pPokemon2Hp);
 		pCombate.add(pPokemon2, BorderLayout.SOUTH);
-		pContent.add(pCombate,BorderLayout.CENTER);
+		pContent.add(pCombate, BorderLayout.CENTER);
 		pContent.add(pMovimientos, BorderLayout.SOUTH);
 		add(pContent, BorderLayout.CENTER);
 
@@ -183,28 +186,89 @@ public class VentanaCombate extends JFrame implements ActionListener {
 				System.exit(0);
 			}
 		});
+
+		movimiento1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				esconderBotones(); // Esconde los botones
+				if (quienAtacaPrimero() == 1) { // Elige quien ataca primero
+					atacarJugador(pokemonActualAliado.getMovimiento1()); // Ataca con el pokemon y el movimiento elegido
+					if (pokemonEsDerrotado(hpPokemonEnemigo)) {
+						cargarPokemonEnemigo();
+					} else
+						atacarRojo(pokemonRojo.getMovimiento2());
+					if (pokemonEsDerrotado(hpPokemonAliado)) {
+						cargarPokemonAliado();
+					}
+
+				} else if (quienAtacaPrimero() == 2) {
+					atacarRojo(pokemonRojo.getMovimiento2());
+					if (pokemonEsDerrotado(hpPokemonAliado)) {
+						cargarPokemonAliado();
+					} else
+						atacarJugador(pokemonActualAliado.getMovimiento1()); // Ataca con el pokemon y el movimiento
+																				// elegido
+					if (pokemonEsDerrotado(hpPokemonEnemigo)) {
+						cargarPokemonEnemigo();
+					}
+				}
+				inicioDeTurno();
+			}
+		});
+
+		movimiento2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				esconderBotones(); // Esconde los botones
+				if (quienAtacaPrimero() == 1) { // Elige quien ataca primero
+					atacarJugador(pokemonActualAliado.getMovimiento2()); // Ataca con el pokemon y el movimiento elegido
+					if (pokemonEsDerrotado(hpPokemonEnemigo)) {
+						cargarPokemonEnemigo();
+					} else
+						atacarRojo(pokemonRojo.getMovimiento1());
+					if (pokemonEsDerrotado(hpPokemonAliado)) {
+						cargarPokemonAliado();
+					}
+
+				} else if (quienAtacaPrimero() == 2) {
+					atacarRojo(pokemonRojo.getMovimiento1());
+					if (pokemonEsDerrotado(hpPokemonAliado)) {
+						cargarPokemonAliado();
+					} else
+						atacarJugador(pokemonActualAliado.getMovimiento2()); // Ataca con el pokemon y el movimiento
+																				// elegido
+					if (pokemonEsDerrotado(hpPokemonEnemigo)) {
+						cargarPokemonEnemigo();
+					}
+				}
+				inicioDeTurno();
+			}
+		});
 	}
 
 	public void cargarPokemonAliado() {
 
 		zonaCombate.removeAll();
-		
+
 		pokemonActualAliado = entrenador.getPokemons().get(contadorAliado);
-		String cadena = "\n\t"  + " Adelante " + pokemonActualAliado.getNombre();
+		String cadena = "\n\t" + " Adelante " + pokemonActualAliado.getNombre() + "\n\t";
 		textoLogger += cadena;
-		
-		ImagenPOK1 = new ImageIcon(getClass().getResource("/resources/"+pokemonActualAliado.getNombre().toLowerCase()+".png"));
+
+		ImagenPOK1 = new ImageIcon(
+				getClass().getResource("/resources/" + pokemonActualAliado.getNombre().toLowerCase() + ".png"));
 		ImagenPOK1B = ImagenPOK1.getImage();
-		NewImagenPOK1 = ImagenPOK1B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH);
+		NewImagenPOK1 = ImagenPOK1B.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
 		ImagenPOK1 = new ImageIcon(NewImagenPOK1);
 		pokemonAliado = new JLabel((ImagenPOK1));
 		pokemonAliado.setBackground(new Color(0, 0, 0, 0));
-				
+
 		zonaCombate.add(pokemonAliado);
 		zonaCombate.add(pokemonRival);
-		
+
 		logger.setText(textoLogger);
-		lblNombreAliado.setText(  " : HP" + pokemonActualAliado.getNombre() );
+		lblNombreAliado.setText(":HP " + pokemonActualAliado.getNombre());
 		hpPokemonAliado.setMaximum(pokemonActualAliado.getHp());
 		hpPokemonAliado.setMinimum(0);
 		hpPokemonAliado.setValue(pokemonActualAliado.getHp());
@@ -214,23 +278,24 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	}
 
 	public void cargarPokemonEnemigo() {
-		
+
 		zonaCombate.removeAll();
-		
+
 		pokemonRojo = rojo.getPokemons().get(contadorEnemigo);
-		String cadena = "\n\t"  + " Rojo sacó a " + pokemonRojo.getNombre();
+		String cadena = "\n\t" + " Rojo sacó a " + pokemonRojo.getNombre() + "\n\t";
 		textoLogger += cadena;
-		
-		ImagenPOK2 = new ImageIcon(getClass().getResource("/resources/"+pokemonRojo.getNombre().toLowerCase()+".png"));
+
+		ImagenPOK2 = new ImageIcon(
+				getClass().getResource("/resources/" + pokemonRojo.getNombre().toLowerCase() + ".png"));
 		ImagenPOK2B = ImagenPOK2.getImage();
-		NewImagenPOK2 = ImagenPOK2B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH);
+		NewImagenPOK2 = ImagenPOK2B.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
 		ImagenPOK2 = new ImageIcon(NewImagenPOK2);
 		pokemonRival = new JLabel((ImagenPOK2));
 		pokemonRival.setBackground(new Color(0, 0, 0, 0));
-		
+
 		zonaCombate.add(pokemonAliado);
 		zonaCombate.add(pokemonRival);
-		
+
 		logger.setText(textoLogger);
 		lblNombreEnemigo.setText(pokemonRojo.getNombre() + " HP: ");
 		hpPokemonEnemigo.setMaximum(pokemonRojo.getHp());
@@ -240,7 +305,6 @@ public class VentanaCombate extends JFrame implements ActionListener {
 
 	public int quienAtacaPrimero() {
 		if (pokemonActualAliado.getSpeed() > pokemonRojo.getSpeed()) {
-
 			return 1;
 		}
 		if (pokemonRojo.getSpeed() < pokemonActualAliado.getSpeed()) {
@@ -251,97 +315,36 @@ public class VentanaCombate extends JFrame implements ActionListener {
 
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == movimiento1) { // Recibe el ataque del boton
-			esconderBotones();              // Esconde los botones
-			if (quienAtacaPrimero() == 1) { // Elige quien ataca primero
-				atacarJugador(pokemonActualAliado.getMovimiento1()); // Ataca con el pokemon y el movimiento elegido
-				if (pokemonEsDerrotado(hpPokemonEnemigo)) {
-					cargarPokemonEnemigo();
-					
-				}
-				else  
-					atacarJugador(pokemonActualAliado.getMovimiento1());
-					if (pokemonEsDerrotado(hpPokemonAliado)) {
-						cargarPokemonAliado();
-					}
-					else if (!pokemonEsDerrotado(hpPokemonEnemigo)) {
-						atacarRojo(pokemonRojo.getMovimiento2());
-					if (pokemonEsDerrotado(hpPokemonAliado)) {
-						cargarPokemonAliado();
-					
-					}
-				} 
-				}
-			
-			if (quienAtacaPrimero() == 2) {
-				atacarRojo(pokemonRojo.getMovimiento2());
-				if (pokemonEsDerrotado(hpPokemonAliado)) {
-					cargarPokemonAliado();
-
-				}
-				else  
-					atacarJugador(pokemonActualAliado.getMovimiento1()); // Ataca con el pokemon y el movimiento elegido
-				if (pokemonEsDerrotado(hpPokemonEnemigo)) {
-					cargarPokemonEnemigo();
-
-
-				}
-			}
-
-		}
-
-
-
-
-		inicioDeTurno();
-		if (e.getSource() == movimiento2) {
-			esconderBotones();
-			if (quienAtacaPrimero() == 2) {
-				atacarRojo(pokemonRojo.getMovimiento1());
-				if (!pokemonEsDerrotado(hpPokemonAliado)) {
-					atacarJugador(pokemonActualAliado.getMovimiento2());
-					inicioDeTurno();
-				} else {
-					cargarPokemonAliado();
-					if (pokemonEsDerrotado(hpPokemonEnemigo)) {
-						cargarPokemonEnemigo();
-					}
-				}
-			}
-			}
-			inicioDeTurno();
-		
-	}
-
-
 	public void esconderBotones() {
-		movimiento1.setVisible(false);
-		movimiento2.setVisible(false);
+		movimiento1.setEnabled(false);
+		movimiento2.setEnabled(false);
 
 	}
 
 	public void inicioDeTurno() {
-		movimiento1.setVisible(true);
-		movimiento2.setVisible(true);
+		movimiento1.setEnabled(true);
+		movimiento2.setEnabled(true);
 
 	}
 
 	public void atacarJugador(Movimiento movimiento) {
-		String cadena = "\n\t" + pokemonActualAliado.getNombre() + " USÓ " + movimiento.getNombre();
+		String cadena = "\n\t" + pokemonActualAliado.getNombre() + " usó " + movimiento.getNombre();
 		textoLogger += cadena;
 		logger.setText(textoLogger);
-		if ((pokemonRojo.getDefense() - (movimiento.getDaño()+pokemonActualAliado.getAttack())) < 0) {
-			hpPokemonEnemigo.setValue(hpPokemonEnemigo.getValue() - movimiento.getDaño());
+		if ((pokemonRojo.getDefense() - (movimiento.getDaño() + pokemonActualAliado.getAttack())) < -10) {
+			hpPokemonEnemigo.setValue(hpPokemonEnemigo.getValue()
+					+ (pokemonRojo.getDefense() - (movimiento.getDaño() + pokemonActualAliado.getAttack())));
 		} else {
 			hpPokemonEnemigo.setValue(hpPokemonEnemigo.getValue() - 10);
 		}
-
 		if (pokemonEsDerrotado(hpPokemonEnemigo)) {
 			contadorEnemigo++;
 			if (contadorEnemigo != 6) {
 				cargarPokemonEnemigo();
 			}
+		}
+		if (movimiento.getNombre() == "EXPLOSION") {
+			hpPokemonAliado.setValue(hpPokemonAliado.getValue() - 1000);
 		}
 
 		comprobarganador();
@@ -349,15 +352,16 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	}
 
 	public void atacarRojo(Movimiento movimiento) {
-		String cadena = "\n\t" + pokemonRojo.getNombre() + " USÓ " +  movimiento.getNombre();
+		String cadena = "\n\t" + pokemonRojo.getNombre() + " usó " + movimiento.getNombre();
 
 		textoLogger += cadena + "\n\t";
 		logger.setText(textoLogger);
-		if ((pokemonActualAliado.getDefense() - (movimiento.getDaño()+ pokemonRojo.getAttack())) < 0) {
-			hpPokemonAliado.setValue(hpPokemonAliado.getValue() - movimiento.getDaño());
+		if ((pokemonActualAliado.getDefense() - (movimiento.getDaño() + pokemonRojo.getAttack())) < -10) {
+			hpPokemonAliado.setValue(hpPokemonAliado.getValue()
+					+ (pokemonActualAliado.getDefense() - (movimiento.getDaño() + pokemonRojo.getAttack())));
 		} else {
 			hpPokemonAliado.setValue(hpPokemonAliado.getValue() - 10);
-			
+
 		}
 		if (pokemonEsDerrotado(hpPokemonAliado)) {
 			contadorAliado++;
@@ -377,57 +381,67 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		return false;
 	}
 
-	//	public static void main(String[] args) {
-	//		List<Pokemon> equipo = new ArrayList<Pokemon>();
-	//		List<Pokemon> equipo2 = new ArrayList<Pokemon>();
-	//		Tipo t1 = new Tipo("t1");
-	//		Tipo t2 = new Tipo("t2");
+	// public static void main(String[] args) {
+	// List<Pokemon> equipo = new ArrayList<Pokemon>();
+	// List<Pokemon> equipo2 = new ArrayList<Pokemon>();
+	// Tipo t1 = new Tipo("t1");
+	// Tipo t2 = new Tipo("t2");
 	//
-	//		Movimiento m1 = new Movimiento("as", t1, 12, "a");
-	//		Movimiento m2 = new Movimiento("df", t2, 12, "b");
+	// Movimiento m1 = new Movimiento("as", t1, 12, "a");
+	// Movimiento m2 = new Movimiento("df", t2, 12, "b");
 	//
-	//		Pokemon p1 = new Pokemon("a", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-	//		Pokemon p2 = new Pokemon("b", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-	//		Pokemon p3 = new Pokemon("c", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-	//		Pokemon p4 = new Pokemon("d", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-	//		Pokemon p5 = new Pokemon("e", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-	//		Pokemon p6 = new Pokemon("f", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-	//		Pokemon p7 = new Pokemon("a", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-	//		Pokemon p8 = new Pokemon("b", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-	//		Pokemon p9 = new Pokemon("c", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-	//		Pokemon p10 = new Pokemon("d", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-	//		Pokemon p11 = new Pokemon("e", 0, t1, t2, m1, m2, 10, 10, 10, 10);
-	//		Pokemon p12 = new Pokemon("f", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+	// Pokemon p1 = new Pokemon("a", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+	// Pokemon p2 = new Pokemon("b", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+	// Pokemon p3 = new Pokemon("c", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+	// Pokemon p4 = new Pokemon("d", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+	// Pokemon p5 = new Pokemon("e", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+	// Pokemon p6 = new Pokemon("f", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+	// Pokemon p7 = new Pokemon("a", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+	// Pokemon p8 = new Pokemon("b", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+	// Pokemon p9 = new Pokemon("c", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+	// Pokemon p10 = new Pokemon("d", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+	// Pokemon p11 = new Pokemon("e", 0, t1, t2, m1, m2, 10, 10, 10, 10);
+	// Pokemon p12 = new Pokemon("f", 0, t1, t2, m1, m2, 10, 10, 10, 10);
 	//
-	//		equipo.add(p1);
-	//		equipo.add(p2);
-	//		equipo.add(p3);
-	//		equipo.add(p4);
-	//		equipo.add(p5);
-	//		equipo.add(p6);
-	//		equipo2.add(p7);
-	//		equipo2.add(p8);
-	//		equipo2.add(p9);
-	//		equipo2.add(p10);
-	//		equipo2.add(p11);
-	//		equipo2.add(p12);
-	//		Entrenador entrenadorActual = new Entrenador("a", 0, "a", equipo);
-	//		Entrenador rojo = new Entrenador("b", 0, "c", equipo2);
-	//		VentanaCombate v = new VentanaCombate(entrenadorActual, rojo);
+	// equipo.add(p1);
+	// equipo.add(p2);
+	// equipo.add(p3);
+	// equipo.add(p4);
+	// equipo.add(p5);
+	// equipo.add(p6);
+	// equipo2.add(p7);
+	// equipo2.add(p8);
+	// equipo2.add(p9);
+	// equipo2.add(p10);
+	// equipo2.add(p11);
+	// equipo2.add(p12);
+	// Entrenador entrenadorActual = new Entrenador("a", 0, "a", equipo);
+	// Entrenador rojo = new Entrenador("b", 0, "c", equipo2);
+	// VentanaCombate v = new VentanaCombate(entrenadorActual, rojo);
 	//
-	//	}
+	// }
 
 	public void comprobarganador() {
 		VentanaFinCombate ventanaFinCombate;
 		if (contadorAliado == 6) {
+			entrenador.setScore(entrenador.getScore() + 1);
+			rojo.setScore(rojo.getScore() - 1);
 			ventanaFinCombate = new VentanaFinCombate(entrenador, avatar, rojo);
 			ventanaFinCombate.setVisible(true);
 			dispose();
 		}
 		if (contadorEnemigo == 6) {
+			entrenador.setScore(entrenador.getScore() - 1);
+			rojo.setScore(rojo.getScore() + 1);
 			ventanaFinCombate = new VentanaFinCombate(entrenador, avatar, rojo);
 			ventanaFinCombate.setVisible(true);
 			dispose();
 		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 }

@@ -138,7 +138,6 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		try {
 			usuarios = baseDeDatos.obtenerTodosUsuarios(pokemons);
 			rojo = usuarios.get(0);
-			System.out.println(rojo.getUsuario());
 		} catch (BDException e3) {
 			e3.printStackTrace();
 		}
