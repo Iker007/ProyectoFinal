@@ -7,6 +7,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +16,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -64,6 +66,15 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	private Pokemon pokemonRojo;
 	private String avatar;
 	private List<Pokemon> equipo;
+	private JLabel pokemonRival;
+	private ImageIcon ImagenPOK2;
+	private Image ImagenPOK2B;
+	private Image NewImagenPOK2;
+	private JLabel pokemonAliado;
+	private ImageIcon ImagenPOK1;
+	private Image ImagenPOK1B;
+	private Image NewImagenPOK1;
+	private JLabel zonaCombate;
 
 	private int contadorAliado = 0;
 	private int contadorEnemigo = 0;
@@ -77,6 +88,8 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		this.entrenador = entrenadorActual;
 		this.rojo = rojo;
 		this.avatar = eleccionAvatar;
+		pokemonActualAliado = entrenador.getPokemons().get(0);
+		pokemonRojo = rojo.getPokemons().get(0);
 		logger = new JTextArea();
 		textoLogger = "Datos del combate:";
 		logger.setText(textoLogger);
@@ -120,6 +133,14 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		hpPokemonEnemigo.setStringPainted(true);
 		hpPokemonEnemigo.setForeground(Color.GREEN);
 		pCombate = new JPanel(new BorderLayout());
+		
+		ImagenPOK1 = new ImageIcon(getClass().getResource("/resources/"+pokemonActualAliado.getNombre().toLowerCase()+".png"));
+		ImagenPOK1B = ImagenPOK1.getImage();
+		NewImagenPOK1 = ImagenPOK1B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH);
+		ImagenPOK1 = new ImageIcon(NewImagenPOK1);
+		pokemonAliado = new JLabel((ImagenPOK1));
+		pokemonAliado.setBackground(new Color(0, 0, 0, 0));
+		
 
 		pPokemon1 = new JPanel(new GridLayout());
 		pPokemon1Hp = new JPanel(new FlowLayout());
@@ -128,6 +149,21 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		pPokemon1.add(hpPokemonEnemigo);
 		pCombate.add(pPokemon1, BorderLayout.NORTH);
 
+		ImagenPOK2 = new ImageIcon(getClass().getResource("/resources/"+pokemonRojo.getNombre().toLowerCase()+".png"));
+		ImagenPOK2B = ImagenPOK2.getImage();
+		NewImagenPOK2 = ImagenPOK2B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH);
+		ImagenPOK2 = new ImageIcon(NewImagenPOK2);
+		pokemonRival = new JLabel((ImagenPOK2));
+		pokemonRival.setBackground(new Color(0, 0, 0, 0));
+		
+		zonaCombate = new JLabel();
+		zonaCombate.setLayout(new GridLayout(1,2));
+		
+		zonaCombate.add(pokemonAliado);
+		zonaCombate.add(pokemonRival);
+		
+		pCombate.add(zonaCombate);
+		
 		pPokemon2 = new JPanel(new GridLayout());
 		pPokemon2Hp = new JPanel(new FlowLayout());
 		pPokemon2Hp.add(lblNombreAliado);
@@ -151,8 +187,24 @@ public class VentanaCombate extends JFrame implements ActionListener {
 
 	public void cargarPokemonAliado() {
 
+		zonaCombate.removeAll();
+		
 		pokemonActualAliado = entrenador.getPokemons().get(contadorAliado);
-		lblNombreAliado.setText(  ": HP" + pokemonActualAliado.getNombre() );
+		String cadena = "\n\t"  + " Adelante " + pokemonActualAliado.getNombre();
+		textoLogger += cadena;
+		
+		ImagenPOK1 = new ImageIcon(getClass().getResource("/resources/"+pokemonActualAliado.getNombre().toLowerCase()+".png"));
+		ImagenPOK1B = ImagenPOK1.getImage();
+		NewImagenPOK1 = ImagenPOK1B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH);
+		ImagenPOK1 = new ImageIcon(NewImagenPOK1);
+		pokemonAliado = new JLabel((ImagenPOK1));
+		pokemonAliado.setBackground(new Color(0, 0, 0, 0));
+				
+		zonaCombate.add(pokemonAliado);
+		zonaCombate.add(pokemonRival);
+		
+		logger.setText(textoLogger);
+		lblNombreAliado.setText(  " : HP" + pokemonActualAliado.getNombre() );
 		hpPokemonAliado.setMaximum(pokemonActualAliado.getHp());
 		hpPokemonAliado.setMinimum(0);
 		hpPokemonAliado.setValue(pokemonActualAliado.getHp());
@@ -162,9 +214,25 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	}
 
 	public void cargarPokemonEnemigo() {
+		
+		zonaCombate.removeAll();
+		
 		pokemonRojo = rojo.getPokemons().get(contadorEnemigo);
-
-		lblNombreEnemigo.setText(pokemonRojo.getNombre() + " HP:");
+		String cadena = "\n\t"  + " Rojo sacó a " + pokemonRojo.getNombre();
+		textoLogger += cadena;
+		
+		ImagenPOK2 = new ImageIcon(getClass().getResource("/resources/"+pokemonRojo.getNombre().toLowerCase()+".png"));
+		ImagenPOK2B = ImagenPOK2.getImage();
+		NewImagenPOK2 = ImagenPOK2B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH);
+		ImagenPOK2 = new ImageIcon(NewImagenPOK2);
+		pokemonRival = new JLabel((ImagenPOK2));
+		pokemonRival.setBackground(new Color(0, 0, 0, 0));
+		
+		zonaCombate.add(pokemonAliado);
+		zonaCombate.add(pokemonRival);
+		
+		logger.setText(textoLogger);
+		lblNombreEnemigo.setText(pokemonRojo.getNombre() + " HP: ");
 		hpPokemonEnemigo.setMaximum(pokemonRojo.getHp());
 		hpPokemonEnemigo.setMinimum(0);
 		hpPokemonEnemigo.setValue(pokemonRojo.getHp());
