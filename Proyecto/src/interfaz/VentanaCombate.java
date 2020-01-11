@@ -190,6 +190,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 				atacarJugador(pokemonActualAliado.getMovimiento1()); // Ataca con el pokemon y el movimiento elegido
 				if (pokemonEsDerrotado(hpPokemonEnemigo)) {
 					cargarPokemonEnemigo();
+					
 				}
 				else  
 					atacarJugador(pokemonActualAliado.getMovimiento1());
@@ -288,6 +289,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 			hpPokemonAliado.setValue(hpPokemonAliado.getValue() - movimiento.getDaño());
 		} else {
 			hpPokemonAliado.setValue(hpPokemonAliado.getValue() - 10);
+			
 		}
 		if (pokemonEsDerrotado(hpPokemonAliado)) {
 			contadorAliado++;
