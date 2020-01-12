@@ -1,6 +1,6 @@
 # ProyectoFinal
 
-Lo más importante a tener en cuenta es que nuestro proyecto utiliza la librería externa para gestionar la base de datos sqlite-jdbc (cuanto más reciente sea la versión mejor).
+Lo más importante a tener en cuenta es que nuestro proyecto utiliza la librería externa para gestionar la base de datos: sqlite-jdbc (cuanto más reciente sea la versión mejor).
 Puede descargar el driver en este enlace: https://bitbucket.org/xerial/sqlite-jdbc/downloads/
 
 Antes de comenzar a jugar, se debe ejecutar la clase de creacionBD (basta con hacerlo una vez).
