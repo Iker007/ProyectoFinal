@@ -114,7 +114,14 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		PanelEntrenador2.setBackground(new Color(0, 0, 0, 0));
 		fondo.add(PanelEntrenador2);
 
-		if (eleccionAvatar.equals("Chico")) {
+		
+		if(this.entrenadorActual.getUsuario().equals("RED")) {
+			ImagenENT1 = new ImageIcon(getClass().getResource("/resources/Red.png"));
+			ImageENT1B = ImagenENT1.getImage();
+			NewImageENT1 = ImageENT1B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH);
+			ImagenENT1 = new ImageIcon(NewImageENT1);
+		}
+		else if (eleccionAvatar.equals("Chico")) {
 			avatar = "Chico";
 			ImagenENT1 = new ImageIcon(getClass().getResource("/resources/" + avatar + ".png"));
 			ImageENT1B = ImagenENT1.getImage();
@@ -133,15 +140,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 			NewImageENT1 = ImageENT1B.getScaledInstance(300, 200, java.awt.Image.SCALE_SMOOTH);
 			ImagenENT1 = new ImageIcon(NewImageENT1);
 		}
-		if(this.entrenadorActual.getUsuario().equals("RED")) {
-			ImagenENT1 = new ImageIcon(getClass().getResource("/resources/Red.png"));
-			ImageENT1B = ImagenENT1.getImage();
-			NewImageENT1 = ImageENT1B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH);
-			ImagenENT1 = new ImageIcon(NewImageENT1);
-			entrenador1 = new JLabel((ImagenENT1));
-			entrenador1.setBackground(new Color(0, 0, 0, 0));
-			fondo.add(entrenador1);
-		}
+		
 		// Pillar imagen H v M v O
 		entrenador1 = new JLabel((ImagenENT1));
 		entrenador1.setBackground(new Color(0, 0, 0, 0));
