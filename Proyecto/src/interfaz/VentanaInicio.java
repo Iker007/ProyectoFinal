@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.swing.*;
 
 import clases.Entrenador;
+import database.BDException;
 
 public class VentanaInicio extends JFrame implements ActionListener {
 
@@ -252,9 +253,17 @@ public class VentanaInicio extends JFrame implements ActionListener {
 				super.mouseClicked(e);
 				dispose();
 				logger_Inicio.info("Creando VentanaCombate");
-				VentanaCombate v = new VentanaCombate(entrenadorActual, eleccionAvatar, rojo);
-				v.setVisible(true);
-				logger_Inicio.info("Se ha creado ventanaCombate");
+				VentanaCombate v;
+				try {
+					v = new VentanaCombate(entrenadorActual, eleccionAvatar, rojo);
+					v.setVisible(true);
+					logger_Inicio.info("Se ha creado ventanaCombate");
+
+				} catch (BDException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 

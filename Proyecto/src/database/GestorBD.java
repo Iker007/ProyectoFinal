@@ -77,7 +77,16 @@ public class GestorBD {
 		}
 	}
 	
-	public void actualizarScore(Entrenador e) throws BDException, ClassNotFoundException{
+	public void eliminarEntrenador(Entrenador e) throws SQLException, BDException {
+		try (Statement stmt = connection.createStatement()) {
+			stmt.executeUpdate("DELETE FROM ENTRENADOR WHERE USUARIO = '"+ e.getUsuario()+"');");
+	}catch (SQLException e1) {
+		LOG_GestorBD.info("No se pudo insertar a la lista de la tabla 'Entrenador'");
+		throw new BDException("No se pudo eliminar de la tabla 'Entrenador'", e1);
+	}
+	}
+	
+	public static void actualizarScore(Entrenador e) throws BDException, ClassNotFoundException{
 		try(Statement stmt = connection.createStatement()){
 			stmt.executeUpdate("UPDATE ENTRENADOR SET SCORE = " +e.getScore()+ " WHERE USUARIO = '" +e.getUsuario()+"'); ");
 			LOG_GestorBD.info("Se ha actualizado el score de " + e.getUsuario());

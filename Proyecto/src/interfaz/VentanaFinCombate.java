@@ -66,7 +66,7 @@ public class VentanaFinCombate extends JFrame {
 	private GestorBD baseDeDatos = new GestorBD();
 
 
-	public VentanaFinCombate(Entrenador entrenadorActual, String eleccionAvatar, Entrenador rojo) throws BDException {
+	public VentanaFinCombate(Entrenador entrenadorActual, String eleccionAvatar, Entrenador rojo, Entrenador ganador) throws BDException {
 		this.setLayout(new FlowLayout());
 		this.entrenadorActual = entrenadorActual;
 		this.eleccionAvatar = eleccionAvatar;
@@ -218,30 +218,41 @@ public class VentanaFinCombate extends JFrame {
 //				e2.printStackTrace();
 //			}
 //		}
+//		----------------------------------------------------------------------------------------
+//		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("scores.txt"))){			
+//			try {
+//				File a = (File)ois.readObject();
+//				FileReader fr = new FileReader(a);
+//				BufferedReader br = new BufferedReader(fr);
+//				try {
+//					while((br.readLine()) != null) {
+//						Entrenador e = (Entrenador) ois.readObject();
+//						System.out.println(e.getUsuario());
+//						System.out.println(e.getScore());
+//						System.out.println();
+//					}
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			} catch (FileNotFoundException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//			}
 		
-		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("scores.txt"))){			
-			try {
-				File a = (File)ois.readObject();
-				FileReader fr = new FileReader(a);
-				BufferedReader br = new BufferedReader(fr);
-				String s;
-				try {
-					while((s = br.readLine()) != null) {
-						Entrenador e = (Entrenador) ois.readObject();
-						System.out.println(e.getUsuario());
-						System.out.println(e.getScore());
-						System.out.println();
-					}
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			}
+		try(FileReader fileReader = new FileReader("scores.txt")) {
+		    int ch = fileReader.read();
+		    while(ch != -1) {
+		        System.out.print((char)ch);
+		        ch = fileReader.read();
+		    }
+		} catch (FileNotFoundException e) {
+		    // exception handling
+		} catch (IOException e) {
+		    // exception handling
+		}
 
 	}
 
@@ -267,15 +278,27 @@ public class VentanaFinCombate extends JFrame {
 //				e2.printStackTrace();
 //			}
 //		}
+//		-----------------------------------------------------------------------------------------------------
+//		try(ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(new File("scores.txt")))){
+//			for(int i = 0; i < lista.size(); i++) {
+//			os.writeObject(lista.get(i).getUsuario());
+//			}
+//			System.out.println("Puntuaciones guardadas con éxito");
+//		}catch (FileNotFoundException e) {
+//			System.out.println("No se ha podido encontrar el fichero");
+//		}catch (IOException e) {
+//			System.err.println("No se ha podido serializar el Entrenador");
+//		}
 		
-		try(ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(new File("scores.txt")))){
-			for(int i = 0; i < lista.size(); i++) {
-			os.writeObject(lista.get(i));
-			}
-		}catch (FileNotFoundException e) {
-			System.out.println("No se ha podido encontrar el fichero");
-		}catch (IOException e) {
-			System.err.println("No se ha podido serializar el Entrenador");
+		try(FileWriter fileWriter = new FileWriter("scores.txt")) {
+		    
+		    for(int i = 0; i < lista.size(); i++) {
+		    	String fileContent = lista.get(i).getUsuario() + " " + lista.get(i).getScore() + "\n";
+			    fileWriter.write(fileContent);
+				}
+				System.out.println("Puntuaciones guardadas con éxito");
+		} catch (IOException e) {
+		    // exception handling
 		}
 	}
 

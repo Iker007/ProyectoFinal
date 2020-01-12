@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,7 @@ import clases.Movimiento;
 import clases.Pokemon;
 import clases.Tipo;
 import database.BDException;
+import database.GestorBD;
 
 public class VentanaCombate extends JFrame implements ActionListener {
 	private JPanel pCombate;
@@ -80,14 +82,17 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	private Image ImagenPOK1B;
 	private Image NewImagenPOK1;
 	private JLabel zonaCombate;
-	private JScrollPane jScrollPane ;
+	private JScrollPane jScrollPane;
+	private Entrenador ganador;
+	private GestorBD baseDeDatos = new GestorBD();
+
 
 	private int contadorAliado = 0;
 	private int contadorEnemigo = 0;
 
 	private VentanaFinCombate ventanaFinCombate;
 
-	public VentanaCombate(Entrenador entrenadorActual, String eleccionAvatar, Entrenador rojo) {
+	public VentanaCombate(Entrenador entrenadorActual, String eleccionAvatar, Entrenador rojo) throws BDException{
 		this.setSize(new Dimension(1400, 800));
 		setTitle("POKEMON SHOWDOWN");
 		setLayout(new BorderLayout());
@@ -97,7 +102,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		pokemonActualAliado = entrenador.getPokemons().get(0);
 		pokemonRojo = rojo.getPokemons().get(0);
 		logger = new JTextArea();
-		
+
 		textoLogger = "Datos del combate:" + "\n Te ha retado el entrenador Rojo";
 		logger.setText(textoLogger);
 		logger.setEditable(false);
@@ -108,7 +113,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		pComentarista = new JPanel();
-		jScrollPane.setPreferredSize(new Dimension(200,750));
+		jScrollPane.setPreferredSize(new Dimension(200, 750));
 		pComentarista.add(jScrollPane);
 		pComentarista.setBorder(new LineBorder(Color.BLACK));
 		add(pComentarista, BorderLayout.EAST);
@@ -210,12 +215,25 @@ public class VentanaCombate extends JFrame implements ActionListener {
 						// TODO Auto-generated catch block
 						e2.printStackTrace();
 					} // Ataca con el pokemon y el movimiento elegido
+					catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					if (pokemonEsDerrotado(hpPokemonEnemigo)) {
 						cargarPokemonEnemigo();
 					} else
 						try {
 							atacarRojo(pokemonRojo.getMovimiento2());
 						} catch (BDException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (ClassNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
@@ -229,6 +247,12 @@ public class VentanaCombate extends JFrame implements ActionListener {
 					} catch (BDException e2) {
 						// TODO Auto-generated catch block
 						e2.printStackTrace();
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 					if (pokemonEsDerrotado(hpPokemonAliado)) {
 						cargarPokemonAliado();
@@ -239,13 +263,20 @@ public class VentanaCombate extends JFrame implements ActionListener {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						} // Ataca con el pokemon y el movimiento
-																				// elegido
+						catch (ClassNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					// elegido
 					if (pokemonEsDerrotado(hpPokemonEnemigo)) {
 						cargarPokemonEnemigo();
 					}
 				}
 				inicioDeTurno();
-				
+
 			}
 		});
 
@@ -261,12 +292,25 @@ public class VentanaCombate extends JFrame implements ActionListener {
 						// TODO Auto-generated catch block
 						e2.printStackTrace();
 					} // Ataca con el pokemon y el movimiento elegido
+					catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					if (pokemonEsDerrotado(hpPokemonEnemigo)) {
 						cargarPokemonEnemigo();
 					} else
 						try {
 							atacarRojo(pokemonRojo.getMovimiento1());
 						} catch (BDException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (ClassNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
@@ -280,6 +324,12 @@ public class VentanaCombate extends JFrame implements ActionListener {
 					} catch (BDException e2) {
 						// TODO Auto-generated catch block
 						e2.printStackTrace();
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 					if (pokemonEsDerrotado(hpPokemonAliado)) {
 						cargarPokemonAliado();
@@ -290,7 +340,14 @@ public class VentanaCombate extends JFrame implements ActionListener {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						} // Ataca con el pokemon y el movimiento
-																				// elegido
+						catch (ClassNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					// elegido
 					if (pokemonEsDerrotado(hpPokemonEnemigo)) {
 						cargarPokemonEnemigo();
 					}
@@ -379,7 +436,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 
 	}
 
-	public void atacarJugador(Movimiento movimiento) throws BDException {
+	public void atacarJugador(Movimiento movimiento) throws BDException, ClassNotFoundException, SQLException {
 		String cadena = "\n" + pokemonActualAliado.getNombre() + " usó " + movimiento.getNombre();
 		textoLogger += cadena + "\n";
 		logger.setText(textoLogger);
@@ -403,7 +460,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 
 	}
 
-	public void atacarRojo(Movimiento movimiento) throws BDException {
+	public void atacarRojo(Movimiento movimiento) throws BDException, ClassNotFoundException, SQLException {
 		String cadena = "\n" + pokemonRojo.getNombre() + " usó " + movimiento.getNombre();
 
 		textoLogger += cadena + "\n";
@@ -418,8 +475,10 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		if (pokemonEsDerrotado(hpPokemonAliado)) {
 			contadorAliado++;
 			if (contadorAliado != 6) {
+				
 				cargarPokemonAliado();
 			}
+			
 		}
 
 		comprobarganador();
@@ -473,20 +532,27 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	//
 	// }
 
-	public void comprobarganador() throws BDException {
+	public void comprobarganador() throws BDException, ClassNotFoundException, SQLException {
 		VentanaFinCombate ventanaFinCombate;
 		if (contadorAliado == 6) {
-			entrenador.setScore(entrenador.getScore() + 1);
-			rojo.setScore(rojo.getScore() - 1);
-			ventanaFinCombate = new VentanaFinCombate(entrenador, avatar, rojo);
+			entrenador.setScore(entrenador.getScore() - 1);
+			rojo.setScore(rojo.getScore() + 1);
+			ganador = rojo;
+			
+			ventanaFinCombate = new VentanaFinCombate(entrenador, avatar, rojo, ganador);
+			
 			ventanaFinCombate.setVisible(true);
+			
 			dispose();
 		}
 		if (contadorEnemigo == 6) {
-			entrenador.setScore(entrenador.getScore() - 1);
-			rojo.setScore(rojo.getScore() + 1);
-			ventanaFinCombate = new VentanaFinCombate(entrenador, avatar, rojo);
+			entrenador.setScore(entrenador.getScore() + 1);
+			rojo.setScore(rojo.getScore() - 1);
+			ganador = entrenador;
+		
+			ventanaFinCombate = new VentanaFinCombate(entrenador, avatar, rojo, ganador);
 			ventanaFinCombate.setVisible(true);
+			
 			dispose();
 		}
 	}
