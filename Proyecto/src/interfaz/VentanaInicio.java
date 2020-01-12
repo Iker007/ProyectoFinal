@@ -139,7 +139,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 			NewImageENT1 = ImageENT1B.getScaledInstance(300, 200, java.awt.Image.SCALE_SMOOTH);
 			ImagenENT1 = new ImageIcon(NewImageENT1);
 		}
-		if(this.entrenadorActual.getPokemons().get(0).getId()==14) {
+		if(this.entrenadorActual.getUsuario().equals("RED")) {
 			ImagenENT1 = new ImageIcon(getClass().getResource("/resources/Red.png"));
 			ImageENT1B = ImagenENT1.getImage();
 			NewImageENT1 = ImageENT1B.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH);

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -20,6 +21,7 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -58,6 +60,17 @@ public class VentanaFinCombate extends JFrame {
 	private JMenuBar mb;
     private JMenu menu1;
     private JMenuItem mi1,mi2,mi3;
+    private ImageIcon imagenENT;
+    private Image imagenENTB;
+    private Image newImagenENT;
+    private ImageIcon imagenD;
+    private Image imagenD2;
+    private Image newImagenD;
+    private JLabel derrota;
+    private ImageIcon imagenV;
+    private Image imagenV2;
+    private Image newImagenV;
+    private JLabel victoria;
 	private static String eleccionAvatar;
 	private List<Entrenador> entrenadores;
 	private List<Pokemon> pokemons;
@@ -92,32 +105,99 @@ public class VentanaFinCombate extends JFrame {
 		this.setVisible(true);
 		this.setTitle("Pokemon Showdown");
 		this.setLayout(new GridLayout(2, 1));
-		panel1 = new JPanel();
-		panel1.setBackground(Color.RED);
-		this.add(panel1);
-		panel2 = new JPanel();
-		panel2.setBackground(Color.BLACK);
-		hueco1 = new JPanel();
-		hueco1.setVisible(false);
-		hueco2 = new JPanel();
-		hueco2.setVisible(false);
-		hueco3 = new JPanel();
-		hueco3.setVisible(false);
-		panel2.setLayout(new GridLayout(2, 3));
-		panel2a = new JPanel(new FlowLayout());
-		panel2a.add(cerrarSesion);
-		panel2b = new JPanel(new FlowLayout());
-		panel2b.add(revancha);
-		panel2c = new JPanel(new FlowLayout());
-		panel2c.add(salir);
-		panel2.add(hueco1);
-		panel2.add(hueco2);
-		panel2.add(hueco3);
-		panel2.add(panel2a);
-		panel2.add(panel2b);
-		panel2.add(panel2c);
-		this.add(panel2);
 		
+		panel2 = new JPanel();
+		panel2.setLayout(new GridLayout(2,3));
+		panel2.setBackground(Color.BLACK);
+		
+		if(ganador.getUsuario().equals("RED")) {
+			imagenENT = new ImageIcon(getClass().getResource("/resources/Red.png"));
+			imagenENTB = imagenENT.getImage();
+			newImagenENT = imagenENTB.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH);
+			imagenENT = new ImageIcon(newImagenENT);
+			
+			imagenD = new ImageIcon(getClass().getResource("/resources/Defeat.png"));
+			imagenD2 = imagenD.getImage();
+			newImagenD = imagenD2.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
+			imagenD = new ImageIcon(newImagenD);
+
+			derrota = new JLabel((imagenD));
+			derrota.setBackground(new Color(0, 0, 0, 0));
+			panel2.add(derrota);
+			
+			}else if (eleccionAvatar.equals("Chico")) {
+				imagenENT = new ImageIcon(getClass().getResource("/resources/" + eleccionAvatar + ".png"));
+				imagenENTB = imagenENT.getImage();
+				newImagenENT = imagenENTB.getScaledInstance(150, 180, java.awt.Image.SCALE_SMOOTH);
+				imagenENT = new ImageIcon(newImagenENT);
+				
+				imagenV = new ImageIcon(getClass().getResource("/resources/Victory.png"));
+				imagenV2 = imagenV.getImage();
+				newImagenV = imagenV2.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
+				imagenV = new ImageIcon(newImagenV);
+
+				victoria = new JLabel((imagenV));
+				victoria.setBackground(new Color(0, 0, 0, 0));
+				panel2.add(victoria);
+			} else if (eleccionAvatar.equals("Chica")) {
+				imagenENT = new ImageIcon(getClass().getResource("/resources/" + eleccionAvatar + ".png"));
+				imagenENTB = imagenENT.getImage();
+				newImagenENT = imagenENTB.getScaledInstance(150, 180, java.awt.Image.SCALE_SMOOTH);
+				imagenENT = new ImageIcon(newImagenENT);
+				
+				imagenV = new ImageIcon(getClass().getResource("/resources/Victory.png"));
+				imagenV2 = imagenV.getImage();
+				newImagenV = imagenV2.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
+				imagenV = new ImageIcon(newImagenV);
+
+				victoria = new JLabel((imagenV));
+				victoria.setBackground(new Color(0, 0, 0, 0));
+				panel2.add(victoria);
+			} else if (eleccionAvatar.equals("Otros")) {
+				imagenENT = new ImageIcon(getClass().getResource("/resources/" + eleccionAvatar + ".png"));
+				imagenENTB = imagenENT.getImage();
+				newImagenENT = imagenENTB.getScaledInstance(300, 200, java.awt.Image.SCALE_SMOOTH);
+				imagenENT = new ImageIcon(newImagenENT);
+				
+				imagenV = new ImageIcon(getClass().getResource("/resources/Victory.png"));
+				imagenV2 = imagenV.getImage();
+				newImagenV = imagenV2.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
+				imagenV = new ImageIcon(newImagenV);
+
+				victoria = new JLabel((imagenV));
+				victoria.setBackground(new Color(0, 0, 0, 0));
+				panel2.add(victoria);
+			}		
+			entrenador = new JLabel((imagenENT));
+			entrenador.setBackground(new Color(0, 0, 0, 0));
+		
+			panel1 = new JPanel();
+			panel1.setBackground(Color.RED);
+			panel1.add(entrenador);
+			this.add(panel1);
+			
+			
+			hueco1 = new JPanel();
+			hueco1.setVisible(false);
+			hueco2 = new JPanel();
+			hueco2.setVisible(false);
+			hueco3 = new JPanel();
+			hueco3.setVisible(false);
+			panel2a = new JPanel(new FlowLayout());
+			panel2a.add(cerrarSesion);
+			panel2b = new JPanel(new FlowLayout());
+			panel2b.add(revancha);
+			panel2c = new JPanel(new FlowLayout());
+			panel2c.add(salir);
+			panel2.add(hueco1);
+			panel2.add(hueco2);
+			panel2.add(hueco3);
+			panel2.add(panel2a);
+			panel2.add(panel2b);
+			panel2.add(panel2c);
+			this.add(panel2);
+			
+			
 		 mb=new JMenuBar();
 	        setJMenuBar(mb);
 	        menu1=new JMenu("Opciones");
@@ -305,10 +385,6 @@ public class VentanaFinCombate extends JFrame {
 	public static void main(String[] args) {
 		//VentanaFinCombate v = new VentanaFinCombate(entrenadorActual, eleccionAvatar, rojo);
 
-	}
-
-	public JLabel getEntrenador() {
-		return entrenador;
 	}
 
 	public void setEntrenador(Entrenador entrenador) {
