@@ -34,6 +34,7 @@ import clases.Entrenador;
 import clases.Movimiento;
 import clases.Pokemon;
 import clases.Tipo;
+import database.BDException;
 
 public class VentanaCombate extends JFrame implements ActionListener {
 	private JPanel pCombate;
@@ -203,21 +204,41 @@ public class VentanaCombate extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				esconderBotones(); // Esconde los botones
 				if (quienAtacaPrimero() == 1) { // Elige quien ataca primero
-					atacarJugador(pokemonActualAliado.getMovimiento1()); // Ataca con el pokemon y el movimiento elegido
+					try {
+						atacarJugador(pokemonActualAliado.getMovimiento1());
+					} catch (BDException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					} // Ataca con el pokemon y el movimiento elegido
 					if (pokemonEsDerrotado(hpPokemonEnemigo)) {
 						cargarPokemonEnemigo();
 					} else
-						atacarRojo(pokemonRojo.getMovimiento2());
+						try {
+							atacarRojo(pokemonRojo.getMovimiento2());
+						} catch (BDException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					if (pokemonEsDerrotado(hpPokemonAliado)) {
 						cargarPokemonAliado();
 					}
 
 				} else if (quienAtacaPrimero() == 2) {
-					atacarRojo(pokemonRojo.getMovimiento2());
+					try {
+						atacarRojo(pokemonRojo.getMovimiento2());
+					} catch (BDException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
 					if (pokemonEsDerrotado(hpPokemonAliado)) {
 						cargarPokemonAliado();
 					} else
-						atacarJugador(pokemonActualAliado.getMovimiento1()); // Ataca con el pokemon y el movimiento
+						try {
+							atacarJugador(pokemonActualAliado.getMovimiento1());
+						} catch (BDException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} // Ataca con el pokemon y el movimiento
 																				// elegido
 					if (pokemonEsDerrotado(hpPokemonEnemigo)) {
 						cargarPokemonEnemigo();
@@ -234,21 +255,41 @@ public class VentanaCombate extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				esconderBotones(); // Esconde los botones
 				if (quienAtacaPrimero() == 1) { // Elige quien ataca primero
-					atacarJugador(pokemonActualAliado.getMovimiento2()); // Ataca con el pokemon y el movimiento elegido
+					try {
+						atacarJugador(pokemonActualAliado.getMovimiento2());
+					} catch (BDException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					} // Ataca con el pokemon y el movimiento elegido
 					if (pokemonEsDerrotado(hpPokemonEnemigo)) {
 						cargarPokemonEnemigo();
 					} else
-						atacarRojo(pokemonRojo.getMovimiento1());
+						try {
+							atacarRojo(pokemonRojo.getMovimiento1());
+						} catch (BDException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					if (pokemonEsDerrotado(hpPokemonAliado)) {
 						cargarPokemonAliado();
 					}
 
 				} else if (quienAtacaPrimero() == 2) {
-					atacarRojo(pokemonRojo.getMovimiento1());
+					try {
+						atacarRojo(pokemonRojo.getMovimiento1());
+					} catch (BDException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
 					if (pokemonEsDerrotado(hpPokemonAliado)) {
 						cargarPokemonAliado();
 					} else
-						atacarJugador(pokemonActualAliado.getMovimiento2()); // Ataca con el pokemon y el movimiento
+						try {
+							atacarJugador(pokemonActualAliado.getMovimiento2());
+						} catch (BDException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} // Ataca con el pokemon y el movimiento
 																				// elegido
 					if (pokemonEsDerrotado(hpPokemonEnemigo)) {
 						cargarPokemonEnemigo();
@@ -338,7 +379,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 
 	}
 
-	public void atacarJugador(Movimiento movimiento) {
+	public void atacarJugador(Movimiento movimiento) throws BDException {
 		String cadena = "\n" + pokemonActualAliado.getNombre() + " usó " + movimiento.getNombre();
 		textoLogger += cadena + "\n";
 		logger.setText(textoLogger);
@@ -362,7 +403,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 
 	}
 
-	public void atacarRojo(Movimiento movimiento) {
+	public void atacarRojo(Movimiento movimiento) throws BDException {
 		String cadena = "\n" + pokemonRojo.getNombre() + " usó " + movimiento.getNombre();
 
 		textoLogger += cadena + "\n";
@@ -432,7 +473,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	//
 	// }
 
-	public void comprobarganador() {
+	public void comprobarganador() throws BDException {
 		VentanaFinCombate ventanaFinCombate;
 		if (contadorAliado == 6) {
 			entrenador.setScore(entrenador.getScore() + 1);

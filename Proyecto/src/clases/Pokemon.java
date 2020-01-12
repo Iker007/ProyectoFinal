@@ -1,9 +1,10 @@
 package clases;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pokemon {
+public class Pokemon implements Serializable{
 	private String nombre;
 	private int id;
 	private Tipo tipo1;
