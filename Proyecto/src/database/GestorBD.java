@@ -51,15 +51,7 @@ public class GestorBD {
 		}
 
 	}
-
-
-	public boolean comprobarEntrenadorExiste(Entrenador e, List<Entrenador> usuarios) {
-		for (Entrenador e2 : usuarios) {
-
-		}
-		return true;
-	}
-
+	
 	public void insertarEntrenador(Entrenador e) throws BDException, ClassNotFoundException {
 		
 		try (Statement stmt = connection.createStatement()) {

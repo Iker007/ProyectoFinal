@@ -1,6 +1,5 @@
 package interfaz;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -8,17 +7,12 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -29,7 +23,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import clases.Entrenador;
 import clases.Movimiento;
@@ -40,6 +33,10 @@ import database.GestorBD;
 
 public class VentanaFinCombate extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JButton revancha;
 	private JButton cerrarSesion;
 	private JButton salir;
@@ -98,8 +95,6 @@ public class VentanaFinCombate extends JFrame {
 		pokemons = baseDeDatos.obtenerTodosPokemon(movimientos);
 		entrenadores = baseDeDatos.obtenerTodosUsuarios(pokemons);
 
-		// entrenador = new JLabel(setEntrenador(entrenador););
-
 		setResizable(false);
 		this.setSize(1100, 1000);
 		this.setVisible(true);
@@ -110,10 +105,24 @@ public class VentanaFinCombate extends JFrame {
 		panel2.setLayout(new GridLayout(2,3));
 		panel2.setBackground(Color.BLACK);
 		
+		hueco1 = new JPanel();
+		hueco1.setVisible(false);
+		hueco2 = new JPanel();
+		hueco2.setVisible(false);
+		hueco3 = new JPanel();
+		hueco3.setVisible(false);
+		panel2a = new JPanel(new FlowLayout());
+		panel2a.add(cerrarSesion);
+		panel2b = new JPanel(new FlowLayout());
+		panel2b.add(revancha);
+		panel2c = new JPanel(new FlowLayout());
+		panel2c.add(salir);
+		panel2.add(hueco1);
+		
 		if(ganador.getUsuario().equals("RED")) {
 			imagenENT = new ImageIcon(getClass().getResource("/resources/Red.png"));
 			imagenENTB = imagenENT.getImage();
-			newImagenENT = imagenENTB.getScaledInstance(150, 175, java.awt.Image.SCALE_SMOOTH);
+			newImagenENT = imagenENTB.getScaledInstance(160, 200, java.awt.Image.SCALE_SMOOTH);
 			imagenENT = new ImageIcon(newImagenENT);
 			
 			imagenD = new ImageIcon(getClass().getResource("/resources/Defeat.png"));
@@ -176,27 +185,11 @@ public class VentanaFinCombate extends JFrame {
 			panel1.add(entrenador);
 			this.add(panel1);
 			
-			
-			hueco1 = new JPanel();
-			hueco1.setVisible(false);
-			hueco2 = new JPanel();
-			hueco2.setVisible(false);
-			hueco3 = new JPanel();
-			hueco3.setVisible(false);
-			panel2a = new JPanel(new FlowLayout());
-			panel2a.add(cerrarSesion);
-			panel2b = new JPanel(new FlowLayout());
-			panel2b.add(revancha);
-			panel2c = new JPanel(new FlowLayout());
-			panel2c.add(salir);
-			panel2.add(hueco1);
-			panel2.add(hueco2);
 			panel2.add(hueco3);
 			panel2.add(panel2a);
 			panel2.add(panel2b);
 			panel2.add(panel2c);
 			this.add(panel2);
-			
 			
 		 mb=new JMenuBar();
 	        setJMenuBar(mb);
@@ -264,63 +257,16 @@ public class VentanaFinCombate extends JFrame {
 
 			}
 		});
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+				
+			}
+		});
 
 	}
 
 	public void leerFicheroRanking() throws FileNotFoundException, IOException, ClassNotFoundException {
-//		File archivo = null;
-//		FileReader fr = null;
-//		BufferedReader br = null;
-//		try {
-//			// Apertura del fichero y creacion de BufferedReader para poder
-//			// hacer una lectura comoda (disponer del metodo readLine()).
-//			archivo = new File("scores.txt");
-//			fr = new FileReader(archivo);
-//			br = new BufferedReader(fr);
-//
-//			// Lectura del fichero
-//			String linea;
-//			while ((linea = br.readLine()) != null) {
-//				entrenador.setText("hola");
-//				System.out.println(linea);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			// En el finally cerramos el fichero, para asegurarnos
-//			// que se cierra tanto si todo va bien como si salta
-//			// una excepcion.
-//			try {
-//				if (null != fr) {
-//					fr.close();
-//				}
-//			} catch (Exception e2) {
-//				e2.printStackTrace();
-//			}
-//		}
-//		----------------------------------------------------------------------------------------
-//		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("scores.txt"))){			
-//			try {
-//				File a = (File)ois.readObject();
-//				FileReader fr = new FileReader(a);
-//				BufferedReader br = new BufferedReader(fr);
-//				try {
-//					while((br.readLine()) != null) {
-//						Entrenador e = (Entrenador) ois.readObject();
-//						System.out.println(e.getUsuario());
-//						System.out.println(e.getScore());
-//						System.out.println();
-//					}
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			} catch (FileNotFoundException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//			}
 		
 		try(FileReader fileReader = new FileReader("scores.txt")) {
 		    int ch = fileReader.read();
@@ -329,46 +275,12 @@ public class VentanaFinCombate extends JFrame {
 		        ch = fileReader.read();
 		    }
 		} catch (FileNotFoundException e) {
-		    // exception handling
 		} catch (IOException e) {
-		    // exception handling
 		}
 
 	}
 
 	public void crearFicheroRanking(List<Entrenador> lista) {
-//		FileWriter fichero = null;
-//		PrintWriter pw = null;
-//		try {
-//			fichero = new FileWriter("scores.txt");
-//			pw = new PrintWriter(fichero);
-//
-//			for (Entrenador e : lista) {
-//				pw.println(e.getUsuario() + ":" + e.getScore());
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			try {
-//				// Nuevamente aprovechamos el finally para
-//				// asegurarnos que se cierra el fichero.
-//				if (null != fichero)
-//					fichero.close();
-//			} catch (Exception e2) {
-//				e2.printStackTrace();
-//			}
-//		}
-//		-----------------------------------------------------------------------------------------------------
-//		try(ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(new File("scores.txt")))){
-//			for(int i = 0; i < lista.size(); i++) {
-//			os.writeObject(lista.get(i).getUsuario());
-//			}
-//			System.out.println("Puntuaciones guardadas con éxito");
-//		}catch (FileNotFoundException e) {
-//			System.out.println("No se ha podido encontrar el fichero");
-//		}catch (IOException e) {
-//			System.err.println("No se ha podido serializar el Entrenador");
-//		}
 		
 		try(FileWriter fileWriter = new FileWriter("scores.txt")) {
 		    
@@ -380,11 +292,6 @@ public class VentanaFinCombate extends JFrame {
 		} catch (IOException e) {
 		    // exception handling
 		}
-	}
-
-	public static void main(String[] args) {
-		//VentanaFinCombate v = new VentanaFinCombate(entrenadorActual, eleccionAvatar, rojo);
-
 	}
 
 	public void setEntrenador(Entrenador entrenador) {

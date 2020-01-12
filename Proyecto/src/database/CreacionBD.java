@@ -95,7 +95,7 @@ public class CreacionBD {
 			res = statement
 					.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('SHADOW FORCE', 'GHOST', 150, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('LAVA PLUME', 'FIRE', 80, NULL);");
-			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('EXPLOSION', 'NORMAL', 300, 'BOOM');");
+			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('EXPLOSION', 'NORMAL', 120, 'BOOM');");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('SACRED FIRE', 'FIRE', 100, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('MIST BALL', 'PSYCHYC', 90, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('LUSTER PURGE', 'PSYCHYC', 90, NULL);");

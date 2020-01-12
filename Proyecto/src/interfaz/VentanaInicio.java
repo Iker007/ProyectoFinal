@@ -7,21 +7,22 @@ import java.util.logging.Logger;
 import javax.swing.*;
 
 import clases.Entrenador;
-import database.BDException;
 
 public class VentanaInicio extends JFrame implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel fondo;
 	private JLabel fondo2;
 	private JPanel hueco1;
 	private JPanel hueco2;
 	private JPanel hueco3;
 	private JPanel hueco4;
-	// private JPanel hueco5;
 	private JPanel hueco6;
 	private JPanel hueco7;
 	private JPanel hueco8;
-	// private JPanel hueco9;
 	private JPanel PanelEntrenador1;
 	private JPanel PanelEntrenador2;
 	private JPanel Equipo1;
@@ -89,16 +90,9 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		nombre1.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
 		PanelEntrenador1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 85));
 
-		// PanelEntrenador1.setLayout(new GridLayout(1, 3));
-		// hueco5 = new JPanel();
-		// PanelEntrenador1.add(hueco5);
-		// hueco5.setVisible(false);
 		PanelEntrenador1.add(nombre1);
 		PanelEntrenador1.setBackground(new Color(0, 0, 0, 0));
 
-		// hueco9 = new JPanel();
-		// PanelEntrenador1.add(hueco9);
-		// hueco9.setVisible(false);
 		fondo.add(PanelEntrenador1);
 
 		hueco1 = new JPanel();
@@ -154,11 +148,6 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		entrenador1.setLayout(new FlowLayout());
 		fondo.add(entrenador1);
 		
-
-		// entrenador1 = new JLabel(new
-		// ImageIcon("C:\\Users\\34619\\Desktop\\Uni\\Programacion\\ImagenesProyecto\\ApacheKawaii.png"));
-		// fondo.add(entrenador1);
-
 		ImagenVS = new ImageIcon(getClass().getResource("/resources/Vs.png"));
 		ImageVS2 = ImagenVS.getImage();
 		NewImageVS = ImageVS2.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
@@ -224,10 +213,6 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		Equipo2.setLayout(new FlowLayout());
 		fondo.add(Equipo2);
 
-		// pokemon2 = new JPanel();
-		// pokemon2.setBackground(Color.GREEN);
-		// fondo.add(pokemon2);
-
 		hueco3 = new JPanel();
 		fondo.add(hueco3);
 		hueco3.setVisible(false);
@@ -254,15 +239,9 @@ public class VentanaInicio extends JFrame implements ActionListener {
 				dispose();
 				logger_Inicio.info("Creando VentanaCombate");
 				VentanaCombate v;
-				try {
-					v = new VentanaCombate(entrenadorActual, eleccionAvatar, rojo);
-					v.setVisible(true);
-					logger_Inicio.info("Se ha creado ventanaCombate");
-
-				} catch (BDException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				v = new VentanaCombate(entrenadorActual, eleccionAvatar, rojo);
+				v.setVisible(true);
+				logger_Inicio.info("Se ha creado ventanaCombate");
 				
 			}
 		});
@@ -294,11 +273,6 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		imageIcon = new ImageIcon(newimg); // vuelve a transformarlo
 		logger_Inicio.info("Ajustando sprites");
 		return imageIcon;
-	}
-
-	public static void main(String[] args) {
-		// VentanaInicio a = new VentanaInicio(entrenadorActual);
-
 	}
 
 	@Override

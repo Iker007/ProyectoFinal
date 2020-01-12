@@ -14,8 +14,6 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
@@ -36,6 +34,10 @@ import database.BDException;
 import database.GestorBD;
 
 public class VentanaLogin extends JFrame implements ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel pContent;
 	private JPanel pTitulo;
 	private JPanel pBottom;
@@ -282,7 +284,6 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		logger_Login.info("Creando la ventana");
 		VentanaLogin v = new VentanaLogin();
-		//
 		v.setVisible(true);
 		
 		

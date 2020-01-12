@@ -1,10 +1,13 @@
 package clases;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Pokemon implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private int id;
 	private Tipo tipo1;
