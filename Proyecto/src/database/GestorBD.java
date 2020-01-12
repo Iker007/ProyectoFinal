@@ -76,6 +76,16 @@ public class GestorBD {
 			throw new BDException("No se pudo insertar la lista de la tabla 'Entrenador'", e1);
 		}
 	}
+	
+	public void actualizarScore(Entrenador e) throws BDException, ClassNotFoundException{
+		try(Statement stmt = connection.createStatement()){
+			stmt.executeUpdate("UPDATE ENTRENADOR SET SCORE = " +e.getScore()+ " WHERE USUARIO = '" +e.getUsuario()+"'); ");
+			LOG_GestorBD.info("Se ha actualizado el score de " + e.getUsuario());
+		}catch (SQLException e2) {
+			LOG_GestorBD.info("No se pudo actualizar el score de la tabla 'Entrenador'");
+			throw new BDException("No se pudo actualizar el score", e2);
+		}
+	}
 
 	public List<Tipo> obtenerTodosTipos() throws BDException {
 		List<Tipo> tipos = new ArrayList<Tipo>();

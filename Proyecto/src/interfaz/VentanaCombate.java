@@ -23,7 +23,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.table.TableColumn;
 
 import clases.Entrenador;
@@ -99,7 +101,11 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		loggerDimension = new Dimension(loggerWidth, loggerHeigth);
 		logger.setPreferredSize(loggerDimension);
 		pComentarista = new JPanel();
-		pComentarista.add(logger);
+		
+		JScrollPane scroll = new JScrollPane ( logger );
+	    scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
+		pComentarista.add(scroll);
+		
 		add(pComentarista, BorderLayout.EAST);
 		movimientosDimension = new Dimension(20, 100);
 		pMovimientos = new JPanel(new GridLayout(1, 2));
