@@ -1,5 +1,6 @@
 package interfaz;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -68,6 +69,14 @@ public class VentanaFinCombate extends JFrame {
     private Image imagenV2;
     private Image newImagenV;
     private JLabel victoria;
+    private ImageIcon imagenL;
+    private Image imagenL2;
+    private Image newImagenL;
+    private JLabel liga;
+    private JPanel pEntrenador;
+    private JPanel fondo;
+    private JLabel fondo2;
+
 	private static String eleccionAvatar;
 	private List<Entrenador> entrenadores;
 	private List<Pokemon> pokemons;
@@ -89,6 +98,12 @@ public class VentanaFinCombate extends JFrame {
 		cerrarSesion = new JButton("Cerrar sesión");
 		cerrarSesion.setPreferredSize(new Dimension(200, 50));
 		
+		fondo2 = new JLabel(new ImageIcon(getClass().getResource("/resources/League.jpg")));
+		fondo = new JPanel();
+		fondo.setBackground(new Color(0, 0, 0, 0));
+		fondo2.setLayout(new FlowLayout());
+		fondo.setLayout(new GridLayout(2, 1));
+		fondo.setPreferredSize(new Dimension(1000, 1000));
 		
 		tipos = baseDeDatos.obtenerTodosTipos();		
 		movimientos = baseDeDatos.obtenerTodosMovimientos(tipos);
@@ -96,28 +111,31 @@ public class VentanaFinCombate extends JFrame {
 		entrenadores = baseDeDatos.obtenerTodosUsuarios(pokemons);
 
 		setResizable(false);
-		this.setSize(1100, 1000);
+		this.setSize(1000, 1000);
 		this.setVisible(true);
 		this.setTitle("Pokemon Showdown");
-		this.setLayout(new GridLayout(2, 1));
+		this.setLayout(new BorderLayout());
 		
 		panel2 = new JPanel();
-		panel2.setLayout(new GridLayout(2,3));
+		panel2.setLayout(new GridLayout(1,3));
 		panel2.setBackground(Color.BLACK);
 		
-		hueco1 = new JPanel();
-		hueco1.setVisible(false);
-		hueco2 = new JPanel();
-		hueco2.setVisible(false);
-		hueco3 = new JPanel();
-		hueco3.setVisible(false);
-		panel2a = new JPanel(new FlowLayout());
+		panel2a = new JPanel();
+		panel2b = new JPanel(); 
+		panel2c = new JPanel(); 
 		panel2a.add(cerrarSesion);
-		panel2b = new JPanel(new FlowLayout());
 		panel2b.add(revancha);
-		panel2c = new JPanel(new FlowLayout());
 		panel2c.add(salir);
-		panel2.add(hueco1);
+		panel2.add(panel2a);
+		panel2.add(panel2b);
+		panel2.add(panel2c);
+		panel2a.setBackground(new Color(0, 0, 0, 0));
+		panel2b.setBackground(new Color(0, 0, 0, 0));
+		panel2c.setBackground(new Color(0, 0, 0, 0));
+		
+		panel1 = new JPanel();
+		panel1.setLayout(new GridLayout(2,1));
+		panel1.setBackground(new Color(0, 0, 0, 0));
 		
 		if(ganador.getUsuario().equals("RED")) {
 			imagenENT = new ImageIcon(getClass().getResource("/resources/Red.png"));
@@ -127,12 +145,12 @@ public class VentanaFinCombate extends JFrame {
 			
 			imagenD = new ImageIcon(getClass().getResource("/resources/Defeat.png"));
 			imagenD2 = imagenD.getImage();
-			newImagenD = imagenD2.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
+			newImagenD = imagenD2.getScaledInstance(500, 300, java.awt.Image.SCALE_SMOOTH);
 			imagenD = new ImageIcon(newImagenD);
 
 			derrota = new JLabel((imagenD));
 			derrota.setBackground(new Color(0, 0, 0, 0));
-			panel2.add(derrota);
+			panel1.add(derrota);
 			
 			}else if (eleccionAvatar.equals("Chico")) {
 				imagenENT = new ImageIcon(getClass().getResource("/resources/" + eleccionAvatar + ".png"));
@@ -142,12 +160,12 @@ public class VentanaFinCombate extends JFrame {
 				
 				imagenV = new ImageIcon(getClass().getResource("/resources/Victory.png"));
 				imagenV2 = imagenV.getImage();
-				newImagenV = imagenV2.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
+				newImagenV = imagenV2.getScaledInstance(500, 300, java.awt.Image.SCALE_SMOOTH);
 				imagenV = new ImageIcon(newImagenV);
 
 				victoria = new JLabel((imagenV));
 				victoria.setBackground(new Color(0, 0, 0, 0));
-				panel2.add(victoria);
+				panel1.add(victoria);
 			} else if (eleccionAvatar.equals("Chica")) {
 				imagenENT = new ImageIcon(getClass().getResource("/resources/" + eleccionAvatar + ".png"));
 				imagenENTB = imagenENT.getImage();
@@ -156,42 +174,46 @@ public class VentanaFinCombate extends JFrame {
 				
 				imagenV = new ImageIcon(getClass().getResource("/resources/Victory.png"));
 				imagenV2 = imagenV.getImage();
-				newImagenV = imagenV2.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
+				newImagenV = imagenV2.getScaledInstance(500, 300, java.awt.Image.SCALE_SMOOTH);
 				imagenV = new ImageIcon(newImagenV);
 
 				victoria = new JLabel((imagenV));
 				victoria.setBackground(new Color(0, 0, 0, 0));
-				panel2.add(victoria);
+				panel1.add(victoria);
 			} else if (eleccionAvatar.equals("Otros")) {
-				imagenENT = new ImageIcon(getClass().getResource("/resources/" + eleccionAvatar + ".png"));
+				imagenENT = new ImageIcon(getClass().getResource("/resources/" + "ApacheKawaii" + ".png"));
 				imagenENTB = imagenENT.getImage();
-				newImagenENT = imagenENTB.getScaledInstance(300, 200, java.awt.Image.SCALE_SMOOTH);
+				newImagenENT = imagenENTB.getScaledInstance(400, 300, java.awt.Image.SCALE_SMOOTH);
 				imagenENT = new ImageIcon(newImagenENT);
 				
 				imagenV = new ImageIcon(getClass().getResource("/resources/Victory.png"));
 				imagenV2 = imagenV.getImage();
-				newImagenV = imagenV2.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
+				newImagenV = imagenV2.getScaledInstance(500, 300, java.awt.Image.SCALE_SMOOTH);
 				imagenV = new ImageIcon(newImagenV);
 
 				victoria = new JLabel((imagenV));
 				victoria.setBackground(new Color(0, 0, 0, 0));
-				panel2.add(victoria);
+				panel1.add(victoria);
 			}		
 			entrenador = new JLabel((imagenENT));
 			entrenador.setBackground(new Color(0, 0, 0, 0));
 		
-			panel1 = new JPanel();
-			panel1.setBackground(Color.RED);
+			imagenL = new ImageIcon(getClass().getResource("/resources/League.jpg"));
+			imagenL2 = imagenL.getImage();
+			newImagenL = imagenL2.getScaledInstance(1000, 1000, java.awt.Image.SCALE_SMOOTH);
+			imagenL = new ImageIcon(newImagenL);
+			
+			
 			panel1.add(entrenador);
-			this.add(panel1);
+			fondo.add(panel1);
 			
-			panel2.add(hueco3);
-			panel2.add(panel2a);
-			panel2.add(panel2b);
-			panel2.add(panel2c);
-			this.add(panel2);
+			panel2.setBackground(new Color(0, 0, 0, 0));
+			fondo.add(panel2);
 			
-		 mb=new JMenuBar();
+			fondo2.add(fondo);
+			this.add(fondo2);
+			
+		   mb=new JMenuBar();
 	        setJMenuBar(mb);
 	        menu1=new JMenu("Opciones");
 	        mb.add(menu1);
