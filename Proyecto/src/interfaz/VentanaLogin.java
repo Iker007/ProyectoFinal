@@ -171,13 +171,13 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent event) {
-		String s = username.getText();
-		String p = password.getText();
+		String s = username.getText().toLowerCase();
+		String p = password.getText().toLowerCase();
 
 		if (event.getSource() == signInButton) {
 
-			s = username.getText();
-			p = password.getText();
+			s = username.getText().toLowerCase();
+			p = password.getText().toLowerCase();
 			try {
 				usuarios = baseDeDatos.obtenerTodosUsuarios(pokemons);
 			} catch (BDException e) {
@@ -187,7 +187,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 			if (!s.isEmpty() && !p.isEmpty()) {
 				int existe = 1;
 				for (Entrenador entrenador : usuarios) {
-					if (entrenador.getUsuario().equals(s) && entrenador.getContraseña().equals(p)) {
+					if (entrenador.getUsuario().toLowerCase().equals(s) && entrenador.getContraseña().equals(p)) {
 						JOptionPane.showMessageDialog(this, "Se ha realizado con exito");
 						existe++;
 						entrenadorActual = entrenador;
@@ -222,7 +222,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 					e3.printStackTrace();
 				}
 				for (Entrenador entrenador : usuarios) {
-					if (entrenador.getUsuario().equals(s)) {
+					if (entrenador.getUsuario().toLowerCase().equals(s)) {
 						JOptionPane.showMessageDialog(this, "El usuario ya existe");
 						existe++;
 					}
@@ -282,6 +282,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		logger_Login.info("Creando la ventana");
 		VentanaLogin v = new VentanaLogin();
+		//
 		v.setVisible(true);
 		
 		

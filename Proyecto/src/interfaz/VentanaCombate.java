@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.LayoutManager;
@@ -23,9 +24,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.table.TableColumn;
 
 import clases.Entrenador;
@@ -77,6 +79,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	private Image ImagenPOK1B;
 	private Image NewImagenPOK1;
 	private JLabel zonaCombate;
+	private JScrollPane jScrollPane ;
 
 	private int contadorAliado = 0;
 	private int contadorEnemigo = 0;
@@ -84,7 +87,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	private VentanaFinCombate ventanaFinCombate;
 
 	public VentanaCombate(Entrenador entrenadorActual, String eleccionAvatar, Entrenador rojo) {
-		this.setSize(new Dimension(1200, 800));
+		this.setSize(new Dimension(1400, 800));
 		setTitle("POKEMON SHOWDOWN");
 		setLayout(new BorderLayout());
 		this.entrenador = entrenadorActual;
@@ -93,19 +96,20 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		pokemonActualAliado = entrenador.getPokemons().get(0);
 		pokemonRojo = rojo.getPokemons().get(0);
 		logger = new JTextArea();
-		textoLogger = "Datos del combate:";
+		
+		textoLogger = "Datos del combate:" + "\n Te ha retado el entrenador Rojo";
 		logger.setText(textoLogger);
 		logger.setEditable(false);
-		loggerWidth = 200;
-		loggerHeigth = 810;
-		loggerDimension = new Dimension(loggerWidth, loggerHeigth);
-		logger.setPreferredSize(loggerDimension);
+		logger.setFont(new Font("Agency FB", Font.BOLD, 16));
+		jScrollPane = new JScrollPane();
+		jScrollPane.getViewport().setBackground(Color.white);
+		jScrollPane.getViewport().add(logger);
+		jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		pComentarista = new JPanel();
-		
-		JScrollPane scroll = new JScrollPane ( logger );
-	    scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
-		pComentarista.add(scroll);
-		
+		jScrollPane.setPreferredSize(new Dimension(200,750));
+		pComentarista.add(jScrollPane);
+		pComentarista.setBorder(new LineBorder(Color.BLACK));
 		add(pComentarista, BorderLayout.EAST);
 		movimientosDimension = new Dimension(20, 100);
 		pMovimientos = new JPanel(new GridLayout(1, 2));
@@ -220,6 +224,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 					}
 				}
 				inicioDeTurno();
+				
 			}
 		});
 
@@ -259,7 +264,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		zonaCombate.removeAll();
 
 		pokemonActualAliado = entrenador.getPokemons().get(contadorAliado);
-		String cadena = "\n\t" + " Adelante " + pokemonActualAliado.getNombre() + "\n\t";
+		String cadena = "\n" + " Adelante " + pokemonActualAliado.getNombre() + "\n";
 		textoLogger += cadena;
 
 		ImagenPOK1 = new ImageIcon(
@@ -288,7 +293,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		zonaCombate.removeAll();
 
 		pokemonRojo = rojo.getPokemons().get(contadorEnemigo);
-		String cadena = "\n\t" + " Rojo sacó a " + pokemonRojo.getNombre() + "\n\t";
+		String cadena = "\n" + " Rojo sacó a " + pokemonRojo.getNombre() + "\n";
 		textoLogger += cadena;
 
 		ImagenPOK2 = new ImageIcon(
@@ -334,8 +339,8 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	}
 
 	public void atacarJugador(Movimiento movimiento) {
-		String cadena = "\n\t" + pokemonActualAliado.getNombre() + " usó " + movimiento.getNombre();
-		textoLogger += cadena;
+		String cadena = "\n" + pokemonActualAliado.getNombre() + " usó " + movimiento.getNombre();
+		textoLogger += cadena + "\n";
 		logger.setText(textoLogger);
 		if ((pokemonRojo.getDefense() - (movimiento.getDaño() + pokemonActualAliado.getAttack())) < -10) {
 			hpPokemonEnemigo.setValue(hpPokemonEnemigo.getValue()
@@ -358,9 +363,9 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	}
 
 	public void atacarRojo(Movimiento movimiento) {
-		String cadena = "\n\t" + pokemonRojo.getNombre() + " usó " + movimiento.getNombre();
+		String cadena = "\n" + pokemonRojo.getNombre() + " usó " + movimiento.getNombre();
 
-		textoLogger += cadena + "\n\t";
+		textoLogger += cadena + "\n";
 		logger.setText(textoLogger);
 		if ((pokemonActualAliado.getDefense() - (movimiento.getDaño() + pokemonRojo.getAttack())) < -10) {
 			hpPokemonAliado.setValue(hpPokemonAliado.getValue()
