@@ -39,8 +39,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel pContent;
-	private JPanel pTitulo;
-	private JPanel pBottom;
+	
 	private JPanel pDatos;
 	private JPanel pUsername;
 	private JPanel pPassword;
@@ -52,26 +51,27 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	private JButton signUpButton;
 	private JButton signInButton;
 	private JButton salir;
-	private ImageIcon imageIconTitle;
+	
 	private JLabel avatar;
 	private JComboBox<String> avatarComboBox;
 	private JPanel pComboBox;
 	private String[] avatarNames;
 	private JLabel background;
-	private Image image;
+	
 	private JPanel blanco;
-	private JPanel blanco1;
-	private JMenuBar menuBar;
-	private Color southPanel;
+	
 	private Entrenador rojo;
 	private Dimension tamanyoBotones;
 	private String eleccionAvatar;
+	
 	private GestorBD baseDeDatos = new GestorBD();
 	static Entrenador entrenadorActual;
+	
 	public List<Entrenador> usuarios = new ArrayList<Entrenador>();
 	public List<Pokemon> pokemons = new ArrayList<Pokemon>();
 	public List<Tipo> tipos = new ArrayList<Tipo>();
 	public List<Movimiento> movimientos = new ArrayList<Movimiento>();
+	
 	private static Logger logger_Login = Logger.getLogger(VentanaLogin.class.getName());
 	
 	public VentanaLogin() throws BDException {
@@ -80,12 +80,13 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		this.setTitle("Pokemon Showdown");
 		this.setResizable(false);
 		logger_Login.info("Ajustando la ventana");
+		//Conexion a la BD y Obtencio de los datos
 		baseDeDatos.conectar();
 		tipos = baseDeDatos.obtenerTodosTipos();
-		
 		movimientos = baseDeDatos.obtenerTodosMovimientos(tipos);
 		pokemons = baseDeDatos.obtenerTodosPokemon(movimientos);
 		usuarios = baseDeDatos.obtenerTodosUsuarios(pokemons);
+		//Ajustes para la ventana y componentes
 		usernameLabel = new JLabel("Usuario:");
 		username = new JTextField();
 		username.setEditable(true);
@@ -118,7 +119,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 
 		blanco = new JPanel(new FlowLayout());
 		blanco.setBackground(Color.black);
-		blanco1 = new JPanel(new FlowLayout());
+		
 		pContent.add(pDatos, BorderLayout.SOUTH);
 		blanco.setPreferredSize(new Dimension(300, 300));
 		background = new JLabel(new ImageIcon(getClass().getResource("/resources/PokemonShowdownTitle.jpg")));
@@ -175,7 +176,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		String s;
 		String p;
-
+		//Inicia sesion si el usuario y la contrasena son iguales 
 		if (event.getSource() == signInButton) {
 
 			s = username.getText().toLowerCase();
@@ -211,7 +212,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
-
+		//Registra el usuario y mira si existe, si no existe entonces se crea con su contraseña y se le asignan los pokemons
 		if (event.getSource() == signUpButton) {
 			int existe = 1;
 			s = username.getText().toLowerCase();

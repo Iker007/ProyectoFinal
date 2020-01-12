@@ -34,37 +34,33 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	private JPanel pCombate;
 	private JPanel pContent;
 	private JPanel pMovimientos;
-	private JPanel pEntrenador1;
-	private JPanel pEntrenador2;
+	
 	private JPanel pPokemon1;
 	private JPanel pPokemon2;
 	private JPanel pPokemon1Hp;
 	private JPanel pPokemon2Hp;
-	private JPanel pEquipoPokemon;
+	
 	private JPanel pComentarista;
 	private JButton movimiento1;
 	private JButton movimiento2;
 	private JTextArea logger;
-	private int ventanaWidth;
-	private int ventanaHeigth;
-	private Dimension ventanaDimension;
+	
 	private JProgressBar hpPokemonAliado;
 	private JProgressBar hpPokemonEnemigo;
-	private JLabel hp;
+	
 	private JLabel lblNombreAliado;
 	private JLabel lblNombreEnemigo;
-	private JComboBox comboBox;
+	
 	private String textoLogger;
-	private int loggerWidth;
-	private int loggerHeigth;
-	private Dimension loggerDimension;
+
+
 	private Dimension movimientosDimension;
 	private Entrenador entrenador;
 	private Entrenador rojo;
 	private Pokemon pokemonActualAliado;
 	private Pokemon pokemonRojo;
 	private String avatar;
-	private List<Pokemon> equipo;
+	
 	private JLabel pokemonRival;
 	private ImageIcon ImagenPOK2;
 	private Image ImagenPOK2B;
@@ -361,20 +357,20 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		}
 
 	}
-
+	//Pone los botones desactivados
 	public void esconderBotones() {
 		movimiento1.setEnabled(false);
 		movimiento2.setEnabled(false);
 		logger_Combate.info("Escondiendo botones en ventana Combate");
 	}
-
+	//Pone los botones activados
 	public void inicioDeTurno() {
 		movimiento1.setEnabled(true);
 		movimiento2.setEnabled(true);
 		logger_Combate.info("Poniendo botones en ventana Combate");
 
 	}
-
+	
 	public void atacarJugador(Movimiento movimiento) throws BDException {
 		String cadena = "\n" + pokemonActualAliado.getNombre() + " usó " + movimiento.getNombre();
 		textoLogger += cadena + "\n";
@@ -453,6 +449,8 @@ public class VentanaCombate extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		// TODO Auto-generated method stub
+		
 	}
+
 }
