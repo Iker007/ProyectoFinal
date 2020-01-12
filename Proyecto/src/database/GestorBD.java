@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Logger;
 
 import clases.Entrenador;
 import clases.Movimiento;
@@ -16,30 +18,36 @@ import clases.Tipo;
 public class GestorBD {
 
 	private static Connection connection = null;
-
+	private final static Logger LOG_GestorBD = Logger.getLogger(CreacionBD.class.getName());
+	private final static ConsoleHandler consoleHandlerGestorBD = new ConsoleHandler();
 	public GestorBD() throws BDException {
-
+		LOG_GestorBD.addHandler(consoleHandlerGestorBD);
 	}
 
 	public void conectar() throws BDException {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			connection = DriverManager.getConnection("jdbc:sqlite:showdown");
+			LOG_GestorBD.info("Conectado a la base datos showdown");
 		} catch (ClassNotFoundException e) {
+			LOG_GestorBD.info("No se pudo cargar el driver");
 			throw new BDException("No se pudo cargar el driver", e);
 		} catch (SQLException e) {
+			LOG_GestorBD.info("No se ha podido conectar a la BD");
 			throw new BDException("No se ha podido conectar a la BD", e);
 		}
-
 	}
 
 	public void desconectar() throws BDException {
 		try {
 			if (connection != null) {
 				connection.close();
+				LOG_GestorBD.info("Desconexion a la base datos showdown");
 			}
 		} catch (SQLException e) {
+			LOG_GestorBD.info("No se pudo conectar a la base datos showdown");
 			throw new BDException("No se ha podido cerrar la conexion a la BD", e);
+			
 		}
 
 	}
@@ -60,10 +68,12 @@ public class GestorBD {
 					+ e.getPokemons().get(1).getId() + "," + e.getPokemons().get(2).getId() + ","
 					+ e.getPokemons().get(3).getId() + "," + e.getPokemons().get(4).getId() + ","
 					+ e.getPokemons().get(5).getId() + ");");
+			LOG_GestorBD.info("Se ha cargado el entrenador" + e.getUsuario());
 		}
 
 		catch (SQLException e1) {
-			throw new BDException("No se pudo obtener la lista de la tabla 'Entrenador'", e1);
+			LOG_GestorBD.info("No se pudo insertar a la lista de la tabla 'Entrenador'");
+			throw new BDException("No se pudo insertar la lista de la tabla 'Entrenador'", e1);
 		}
 	}
 
@@ -76,9 +86,12 @@ public class GestorBD {
 
 				t.setNombre(rs.getString("NOMBRE_T"));
 				tipos.add(t);
+				LOG_GestorBD.info("Se ha obtenido correctamente la base de datos");
 			}
 			return tipos;
+			
 		} catch (SQLException e1) {
+			LOG_GestorBD.info("No se pudo obtener la lista de la tabla 'Tipos'\"");
 			throw new BDException("No se pudo obtener la lista de la tabla 'Tipos'", e1);
 		}
 	}
@@ -97,8 +110,10 @@ public class GestorBD {
 				m.setEfecto(rs.getString("EFECTO"));
 				movimientos.add(m);
 			}
+			LOG_GestorBD.info("Se ha obtenido correctamente todos los movimientos");
 			return movimientos;
 		} catch (SQLException e1) {
+			LOG_GestorBD.info("No se pudo obtener la lista de la tabla 'Movimientos'");
 			throw new BDException("No se pudo obtener la lista de la tabla 'Movimientos'", e1);
 		}
 	}
@@ -143,6 +158,7 @@ public class GestorBD {
 				}
 				pokemon.add(p);
 			}
+			LOG_GestorBD.info("Se ha obtenido correctamente todos los movimientos");
 			return pokemon;
 		} catch (SQLException e1) {
 			throw new BDException("No se pudo obtener la lista de la tabla 'Pokemon'", e1);
@@ -272,7 +288,7 @@ public class GestorBD {
 		} catch (SQLException e) {
 			throw new BDException("No se pudo obtener la lista de la tabla 'Entrenador'", e);
 		}
-
+		LOG_GestorBD.info("Se ha obtenido correctamente todos los movimientos");
 		return usuarios;
 	}
 

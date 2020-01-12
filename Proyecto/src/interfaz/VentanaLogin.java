@@ -77,8 +77,10 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		this.setLayout(new BorderLayout());
 		this.setTitle("Pokemon Showdown");
 		this.setResizable(false);
+		logger_Login.info("Ajustando la ventana");
 		baseDeDatos.conectar();
 		tipos = baseDeDatos.obtenerTodosTipos();
+		
 		movimientos = baseDeDatos.obtenerTodosMovimientos(tipos);
 		pokemons = baseDeDatos.obtenerTodosPokemon(movimientos);
 		usuarios = baseDeDatos.obtenerTodosUsuarios(pokemons);
@@ -154,11 +156,13 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		salir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				logger_Login.info("Cerrando la ventana");
 				System.exit(0);
 			}
 		});
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
+				logger_Login.info("Cerrando la ventana");
 				System.exit(0);
 				
 			}
@@ -189,6 +193,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 						entrenadorActual = entrenador;
 						dispose();
 						eleccionAvatar = (String) avatarComboBox.getSelectedItem();
+						logger_Login.info("Creando la ventana inicio");
 						VentanaInicio v = new VentanaInicio(entrenadorActual, eleccionAvatar, rojo);
 						v.setVisible(true);
 
@@ -254,6 +259,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 					e.setScore(0);
 					e.setPokemons(pokemons);
 					entrenadorActual = e;
+					logger_Login.info("Se ha cargado la el entrenador exitosamente");
 					try {
 						baseDeDatos.insertarEntrenador(e);
 						usuarios = baseDeDatos.obtenerTodosUsuarios(pokemons);
@@ -274,12 +280,10 @@ public class VentanaLogin extends JFrame implements ActionListener {
 
 	public static void main(String[] args) throws BDException {
 		// TODO Auto-generated method stub
+		logger_Login.info("Creando la ventana");
 		VentanaLogin v = new VentanaLogin();
 		v.setVisible(true);
 		
-		//logger_Login.setLevel(Level.ALL);
-		//try {
-			//H
-		//}
+		
 	}
 }

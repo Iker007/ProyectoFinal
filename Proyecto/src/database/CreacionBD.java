@@ -5,21 +5,28 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Logger;
 
 public class CreacionBD {
+	private final static Logger LOG_creacionBD = Logger.getLogger(CreacionBD.class.getName());
+	private final static ConsoleHandler consoleHandlerCreacionBD = new ConsoleHandler();
 
 	public static void main(String[] args) throws ClassNotFoundException {
-
+		LOG_creacionBD.addHandler(consoleHandlerCreacionBD);
+		
 		// Carga del sqlite-JDBC driver
 		Class.forName("org.sqlite.JDBC");
-
-		Connection connection = null;
-		try {
+		
+		LOG_creacionBD.info("Conectando a la base de datos");
+		try (Connection connection = DriverManager.getConnection("jdbc:sqlite:showdown"); Statement statement = connection.createStatement();){
 			// Crear la conexión
-			connection = DriverManager.getConnection("jdbc:sqlite:showdown");
-			Statement statement = connection.createStatement();
+			
+			
+			
 			statement.setQueryTimeout(30); // poner timeout 30 msg
-
+			LOG_creacionBD.info("Se ha concetado a la base de datos");
+			
 			statement.executeUpdate("drop table if exists tipos");
 			statement.executeUpdate("drop table if exists pokemon");
 			statement.executeUpdate("drop table if exists movimientos");
@@ -29,6 +36,7 @@ public class CreacionBD {
 			statement.executeUpdate("CREATE TABLE MOVIMIENTOS(" + "NOMBRE_M VARCHAR(20) NOT NULL,"
 					+ "TIPO VARCHAR(20) NOT NULL," + "DAMAGE INT (4) DEFAULT NULL," + "EFECTO VARCHAR(20) DEFAULT NULL,"
 					+ "PRIMARY KEY(NOMBRE_M)," + "FOREIGN KEY(TIPO) REFERENCES TIPOS(NOMBRE_T));");
+			LOG_creacionBD.info("Se ha creado la tabla tipos");
 			statement.executeUpdate("CREATE TABLE POKEMON(" + "ID_P INT(3) NOT NULL," + "NOMBRE_P VARCHAR(20),"
 					+ "TIPO1 VARCHAR(20)," + "TIPO2 VARCHAR(20) DEFAULT NULL," + "ATAQUE INT(6)," + "DEFENSA INT(6),"
 					+ "HP INT (6)," + "VELOCIDAD INT (6)," + "MOVIMIENTO1 VARCHAR(20) NOT NULL,"
@@ -37,6 +45,7 @@ public class CreacionBD {
 					+ "FOREIGN KEY (MOVIMIENTO2) REFERENCES MOVIMIENTOS(NOMBRE_M),"
 					+ "FOREIGN KEY (TIPO1) REFERENCES TIPOS(NOMBRE_T),"
 					+ "FOREIGN KEY (TIPO2) REFERENCES TIPOS(NOMBRE_T));");
+			LOG_creacionBD.info("Se ha creado la tabla pokemon");
 			statement.executeUpdate("CREATE TABLE ENTRENADOR(" + "USUARIO VARCHAR(20) NOT NULL,"
 					+ "CONTRASEÑA VARCHAR(20) NOT NULL," + "SCORE INT(4) DEFAULT 0," + "POKEMON1 INT(3) NOT NULL,"
 					+ "POKEMON2 INT(3) NOT NULL," + "POKEMON3 INT(3) NOT NULL," + "POKEMON4 INT(3) NOT NULL,"
@@ -47,6 +56,8 @@ public class CreacionBD {
 					+ "FOREIGN KEY (POKEMON4) REFERENCES POKEMON(ID_P),"
 					+ "FOREIGN KEY (POKEMON5) REFERENCES POKEMON(ID_P),"
 					+ "FOREIGN KEY (POKEMON6) REFERENCES POKEMON(ID_P));");
+			LOG_creacionBD.info("Se ha creado la tabla entrenador");
+			
 			int res = statement.executeUpdate("INSERT INTO TIPOS VALUES('NORMAL')");
 			// System.out.println( res ); para asegurarse de que se ejecuta
 			res = statement.executeUpdate("INSERT INTO TIPOS VALUES('FIRE');");
@@ -67,6 +78,7 @@ public class CreacionBD {
 			res = statement.executeUpdate("INSERT INTO TIPOS VALUES('STEEL');");
 			res = statement.executeUpdate("INSERT INTO TIPOS VALUES('FAIRY');");
 			ResultSet rs = statement.executeQuery("select * from tipos");
+			LOG_creacionBD.info("Se han insertado los tipos en la tabla tipos");
 			while (rs.next()) {
 				// Leer el resultset
 				System.out.println("name = " + rs.getString("nombre_t"));
@@ -103,6 +115,7 @@ public class CreacionBD {
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('ICE BEAM', 'ICE', 90, NULL);");
 			res = statement.executeUpdate("INSERT INTO MOVIMIENTOS VALUES('SHADOW BALL', 'GHOST', 90, NULL);");
 			rs = statement.executeQuery("select * from MOVIMIENTOS");
+			LOG_creacionBD.info("Se han metido los datos de movimiento");
 			while (rs.next()) {
 				// Leer el resultset
 				System.out.println("name = " + rs.getString("nombre_m"));
@@ -152,6 +165,7 @@ public class CreacionBD {
 			res = statement.executeUpdate(
 					"INSERT INTO POKEMON VALUES(19, 'LAPRAS', 'WATER', 'ICE', 100, 150, 800, 120, 'ICE BEAM', 'HYDRO PUMP');");
 			rs = statement.executeQuery("select * from pokemon");
+			LOG_creacionBD.info("Se han insertado todos los pokemons");
 			while (rs.next()) {
 				// Leer el resultset
 				System.out.println("id = " + rs.getInt("id_p"));
@@ -168,6 +182,7 @@ public class CreacionBD {
 			}
 			res = statement.executeUpdate(
                     "INSERT INTO ENTRENADOR VALUES('RED', 'C', 999, 14, 15, 16, 17, 18, 19);");
+			LOG_creacionBD.info("Se han metido los datos de red");
 			rs = statement.executeQuery("select * from entrenador");
 			while(rs.next()) {
 			System.out.println("usuario = " + rs.getString("usuario"));
@@ -183,16 +198,8 @@ public class CreacionBD {
 			}
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
-		} finally {
-			try {
-				if (connection != null)
-					connection.close();
-				
-			} catch (SQLException e) {
-				// Cierre de conexión fallido
-				System.err.println(e);
-			}
-		}
+			LOG_creacionBD.info(e.getMessage());
+		} 
 	}
 
 }

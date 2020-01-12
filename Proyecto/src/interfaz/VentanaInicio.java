@@ -2,6 +2,8 @@ package interfaz;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.logging.Logger;
+
 import javax.swing.*;
 
 import clases.Entrenador;
@@ -66,7 +68,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 	private String avatar;
 	private Entrenador rojo;
 	static String eleccionAvatar;
-
+	private static Logger logger_Inicio = Logger.getLogger(VentanaInicio.class.getName());
 	public VentanaInicio(Entrenador entrenadorActual, String eleccionAvatar, Entrenador rojo) {
 
 		this.setLayout(new FlowLayout());
@@ -249,8 +251,10 @@ public class VentanaInicio extends JFrame implements ActionListener {
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
 				dispose();
+				logger_Inicio.info("Creando VentanaCombate");
 				VentanaCombate v = new VentanaCombate(entrenadorActual, eleccionAvatar, rojo);
 				v.setVisible(true);
+				logger_Inicio.info("Se ha creado ventanaCombate");
 			}
 		});
 
@@ -279,6 +283,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		Image image = imageIcon.getImage(); // transformarlo
 		Image newimg = image.getScaledInstance(80, 80, java.awt.Image.SCALE_SMOOTH); // escalarlo con smooth scaling
 		imageIcon = new ImageIcon(newimg); // vuelve a transformarlo
+		logger_Inicio.info("Ajustando sprites");
 		return imageIcon;
 	}
 
