@@ -173,13 +173,13 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent event) {
-		String s = username.getText().toLowerCase();
-		String p = password.getText().toLowerCase();
+		String s;
+		String p;
 
 		if (event.getSource() == signInButton) {
 
 			s = username.getText().toLowerCase();
-			p = password.getText().toLowerCase();
+			p = password.getText();
 			try {
 				usuarios = baseDeDatos.obtenerTodosUsuarios(pokemons);
 			} catch (BDException e) {
@@ -214,7 +214,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 
 		if (event.getSource() == signUpButton) {
 			int existe = 1;
-			s = username.getText();
+			s = username.getText().toLowerCase();
 			p = password.getText();
 
 			if (!s.isEmpty() && !p.isEmpty()) {
