@@ -14,25 +14,25 @@ public class CreacionBD {
 
 	public static void main(String[] args) throws ClassNotFoundException {
 		LOG_creacionBD.addHandler(consoleHandlerCreacionBD);
-		
+
 		// Carga del sqlite-JDBC driver
 		Class.forName("org.sqlite.JDBC");
-		
+
 		LOG_creacionBD.info("Conectando a la base de datos");
 		try (Connection connection = DriverManager.getConnection("jdbc:sqlite:showdown"); Statement statement = connection.createStatement();){
 			// Crear la conexión
-			
-			
-			
+
+
+
 			statement.setQueryTimeout(30); // poner timeout 30 msg
 			LOG_creacionBD.info("Se ha concetado a la base de datos");
-			
+
 			statement.executeUpdate("drop table if exists tipos");
 			statement.executeUpdate("drop table if exists pokemon");
 			statement.executeUpdate("drop table if exists movimientos");
 			statement.executeUpdate("drop table if exists entrenador");
 			statement
-					.executeUpdate("CREATE TABLE TIPOS(" + "NOMBRE_T VARCHAR(20) NOT NULL," + "PRIMARY KEY(NOMBRE_T))");
+			.executeUpdate("CREATE TABLE TIPOS(" + "NOMBRE_T VARCHAR(20) NOT NULL," + "PRIMARY KEY(NOMBRE_T))");
 			statement.executeUpdate("CREATE TABLE MOVIMIENTOS(" + "NOMBRE_M VARCHAR(20) NOT NULL,"
 					+ "TIPO VARCHAR(20) NOT NULL," + "DAMAGE INT (4) DEFAULT NULL," + "EFECTO VARCHAR(20) DEFAULT NULL,"
 					+ "PRIMARY KEY(NOMBRE_M)," + "FOREIGN KEY(TIPO) REFERENCES TIPOS(NOMBRE_T));");
@@ -57,7 +57,7 @@ public class CreacionBD {
 					+ "FOREIGN KEY (POKEMON5) REFERENCES POKEMON(ID_P),"
 					+ "FOREIGN KEY (POKEMON6) REFERENCES POKEMON(ID_P));");
 			LOG_creacionBD.info("Se ha creado la tabla entrenador");
-			
+
 			int res = statement.executeUpdate("INSERT INTO TIPOS VALUES('NORMAL')");
 			// System.out.println( res ); para asegurarse de que se ejecuta
 			res = statement.executeUpdate("INSERT INTO TIPOS VALUES('FIRE');");
@@ -181,20 +181,20 @@ public class CreacionBD {
 				System.out.println();
 			}
 			res = statement.executeUpdate(
-                    "INSERT INTO ENTRENADOR VALUES('RED', 'C', 999, 14, 15, 16, 17, 18, 19);");
+					"INSERT INTO ENTRENADOR VALUES('RED', 'C', 999, 14, 15, 16, 17, 18, 19);");
 			LOG_creacionBD.info("Se han metido los datos de red");
 			rs = statement.executeQuery("select * from entrenador");
 			while(rs.next()) {
-			System.out.println("usuario = " + rs.getString("usuario"));
-			System.out.println("cont = " + rs.getString("contraseña"));
-			System.out.println("score = " + rs.getInt("score"));
-			System.out.println("pok1 = " + rs.getInt("pokemon1"));
-			System.out.println("pok2 = " + rs.getInt("pokemon2"));
-			System.out.println("pok3 = " + rs.getInt("pokemon3"));
-			System.out.println("pok4 = " + rs.getInt("pokemon4"));
-			System.out.println("pok5 = " + rs.getInt("pokemon5"));
-			System.out.println("pok6 = " + rs.getInt("pokemon6"));
-			System.out.println();
+				System.out.println("usuario = " + rs.getString("usuario"));
+				System.out.println("cont = " + rs.getString("contraseña"));
+				System.out.println("score = " + rs.getInt("score"));
+				System.out.println("pok1 = " + rs.getInt("pokemon1"));
+				System.out.println("pok2 = " + rs.getInt("pokemon2"));
+				System.out.println("pok3 = " + rs.getInt("pokemon3"));
+				System.out.println("pok4 = " + rs.getInt("pokemon4"));
+				System.out.println("pok5 = " + rs.getInt("pokemon5"));
+				System.out.println("pok6 = " + rs.getInt("pokemon6"));
+				System.out.println();
 			}
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());

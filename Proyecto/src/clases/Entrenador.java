@@ -15,7 +15,7 @@ public class Entrenador implements Serializable{
 	private List<Pokemon> pokemons;
 
 	public Entrenador() {
-		
+
 	}
 	public Entrenador(String usuario, int score, String contraseña, List<Pokemon> pokemons) {
 		super();

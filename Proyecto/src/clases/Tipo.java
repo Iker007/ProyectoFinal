@@ -8,9 +8,9 @@ public class Tipo implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String nombre;
-	
-	
-	
+
+
+
 	public Tipo() {
 		super();
 	}
@@ -30,5 +30,5 @@ public class Tipo implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 }

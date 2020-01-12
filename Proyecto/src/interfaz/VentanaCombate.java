@@ -34,23 +34,23 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	private JPanel pCombate;
 	private JPanel pContent;
 	private JPanel pMovimientos;
-	
+
 	private JPanel pPokemon1;
 	private JPanel pPokemon2;
 	private JPanel pPokemon1Hp;
 	private JPanel pPokemon2Hp;
-	
+
 	private JPanel pComentarista;
 	private JButton movimiento1;
 	private JButton movimiento2;
 	private JTextArea logger;
-	
+
 	private JProgressBar hpPokemonAliado;
 	private JProgressBar hpPokemonEnemigo;
-	
+
 	private JLabel lblNombreAliado;
 	private JLabel lblNombreEnemigo;
-	
+
 	private String textoLogger;
 
 
@@ -60,7 +60,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	private Pokemon pokemonActualAliado;
 	private Pokemon pokemonRojo;
 	private String avatar;
-	
+
 	private JLabel pokemonRival;
 	private ImageIcon ImagenPOK2;
 	private Image ImagenPOK2B;
@@ -88,7 +88,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		pokemonActualAliado = entrenador.getPokemons().get(0);
 		pokemonRojo = rojo.getPokemons().get(0);
 		logger = new JTextArea();
-		
+
 		textoLogger = "Datos del combate:" + "\n Te ha retado el entrenador Rojo";
 		logger.setText(textoLogger);
 		logger.setEditable(false);
@@ -229,13 +229,13 @@ public class VentanaCombate extends JFrame implements ActionListener {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						} // Ataca con el pokemon y el movimiento
-																				// elegido
+					// elegido
 					if (pokemonEsDerrotado(hpPokemonEnemigo)) {
 						cargarPokemonEnemigo();
 					}
 				}
 				inicioDeTurno();
-				
+
 			}
 		});
 
@@ -280,7 +280,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						} // Ataca con el pokemon y el movimiento
-																				// elegido
+					// elegido
 					if (pokemonEsDerrotado(hpPokemonEnemigo)) {
 						cargarPokemonEnemigo();
 					}
@@ -370,7 +370,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		logger_Combate.info("Poniendo botones en ventana Combate");
 
 	}
-	
+
 	public void atacarJugador(Movimiento movimiento) throws BDException {
 		String cadena = "\n" + pokemonActualAliado.getNombre() + " usó " + movimiento.getNombre();
 		textoLogger += cadena + "\n";
@@ -421,7 +421,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 		if (hppokemon.getValue() <= 0) {
 			logger_Combate.info("Pokemon derrotado");
 			return true;
-			
+
 		}
 		return false;
 	}
@@ -450,7 +450,7 @@ public class VentanaCombate extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

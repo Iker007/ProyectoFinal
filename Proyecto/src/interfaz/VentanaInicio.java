@@ -114,7 +114,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		PanelEntrenador2.setBackground(new Color(0, 0, 0, 0));
 		fondo.add(PanelEntrenador2);
 
-		
+
 		if(this.entrenadorActual.getUsuario().equals("RED")) {
 			ImagenENT1 = new ImageIcon(getClass().getResource("/resources/Red.png"));
 			ImageENT1B = ImagenENT1.getImage();
@@ -140,13 +140,13 @@ public class VentanaInicio extends JFrame implements ActionListener {
 			NewImageENT1 = ImageENT1B.getScaledInstance(300, 200, java.awt.Image.SCALE_SMOOTH);
 			ImagenENT1 = new ImageIcon(NewImageENT1);
 		}
-		
+
 		// Pillar imagen H v M v O
 		entrenador1 = new JLabel((ImagenENT1));
 		entrenador1.setBackground(new Color(0, 0, 0, 0));
 		entrenador1.setLayout(new FlowLayout());
 		fondo.add(entrenador1);
-		
+
 		ImagenVS = new ImageIcon(getClass().getResource("/resources/Vs.png"));
 		ImageVS2 = ImagenVS.getImage();
 		NewImageVS = ImageVS2.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
@@ -176,26 +176,26 @@ public class VentanaInicio extends JFrame implements ActionListener {
 			fondo.add(Equipo1Red);
 		}else {
 			Equipo1 = new JPanel();
-		Equipo1.setLayout(new GridLayout(2, 3));
-		pok1 = ajustarSprite(entrenadorActual.getPokemons().get(0).getNombre().toLowerCase());
-		Pokemon1 = new JLabel(pok1);
-		Equipo1.add(Pokemon1);
-		pok2 = ajustarSprite(entrenadorActual.getPokemons().get(1).getNombre().toLowerCase());
-		Pokemon2 = new JLabel(pok2);
-		Equipo1.add(Pokemon2);
-		pok3 = ajustarSprite(entrenadorActual.getPokemons().get(2).getNombre().toLowerCase());
-		Pokemon3 = new JLabel(pok3);
-		Equipo1.add(Pokemon3);
-		pok4 = ajustarSprite(entrenadorActual.getPokemons().get(3).getNombre().toLowerCase());
-		Pokemon4 = new JLabel(pok4);
-		Equipo1.add(Pokemon4);
-		pok5 = ajustarSprite(entrenadorActual.getPokemons().get(4).getNombre().toLowerCase());
-		Pokemon5 = new JLabel(pok5);
-		Equipo1.add(Pokemon5);
-		pok6 = ajustarSprite(entrenadorActual.getPokemons().get(5).getNombre().toLowerCase());
-		Pokemon6 = new JLabel(pok6);
-		Equipo1.add(Pokemon6);
-		fondo.add(Equipo1);
+			Equipo1.setLayout(new GridLayout(2, 3));
+			pok1 = ajustarSprite(entrenadorActual.getPokemons().get(0).getNombre().toLowerCase());
+			Pokemon1 = new JLabel(pok1);
+			Equipo1.add(Pokemon1);
+			pok2 = ajustarSprite(entrenadorActual.getPokemons().get(1).getNombre().toLowerCase());
+			Pokemon2 = new JLabel(pok2);
+			Equipo1.add(Pokemon2);
+			pok3 = ajustarSprite(entrenadorActual.getPokemons().get(2).getNombre().toLowerCase());
+			Pokemon3 = new JLabel(pok3);
+			Equipo1.add(Pokemon3);
+			pok4 = ajustarSprite(entrenadorActual.getPokemons().get(3).getNombre().toLowerCase());
+			Pokemon4 = new JLabel(pok4);
+			Equipo1.add(Pokemon4);
+			pok5 = ajustarSprite(entrenadorActual.getPokemons().get(4).getNombre().toLowerCase());
+			Pokemon5 = new JLabel(pok5);
+			Equipo1.add(Pokemon5);
+			pok6 = ajustarSprite(entrenadorActual.getPokemons().get(5).getNombre().toLowerCase());
+			Pokemon6 = new JLabel(pok6);
+			Equipo1.add(Pokemon6);
+			fondo.add(Equipo1);
 
 		}
 
@@ -241,7 +241,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 				v = new VentanaCombate(entrenadorActual, eleccionAvatar, rojo);
 				v.setVisible(true);
 				logger_Inicio.info("Se ha creado ventanaCombate");
-				
+
 			}
 		});
 
@@ -254,7 +254,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
-				
+
 			}
 		});
 	}
@@ -262,11 +262,11 @@ public class VentanaInicio extends JFrame implements ActionListener {
 	public ImageIcon ajustarSprite(String img) {
 
 		ImageIcon imageIcon = new ImageIcon(getClass().getResource("/resources/" + img.toLowerCase() + "Sprite.png")); // load
-																														// the
-																														// image
-																														// to
-																														// a
-																														// imageIcon
+		// the
+		// image
+		// to
+		// a
+		// imageIcon
 		Image image = imageIcon.getImage(); // transformarlo
 		Image newimg = image.getScaledInstance(80, 80, java.awt.Image.SCALE_SMOOTH); // escalarlo con smooth scaling
 		imageIcon = new ImageIcon(newimg); // vuelve a transformarlo

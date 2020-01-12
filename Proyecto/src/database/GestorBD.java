@@ -47,13 +47,13 @@ public class GestorBD {
 		} catch (SQLException e) {
 			LOG_GestorBD.info("No se pudo conectar a la base datos showdown");
 			throw new BDException("No se ha podido cerrar la conexion a la BD", e);
-			
+
 		}
 
 	}
-	
+
 	public void insertarEntrenador(Entrenador e) throws BDException, ClassNotFoundException {
-		
+
 		try (Statement stmt = connection.createStatement()) {
 			stmt.executeUpdate("INSERT INTO ENTRENADOR VALUES('" + e.getUsuario() + "', " + "'"
 					+ e.getContraseña() + "', " + e.getScore() + ", " + e.getPokemons().get(0).getId() + ","
@@ -68,16 +68,16 @@ public class GestorBD {
 			throw new BDException("No se pudo insertar la lista de la tabla 'Entrenador'", e1);
 		}
 	}
-	
+
 	public void eliminarEntrenador(Entrenador e) throws SQLException, BDException {
 		try (Statement stmt = connection.createStatement()) {
 			stmt.executeUpdate("DELETE FROM ENTRENADOR WHERE USUARIO = '"+ e.getUsuario()+"');");
-	}catch (SQLException e1) {
-		LOG_GestorBD.info("No se pudo insertar a la lista de la tabla 'Entrenador'");
-		throw new BDException("No se pudo eliminar de la tabla 'Entrenador'", e1);
+		}catch (SQLException e1) {
+			LOG_GestorBD.info("No se pudo insertar a la lista de la tabla 'Entrenador'");
+			throw new BDException("No se pudo eliminar de la tabla 'Entrenador'", e1);
+		}
 	}
-	}
-	
+
 	public static void actualizarScore(Entrenador e) throws BDException, ClassNotFoundException{
 		try(Statement stmt = connection.createStatement()){
 			stmt.executeUpdate("UPDATE ENTRENADOR SET SCORE = " +e.getScore()+ " WHERE USUARIO = '" +e.getUsuario()+"'); ");
@@ -100,7 +100,7 @@ public class GestorBD {
 				LOG_GestorBD.info("Se ha obtenido correctamente la base de datos");
 			}
 			return tipos;
-			
+
 		} catch (SQLException e1) {
 			LOG_GestorBD.info("No se pudo obtener la lista de la tabla 'Tipos'\"");
 			throw new BDException("No se pudo obtener la lista de la tabla 'Tipos'", e1);

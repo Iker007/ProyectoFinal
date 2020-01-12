@@ -39,7 +39,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel pContent;
-	
+
 	private JPanel pDatos;
 	private JPanel pUsername;
 	private JPanel pPassword;
@@ -51,30 +51,31 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	private JButton signUpButton;
 	private JButton signInButton;
 	private JButton salir;
-	
+
 	private JLabel avatar;
 	private JComboBox<String> avatarComboBox;
 	private JPanel pComboBox;
 	private String[] avatarNames;
 	private JLabel background;
-	
+
 	private JPanel blanco;
-	
+
 	private Entrenador rojo;
 	private Dimension tamanyoBotones;
 	private String eleccionAvatar;
-	
+
 	private GestorBD baseDeDatos = new GestorBD();
 	static Entrenador entrenadorActual;
-	
+
 	public List<Entrenador> usuarios = new ArrayList<Entrenador>();
 	public List<Pokemon> pokemons = new ArrayList<Pokemon>();
 	public List<Tipo> tipos = new ArrayList<Tipo>();
 	public List<Movimiento> movimientos = new ArrayList<Movimiento>();
-	
+
 	private static Logger logger_Login = Logger.getLogger(VentanaLogin.class.getName());
-	
+
 	public VentanaLogin() throws BDException {
+		logger_Login.info("Creando la ventana");
 		this.setSize(800, 600);
 		this.setLayout(new BorderLayout());
 		this.setTitle("Pokemon Showdown");
@@ -119,7 +120,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 
 		blanco = new JPanel(new FlowLayout());
 		blanco.setBackground(Color.black);
-		
+
 		pContent.add(pDatos, BorderLayout.SOUTH);
 		blanco.setPreferredSize(new Dimension(300, 300));
 		background = new JLabel(new ImageIcon(getClass().getResource("/resources/PokemonShowdownTitle.jpg")));
@@ -138,7 +139,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		pComboBox.add(salir);
 
 		pContent.add(pComboBox);
-		
+
 
 		try {
 			usuarios = baseDeDatos.obtenerTodosUsuarios(pokemons);
@@ -146,7 +147,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		} catch (BDException e3) {
 			e3.printStackTrace();
 		}
-		
+
 
 		pBotones.setBackground(Color.DARK_GRAY);
 		pComboBox.setBackground(Color.DARK_GRAY);
@@ -167,7 +168,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 			public void windowClosing(WindowEvent e) {
 				logger_Login.info("Cerrando la ventana");
 				System.exit(0);
-				
+
 			}
 		});
 		signUpButton.addActionListener(this);
@@ -281,12 +282,5 @@ public class VentanaLogin extends JFrame implements ActionListener {
 
 	}
 
-	public static void main(String[] args) throws BDException {
-		// TODO Auto-generated method stub
-		logger_Login.info("Creando la ventana");
-		VentanaLogin v = new VentanaLogin();
-		v.setVisible(true);
-		
-		
-	}
+
 }
